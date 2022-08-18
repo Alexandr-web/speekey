@@ -1,0 +1,51 @@
+@import "../../node_modules/normalize.css/normalize.css";
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  resize: none;
+  outline: none;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input[type=button],
+input[type=submit] {
+  &[disabled] {
+    opacity: .8;
+    cursor: not-allowed;
+  }
+}
+
+#__nuxt,
+#__layout,
+#__layout>div {
+  min-height: 100vh;
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.container {
+  max-width: 1420px;
+  height: 100%;
+  padding: 0 10px;
+  margin: 0 auto;
+  min-height: inherit;
+}
