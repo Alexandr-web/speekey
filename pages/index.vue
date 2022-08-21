@@ -69,20 +69,20 @@
           const indexActiveLetter = this.text.findIndex(({ active, }) => active);
           const activeLetter = this.text[indexActiveLetter];
 
-          if (activeLetter) {
-            if (activeLetter.letter === key) {
-              this.changeLetter({
-                index: indexActiveLetter,
-                data: { ...activeLetter, active: false, complete: true, failure: false, },
-              });
-            } else {
-              this.changeLetter({
-                index: indexActiveLetter,
-                data: { ...activeLetter, complete: false, failure: true, },
-              });
+          if (activeLetter.letter === key) {
+            this.changeLetter({
+              index: indexActiveLetter,
+              data: { ...activeLetter, active: false, complete: true, failure: false, },
+            });
+
+            if (indexActiveLetter + 1 >= this.text.length) {
+              this.start = false;
             }
           } else {
-            this.start = false;
+            this.changeLetter({
+              index: indexActiveLetter,
+              data: { ...activeLetter, complete: false, failure: true, },
+            });
           }
         }
       },
