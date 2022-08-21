@@ -10,7 +10,7 @@ class Profile {
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", ype: "error", });
     }
   }
 }

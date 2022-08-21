@@ -14,6 +14,14 @@ module.exports = sequelize.define("user", {
     type: DataTypes.TEXT,
     unique: true,
   },
+  completedTexts: {
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
+    defaultValue: [],
+  },
+  createdTexts: {
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
+    defaultValue: [],
+  },
   password: { type: DataTypes.TEXT, },
   id: {
     type: DataTypes.INTEGER,
