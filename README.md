@@ -2,6 +2,9 @@
 
 This app will help you train and test your typing speed
 
+## Authorization page
+<img src="./readmeImages/authorization.jpg" alt="authorization page" />
+
 ## Testing page
 <img src="./readmeImages/testing.jpg" alt="testing page" />
 

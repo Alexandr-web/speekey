@@ -204,11 +204,46 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
+  }
+
+  &-focus {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity .3s;
+
+    &--hide {
+      opacity: 0;
+    }
+
+    &__inner {
+      display: flex;
+      align-items: center;
+    }
+
+    &__icon {
+      fill: $lightGrey;
+      margin-right: 10px;
+      width: 40px;
+    }
   }
 
   &__text {
     line-height: 30px;
     width: 100%;
+    transition: opacity, filter, .3s;
+    user-select: none;
+
+    &--disabled {
+      opacity: .5;
+      filter: blur(3px);
+    }
   }
 
   &__letter {

@@ -2,32 +2,23 @@
   <div class="page">
     <div class="container">
       <div class="page__inner">
-        <div class="testing">
-          <div class="testing__inner">
-            <p
-              v-if="text && text.length"
-              class="testing__text"
-            >
-              <span
-                v-for="(lData, index) in text"
-                :key="index"
-                class="testing__letter"
-                :class="{
-                  'testing__letter--complete': lData.complete,
-                  'testing__letter--failure': lData.failure,
-                }"
-              >{{ lData.letter }}</span>
-            </p>
-          </div>
-        </div>
+        <vTesting
+          v-if="text && text.length"
+          :text="text"
+          :start="start"
+          @startWriting="start = true"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import vTesting from "@/components/vTesting";
+
   export default {
     name: "IndexPage",
+    components: { vTesting, },
     layout: "default",
     async asyncData({ store, }) {
       try {
@@ -40,6 +31,61 @@
         throw err;
       }
     },
+    data: () => ({
+      start: false,
+      invalidKeys: [
+        "Escape", "Tab", "Alt", "Control", "Enter",
+        "Shift", "Backspace", "NumLock", "Delete", "Insert",
+        "CapsLock", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown",
+        "OS"
+      ],
+    }),
     head: { title: "Тестирование", },
+    watch: {
+      start(val) {
+        window[val ? "addEventListener" : "removeEventListener"]("keydown", this.keydownHandler);
+      },
+    },
+    methods: {
+      changeLetter({ index, data, }) {
+        this.text = this.text.map((item, i) => {
+          if (i === index) {
+            item = data;
+          }
+
+          if (!data.active && i === index + 1) {
+            item.active = true;
+          }
+
+          return item;
+        });
+      },
+      keydownHandler(e) {
+        e.preventDefault();
+
+        const key = e.key;
+
+        if (!this.invalidKeys.includes(key)) {
+          const indexActiveLetter = this.text.findIndex(({ active, }) => active);
+          const activeLetter = this.text[indexActiveLetter];
+
+          if (activeLetter) {
+            if (activeLetter.letter === key) {
+              this.changeLetter({
+                index: indexActiveLetter,
+                data: { ...activeLetter, active: false, complete: true, failure: false, },
+              });
+            } else {
+              this.changeLetter({
+                index: indexActiveLetter,
+                data: { ...activeLetter, complete: false, failure: true, },
+              });
+            }
+          } else {
+            this.start = false;
+          }
+        }
+      },
+    },
   };
 </script>
