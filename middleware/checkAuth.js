@@ -5,7 +5,7 @@ export default async ({ store, redirect, }) => {
     store.dispatch("auth/autoLogin");
 
     if (!store.getters["auth/getToken"]) {
-      return redirect("/auth/login");
+      return redirect("/auth");
     }
 
     const data = jwtDecode(store.getters["auth/getToken"]);
@@ -14,7 +14,7 @@ export default async ({ store, redirect, }) => {
     if (!res.user) {
       store.commit("auth/clearToken");
 
-      return redirect("/auth/login");
+      return redirect("/auth");
     }
   } catch (err) {
     throw err;

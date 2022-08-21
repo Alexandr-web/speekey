@@ -6,6 +6,10 @@ module.exports = sequelize.define("user", {
     type: DataTypes.TEXT,
     unique: true,
   },
+  level: {
+    type: DataTypes.INTEGER,
+    defaultValue: 1,
+  },
   email: {
     type: DataTypes.TEXT,
     unique: true,

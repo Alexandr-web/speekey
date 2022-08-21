@@ -5,6 +5,6 @@
 <script>
   export default {
     name: "IndexPage",
-    middleware: "checkAuth",
+    layout: "default",
   };
 </script>

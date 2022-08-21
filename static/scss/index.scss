@@ -150,3 +150,48 @@
     background: $green;
   }
 }
+
+.header {
+  margin-bottom: 15px;
+  padding: 20px 0;
+
+  &__list {
+    display: flex;
+    align-items: center;
+
+    &-item {
+      &:not(:last-child) {
+        margin-right: 15px;
+      }
+    }
+
+    &-link {
+      color: $grey;
+      transition: color .3s;
+      font-size: 14px;
+
+      &:hover {
+        color: $lightGrey;
+      }
+    }
+
+    &-signout {
+      margin-left: auto;
+    }
+
+    &-user {
+      display: flex;
+      align-items: center;
+
+      &-level {
+        padding: 1px 2px;
+        display: inline-block;
+        border-radius: 2px;
+        background: $grey;
+        color: $dark;
+        font-size: 12px;
+        margin-left: 4px;
+      }
+    }
+  }
+}
