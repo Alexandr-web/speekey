@@ -198,6 +198,7 @@
 
 .testing {
   height: 90vh;
+  overflow: hidden;
 
   &__inner {
     height: 100%;
@@ -239,6 +240,7 @@
     width: 100%;
     transition: opacity, filter, .3s;
     user-select: none;
+    position: relative;
 
     &--disabled {
       opacity: .5;
@@ -250,50 +252,34 @@
     font-size: 25px;
     color: $grey;
     transition: color .3s;
-    padding: .5px;
-
-    &--active {
-      position: relative;
-
-      &::after {
-        content: "";
-        position: absolute;
-        height: 1px;
-        border-radius: 5px;
-        background: $yellow;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        margin: 0 auto;
-        transition: background .3s;
-        animation: change-width .8s infinite alternate;
-      }
-    }
+    padding: 0 1px;
 
     &--complete {
       color: $lightGrey;
-
-      &::after {
-        background: $lightGrey;
-      }
     }
 
     &--failure {
       color: $red;
-
-      &::after {
-        background: $red;
-      }
     }
   }
 }
 
-@keyframes change-width {
+.caret {
+  position: absolute;
+  z-index: 99;
+  width: 4px;
+  border-radius: 4px;
+  background: $yellow;
+  animation: hidden .5s infinite alternate ease-out;
+  transition: left, height, top, .1s;
+}
+
+@keyframes hidden {
   0% {
-    width: 50%;
+    opacity: 1;
   }
 
   100% {
-    width: 100%;
+    opacity: 0;
   }
 }
