@@ -37,7 +37,7 @@
         "Escape", "Tab", "Alt", "Control", "Enter",
         "Shift", "Backspace", "NumLock", "Delete", "Insert",
         "CapsLock", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown",
-        "OS"
+        "OS", "Meta"
       ],
     }),
     head: { title: "Тестирование", },
@@ -77,6 +77,12 @@
 
             if (indexActiveLetter + 1 >= this.text.length) {
               this.start = false;
+              this.text = this.text.map((item, index) => {
+                item.active = index === 0;
+                item.complete = false;
+
+                return item;
+              });
             }
           } else {
             this.changeLetter({

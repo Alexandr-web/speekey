@@ -26,6 +26,7 @@
           :class="{
             'testing__letter--complete': lData.complete,
             'testing__letter--failure': lData.failure,
+            'testing__letter--active': lData.active,
           }"
         >{{ lData.letter }}</span>
       </p>
