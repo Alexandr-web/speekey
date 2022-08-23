@@ -2,15 +2,82 @@
   <div class="testing">
     <div class="testing__inner">
       <div
-        class="testing-focus"
+        class="testing-focus testing-window"
         :class="{
-          'testing-focus--hide': start
+          'testing-focus--hide': end || start
         }"
         @click="$emit('startWriting')"
       >
         <div class="testing-focus__inner">
           <vCursorIcon :classes="['testing-focus__icon']" />
-          <span class="testing-focus__text">Нажмите, чтобы начать. <bold v-if="res">Результат: {{ res }} с/м</bold></span>
+          <span class="testing-focus__text">Нажмите, чтобы начать</span>
+        </div>
+      </div>
+      <div
+        v-if="end"
+        class="testing-result testing-window"
+      >
+        <table class="testing-result__data">
+          <tr class="testing-result__data-row">
+            <td class="testing-result__data-column testing-result__data-title">
+              Слов в минуту
+            </td>
+            <td class="testing-result__data-column testing-result__data-value">
+              {{ res }}
+            </td>
+          </tr>
+          <tr class="testing-result__data-row">
+            <td class="testing-result__data-column testing-result__data-title">
+              Количество ошибок
+            </td>
+            <td class="testing-result__data-column testing-result__data-value">
+              {{ invalidLetters }}
+            </td>
+          </tr>
+          <tr class="testing-result__data-row">
+            <td class="testing-result__data-column testing-result__data-title">
+              Количество символов
+            </td>
+            <td class="testing-result__data-column testing-result__data-value">
+              {{ getTextData.body.length }}
+            </td>
+          </tr>
+          <tr class="testing-result__data-row">
+            <td class="testing-result__data-column testing-result__data-title">
+              Время
+            </td>
+            <td class="testing-result__data-column testing-result__data-value">
+              {{ sec }}с
+            </td>
+          </tr>
+        </table>
+        <div class="testing-result__controls">
+          <div class="testing-result__controls-item">
+            <button
+              class="testing-result__controls-btn"
+              :disabled="pendingNextText"
+              @click="$emit('nextText')"
+            >
+              Следующий
+            </button>
+          </div>
+          <div class="testing-result__controls-item">
+            <button
+              class="testing-result__controls-btn"
+              @click="$emit('againTyping')"
+            >
+              Заново
+            </button>
+          </div>
+          <div class="testing-result__controls-item">
+            <button
+              class="testing-result__controls-btn"
+              :disabled="pendingSetFavorite"
+              @click="$emit('setFavorite')"
+            >
+              Добавить в избранное
+            </button>
+          </div>
         </div>
       </div>
       <div
@@ -27,7 +94,7 @@
           }"
         ></div>
         <span
-          v-for="(lData, index) in text"
+          v-for="(lData, index) in getText"
           :key="index"
           ref="letter"
           class="testing__letter"
@@ -48,8 +115,12 @@
     name: "TestingComponent",
     components: { vCursorIcon, },
     props: {
-      text: {
-        type: Array,
+      validLetters: {
+        type: Number,
+        required: true,
+      },
+      invalidLetters: {
+        type: Number,
         required: true,
       },
       start: {
@@ -60,8 +131,24 @@
         type: Number,
         required: true,
       },
+      end: {
+        type: Boolean,
+        required: true,
+      },
       indexActiveLetter: {
         type: Number,
+        required: true,
+      },
+      sec: {
+        type: Number,
+        required: true,
+      },
+      pendingNextText: {
+        type: Boolean,
+        required: true,
+      },
+      pendingSetFavorite: {
+        type: Boolean,
         required: true,
       },
     },
@@ -75,6 +162,12 @@
     computed: {
       getActiveLetter() {
         return this.$refs.letter[this.indexActiveLetter];
+      },
+      getText() {
+        return this.$store.getters["text/getText"];
+      },
+      getTextData() {
+        return this.$store.getters["text/getTextData"];
       },
     },
     watch: {

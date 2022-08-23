@@ -28,7 +28,7 @@
     mounted() {
       setTimeout(() => {
         this.$emit("hideNotification");
-      }, 2500);
+      }, 5000);
     },
   };
 </script>

@@ -47,7 +47,7 @@ class Auth {
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", });
+      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
     }
   }
 }

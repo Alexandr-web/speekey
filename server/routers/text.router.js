@@ -4,6 +4,7 @@ const textController = require("../controllers/Text.controller");
 const isAuth = require("../middleware/isAuth");
 
 router.post("/create", isAuth, textController.create);
-router.get("/random", isAuth, textController.getRandom);
+router.get("/api/random", isAuth, textController.getRandom);
+router.get("/api/except/:id", isAuth, textController.getOneExceptOne);
 
 module.exports = router;

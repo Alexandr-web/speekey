@@ -1,14 +1,27 @@
 <template>
   <div class="page">
     <div class="container">
+      <div class="notifications">
+        <vNotification
+          v-if="notificationData.show"
+          :data="notificationData"
+          @hideNotification="hideNotification"
+        />
+      </div>
       <div class="page__inner">
         <vTesting
-          v-if="text && text.length"
-          :text="text"
           :start="start"
+          :end="end"
           :res="res"
+          :invalid-letters="invalidLetters"
+          :valid-letters="validLetters"
           :index-active-letter="indexActiveLetter"
-          @startWriting="start = true"
+          :sec="sec"
+          :pending-next-text="pendingNextText"
+          :pending-set-favorite="pendingSetFavorite"
+          @startWriting="startWriting"
+          @nextText="nextText"
+          @againTyping="againTyping"
         />
       </div>
     </div>
@@ -17,31 +30,28 @@
 
 <script>
   import vTesting from "@/components/vTesting";
+  import vNotification from "@/components/vNotification";
+  import notificationMixin from "@/mixins/notificationMixin";
 
   export default {
     name: "IndexPage",
-    components: { vTesting, },
-    layout: "default",
-    async asyncData({ store, }) {
-      try {
-        const token = store.getters["auth/getToken"];
-        const { ok, text: textData, } = await store.dispatch("text/getRandom", token);
-        const text = ok ? textData.body.split("").map((l, i) => ({ letter: l, active: i === 0, complete: false, failure: false, })) : [];
-        const totalWords = ok ? textData.body.split(" ").length : 0;
-
-        return {
-          text,
-          totalWords,
-        };
-      } catch (err) {
-        throw err;
-      }
+    components: {
+      vTesting,
+      vNotification,
     },
+    mixins: [notificationMixin],
+    layout: "default",
     data: () => ({
       start: false,
-      res: 0,
+      end: false,
+      pendingNextText: false,
+      pendingSetFavorite: false,
       timer: null,
+      validLetters: 0,
+      invalidLetters: 0,
+      res: 0,
       sec: 0,
+      indexActiveLetter: 0,
       invalidKeys: [
         "Escape", "Tab", "Alt", "Control", "Enter",
         "Shift", "Backspace", "NumLock", "Delete", "Insert",
@@ -51,15 +61,32 @@
         "PageUp", "PageDown", "ScrollLock", "Pause", "Insert",
         "Home"
       ],
-      indexActiveLetter: 0,
     }),
+    async fetch() {
+      try {
+        const token = this.$store.getters["auth/getToken"];
+        const { ok, text: textData, } = await this.$store.dispatch("text/getRandom", token);
+
+        if (ok) {
+          this.$store.commit("text/setTextData", textData);
+        }
+      } catch (err) {
+        throw err;
+      }
+    },
     head: { title: "Тестирование", },
+    computed: {
+      getText() {
+        return this.$store.getters["text/getText"];
+      },
+      getTextData() {
+        return this.$store.getters["text/getTextData"];
+      },
+    },
     watch: {
       start(val) {
         if (val) {
-          this.timer = setInterval(() => {
-            this.sec += 1;
-          }, 1000);
+          this.timer = setInterval(() => this.sec += 1, 1000);
 
           window.addEventListener("keydown", this.keydownHandler);
         } else {
@@ -67,24 +94,75 @@
 
           clearInterval(this.timer);
 
-          this.res = Math.floor(((this.totalWords || 1) / (this.sec || 1)) * 60);
-          this.sec = 0;
+          this.res = Math.floor(((this.getTextData.body.split(" ").length || 1) / (this.sec || 1)) * 60);
+          this.end = true;
+          this.indexActiveLetter = 0;
+        }
+      },
+      end(val) {
+        if (val) {
+          const token = this.$store.getters["auth/getToken"];
+          const { id, } = this.getTextData;
+          const res = this.$store.dispatch("profile/setTextComplete", { token, id, });
+
+          res.then(({ message, type, }) => {
+            this.callNotification({
+              desc: message,
+              type,
+              show: true,
+            });
+          }).catch((err) => {
+            this.callNotification({
+              title: "Ошибка",
+              desc: `Произошла ошибка сервера: ${err}`,
+              type: "error",
+              show: true,
+            });
+
+            throw err;
+          });
         }
       },
     },
     methods: {
-      changeLetter({ index, data, }) {
-        this.text = this.text.map((item, i) => {
-          if (i === index) {
-            item = data;
-          }
+      againTyping() {
+        this.clearParams();
+        this.end = false;
+      },
+      nextText() {
+        const token = this.$store.getters["auth/getToken"];
+        const res = this.$store.dispatch("text/getOneExceptOne", { token, id: this.getTextData.id, });
 
-          if (!data.active && i === index + 1) {
-            item.active = true;
-          }
+        this.pendingNextText = true;
 
-          return item;
+        res.then(({ ok, text: textData, }) => {
+          this.pendingNextText = false;
+
+          if (ok) {
+            this.$store.commit("text/setTextData", textData);
+            this.clearParams();
+            this.end = false;
+          }
+        }).catch((err) => {
+          this.callNotification({
+            title: "Ошибка",
+            desc: `Произошла ошибка сервера: ${err}`,
+            type: "error",
+            show: true,
+          });
+
+          throw err;
         });
+      },
+      clearParams() {
+        this.sec = 0;
+        this.res = 0;
+        this.validLetters = 0;
+        this.invalidLetters = 0;
+      },
+      startWriting() {
+        this.start = true;
+        this.end = false;
       },
       keydownHandler(e) {
         e.preventDefault();
@@ -92,32 +170,30 @@
         const key = e.key;
         
         if (!this.invalidKeys.includes(key)) {
-          const indexActiveLetter = this.text.findIndex(({ active, }) => active);
-          const activeLetter = this.text[indexActiveLetter];
+          const indexActiveLetter = this.getText.findIndex(({ active, }) => active);
+          const activeLetter = this.getText[indexActiveLetter];
 
           if (activeLetter.letter === key) {
-            this.changeLetter({
+            this.$store.commit("text/changeLetter", {
               index: indexActiveLetter,
-              data: { ...activeLetter, active: false, complete: true, failure: false, },
+              data: { active: false, complete: true, failure: false, },
             });
 
-            if (indexActiveLetter + 1 >= this.text.length) {
-              this.indexActiveLetter = 0;
-              this.start = false;
-              this.text = this.text.map((item, index) => {
-                item.active = index === 0;
-                item.complete = false;
+            this.validLetters += 1;
 
-                return item;
-              });
+            if (indexActiveLetter + 1 >= this.getText.length) {
+              this.start = false;
+              this.$store.commit("text/resetText");
             } else {
               this.indexActiveLetter = indexActiveLetter + 1;
             }
           } else {
-            this.changeLetter({
+            this.$store.commit("text/changeLetter", {
               index: indexActiveLetter,
-              data: { ...activeLetter, complete: false, failure: true, },
+              data: { complete: false, failure: true, },
             });
+
+            this.invalidLetters += 1;
           }
         }
       },

@@ -7,7 +7,7 @@ export default {
   actions: {
     async getOne({ }, id) {
       try {
-        const res = await fetch(`${host}/profile/${id}`, {
+        const res = await fetch(`${host}/profile/api/${id}`, {
           method: "GET",
           headers: { "Accept-Type": "application/json", },
         });
@@ -29,6 +29,23 @@ export default {
 
           return user;
         }
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async setTextComplete({ }, { token, id, }) {
+      try {
+        const res = await fetch(`${host}/profile/text/${id}/complete`, {
+          method: "POST",
+          headers: {
+            "Accept-Type": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+        });
+
+        return res.json();
       } catch (err) {
         throw err;
       }

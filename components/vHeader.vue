@@ -21,7 +21,7 @@
           >
             <nuxt-link
               class="header__list-link"
-              :to="`/profile/${user.id}`"
+              to="/account"
             >
               {{ user.username }}
             </nuxt-link>
