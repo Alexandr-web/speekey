@@ -28,7 +28,7 @@
                 Создано текстов
               </h4>
               <h2 class="account__info-title">
-                {{ user.createdTexts.length }}
+                {{ user.createdTexts }}
               </h2>
             </div>
             <div class="account__info-block account__params">
@@ -36,7 +36,7 @@
                 Выполнено текстов
               </h4>
               <h2 class="account__info-title">
-                {{ user.completedTexts.length }}
+                {{ user.completedTexts }}
               </h2>
             </div>
           </div>

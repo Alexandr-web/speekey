@@ -7,8 +7,11 @@ class Profile {
     try {
       const { id, } = req.params;
       const user = await User.findOne({ where: { id, }, });
+      const completedTexts = user ? await CompletedText.findAll({ where: { userId: id, }, }) : [];
+      const createdTexts = user ? await Text.findAll({ where: { userId: id, }, }) : [];
+      const userData = { ...user.dataValues, completedTexts: completedTexts.length, createdTexts: createdTexts.length, };
 
-      return res.status(200).json({ ok: true, user, });
+      return res.status(200).json({ ok: true, user: userData, });
     } catch (err) {
       console.log(err);
 
@@ -29,15 +32,12 @@ class Profile {
         return res.status(404).json({ ok: false, message: "Такого текста не существует", type: "error", });
       }
 
-      const user = await User.findOne({ where: { id: req.userId, }, });
       const completedTexts = await CompletedText.findAll({ where: { userId: req.userId, }, });
       const textData = { ...req.body, textId: text.id, userId: req.userId, };
       const findTextIndex = completedTexts.findIndex(({ textId, }) => textId === text.id);
 
       if (findTextIndex === -1) {
-        const completedText = await CompletedText.create(textData);
-
-        await user.update({ completedTexts: user.completedTexts.concat(completedText.id), });
+        await CompletedText.create(textData);
       } else {
         await completedTexts[findTextIndex].update(textData);
       }

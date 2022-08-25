@@ -1,5 +1,4 @@
 const TextModel = require("../models/Text");
-const User = require("../models/User");
 
 class Text {
   async create(req, res) {
@@ -9,10 +8,8 @@ class Text {
       }
 
       const textData = { ...req.body, userId: req.userId, };
-      const newText = await TextModel.create(textData);
-      const user = await User.findOne({ where: { id: req.userId, }, });
 
-      await user.update({ createdTexts: user.createdTexts.concat(newText.id), });
+      await TextModel.create(textData);
 
       return res.status(200).json({ ok: true, message: "Текст создан", type: "success", });
     } catch (err) {

@@ -67,7 +67,7 @@
     async fetch() {
       try {
         const user = await this.$store.dispatch("profile/getCurrent");
-
+        
         if (user) {
           this.user = user;
         }
