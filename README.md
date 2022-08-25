@@ -8,6 +8,9 @@ This app will help you train and test your typing speed
 ## Testing page
 <img src="./readmeImages/testing.jpg" alt="testing page" />
 
+## Profile page
+<img src="./readmeImages/profile.jpg" alt="profile page" />
+
 ## Build Setup
 
 ```bash

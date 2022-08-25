@@ -66,7 +66,7 @@
       try {
         const token = this.$store.getters["auth/getToken"];
         const { ok, text: textData, } = await this.$store.dispatch("text/getRandom", token);
-
+        
         if (ok) {
           this.$store.commit("text/setTextData", textData);
         }
@@ -103,7 +103,12 @@
         if (val) {
           const token = this.$store.getters["auth/getToken"];
           const { id, } = this.getTextData;
-          const res = this.$store.dispatch("profile/setTextComplete", { token, id, });
+          const data = {
+            speed: this.res,
+            length: this.getText.length,
+            errors: this.invalidLetters,
+          };
+          const res = this.$store.dispatch("profile/setTextComplete", { token, id, data, });
 
           res.then(({ message, type, }) => {
             this.callNotification({

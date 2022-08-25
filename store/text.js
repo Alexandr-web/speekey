@@ -11,8 +11,10 @@ export default {
   },
   mutations: {
     setTextData(state, val) {
-      state.textData = val;
-      state.text = val.body.split("").map((l, i) => ({ letter: l, active: i === 0, complete: false, failure: false, }));
+      if (val && "body" in val) {
+        state.textData = val;
+        state.text = val.body.split("").map((l, i) => ({ letter: l, active: i === 0, complete: false, failure: false, }));
+      }
     },
     setText(state, val) {
       state.text = val;

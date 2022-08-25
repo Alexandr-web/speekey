@@ -18,6 +18,17 @@ body {
   background: $dark;
   color: $lightGrey;
   @extend %roboto-mono-400;
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: $grey;
+  }
+
+  &::-webkit-scrollbar {
+    border-radius: 8px;
+    background: $black;
+    width: 6px;
+  }
 }
 
 img {

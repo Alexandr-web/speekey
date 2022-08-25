@@ -34,13 +34,30 @@ export default {
       }
     },
 
-    async setTextComplete({ }, { token, id, }) {
+    async setTextComplete({ }, { token, id, data, }) {
       try {
         const res = await fetch(`${host}/profile/text/${id}/complete`, {
           method: "POST",
           headers: {
             "Accept-Type": "application/json",
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+          body: JSON.stringify(data),
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async getCompletedTexts({ }, { token, id, }) {
+      try {
+        const res = await fetch(`${host}/profile/api/${id}/text/completed`, {
+          method: "GET",
+          headers: {
+            "Accept-Type": "application/json",
             Authorization: `Bearer ${token || ""}`,
           },
         });

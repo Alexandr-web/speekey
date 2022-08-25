@@ -2,6 +2,7 @@
   <div class="testing">
     <div class="testing__inner">
       <div
+        v-if="Object.keys(getTextData).length"
         class="testing-focus testing-window"
         :class="{
           'testing-focus--hide': end || start

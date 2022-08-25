@@ -319,6 +319,135 @@
   }
 }
 
+.account {
+  display: flex;
+  flex-direction: column;
+
+  &__info {
+    display: grid;
+    grid-template-columns: .3fr .8fr .8fr;
+    grid-gap: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    background: $black;
+
+    &-subtitle {
+      margin-bottom: 5px;
+      color: $grey;
+      font-size: 16px;
+      @extend %roboto-mono-400;
+    }
+
+    &-title {
+      color: $yellow;
+      font-size: 20px;
+      @extend %roboto-mono-400;
+    }
+  }
+
+  &__params {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  &__user {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-right: 30px;
+
+    &::after {
+      content: "";
+      width: 10px;
+      height: 100%;
+      border-radius: 10px;
+      background: $dark;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 99;
+    }
+
+    &-header {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-level {
+      text-align: center;
+      color: $grey;
+
+      &-value {
+        color: $yellow;
+      }
+    }
+
+    &-icon {
+      fill: $dark;
+      width: 120px;
+
+      .cls-1 {
+        stroke: $grey;
+      }
+    }
+
+    &-username {
+      margin-left: 10px;
+      word-break: break-word;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 250px;
+      @extend %roboto-mono-400;
+    }
+  }
+
+  &__texts {
+    margin-top: 15px;
+
+    &-table {
+      width: 100%;
+      border-collapse: collapse;
+
+      &-header {
+        &-title {
+          font-size: 14px;
+          text-align: left;
+          color: $grey;
+          @extend %roboto-mono-400;
+        }
+      }
+
+      &-body {
+        &-row {
+          padding: 10px;
+
+          &:nth-child(odd) {
+            td {
+              background: $black;
+
+              &:first-child {
+                border-radius: 10px 0 0 10px;
+              }
+
+              &:last-child {
+                border-radius: 0 10px 10px 0;
+              }
+            }
+          }
+        }
+      }
+
+      &-content {
+        padding: 10px;
+      }
+    }
+  }
+}
+
 .caret {
   position: absolute;
   z-index: 99;
