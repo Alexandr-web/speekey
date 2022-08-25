@@ -275,11 +275,14 @@
       margin: 0 auto;
       background: $black;
       border-radius: 5px;
-      border-bottom: 1px solid $dark;
       margin-bottom: 15px;
 
       &-row {
-        width: 100%;
+        &:not(:last-child) {
+          td {
+            border-bottom: 1px solid $dark;
+          }
+        }
       }
 
       &-column {
@@ -409,9 +412,6 @@
     margin-top: 15px;
 
     &-table {
-      width: 100%;
-      border-collapse: collapse;
-
       &-header {
         &-title {
           font-size: 14px;
