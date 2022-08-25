@@ -77,7 +77,7 @@
                     {{ txt.errors }}
                   </td>
                   <td class="account__texts-table-content">
-                    {{ new Date(txt.createdAt).toLocaleString() }}
+                    {{ new Date(txt.updatedAt).toLocaleString() }}
                   </td>
                 </tr>
               </tbody>

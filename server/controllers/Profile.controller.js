@@ -30,23 +30,19 @@ class Profile {
       }
 
       const user = await User.findOne({ where: { id: req.userId, }, });
+      const completedTexts = await CompletedText.findAll({ where: { userId: req.userId, }, });
       const textData = { ...req.body, textId: text.id, userId: req.userId, };
-      const completedText = await CompletedText.create(textData);
-      const completedTexts = user.completedTexts.map((idCompletedText) => CompletedText.findOne({ where: { id: idCompletedText, }, }));
+      const findTextIndex = completedTexts.findIndex(({ textId, }) => textId === text.id);
 
-      return Promise
-        .all(completedTexts)
-        .then((texts) => {
-          if (!texts.map(({ textId, }) => textId).includes(text.id)) {
-            return user.update({ completedTexts: user.completedTexts.concat(completedText.id), });
-          }
-        }).then(() => {
-          return res.status(200).json({ ok: true, message: "Текст завершен", type: "success", });
-        }).catch((err) => {
-          console.log(err);
+      if (findTextIndex === -1) {
+        const completedText = await CompletedText.create(textData);
 
-          return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
-        });
+        await user.update({ completedTexts: user.completedTexts.concat(completedText.id), });
+      } else {
+        await completedTexts[findTextIndex].update(textData);
+      }
+
+      return res.status(200).json({ ok: true, message: "Текст завершен", type: "success", });
     } catch (err) {
       console.log(err);
 
