@@ -9,7 +9,7 @@ class Profile {
       const user = await User.findOne({ where: { id, }, });
       const completedTexts = user ? await CompletedText.findAll({ where: { userId: id, }, }) : [];
       const createdTexts = user ? await Text.findAll({ where: { userId: id, }, }) : [];
-      const userData = { ...user.dataValues, completedTexts: completedTexts.length, createdTexts: createdTexts.length, };
+      const userData = user ? { ...user.dataValues, completedTexts: completedTexts.length, createdTexts: createdTexts.length, } : null;
 
       return res.status(200).json({ ok: true, user: userData, });
     } catch (err) {

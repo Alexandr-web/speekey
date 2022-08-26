@@ -44,6 +44,24 @@
     }
   }
 
+  &__textarea,
+  &__input {
+    border: none;
+    background: $black;
+    caret-color: $yellow;
+    color: $grey;
+    padding: 8px 35px 8px 8px;
+    border-radius: 8px;
+
+    &:focus {
+      color: $lightGrey;
+    }
+  }
+
+  &__textarea {
+    width: 100%;
+  }
+
   &__label {
     width: 100%;
     position: relative;
@@ -66,16 +84,6 @@
 
   &__input {
     width: 240px;
-    border: none;
-    background: $black;
-    caret-color: $yellow;
-    color: $grey;
-    padding: 8px 35px 8px 8px;
-    border-radius: 8px;
-
-    &:focus {
-      color: $lightGrey;
-    }
   }
 
   &__submit-block {
@@ -318,6 +326,21 @@
           color: $lightGrey;
         }
       }
+    }
+  }
+}
+
+.create-text {
+  &__textarea {
+    width: 1000px;
+    margin: 0 auto;
+    display: block;
+    resize: vertical;
+    min-height: 200px;
+    border: 1px solid transparent;
+
+    &--invalid {
+      border-color: $red;
     }
   }
 }

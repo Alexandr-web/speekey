@@ -8,10 +8,9 @@ class Text {
       }
 
       const textData = { ...req.body, userId: req.userId, };
+      const text = await TextModel.create(textData);
 
-      await TextModel.create(textData);
-
-      return res.status(200).json({ ok: true, message: "Текст создан", type: "success", });
+      return res.status(200).json({ ok: true, message: "Текст создан", type: "success", id: text.id, });
     } catch (err) {
       console.log(err);
 
@@ -28,6 +27,23 @@ class Text {
       const texts = await TextModel.findAll();
 
       return res.status(200).json({ ok: true, text: texts.sort(() => Math.random() - 0.5)[0], });
+    } catch (err) {
+      console.log(err);
+
+      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+    }
+  }
+
+  async getOne(req, res) {
+    try {
+      if (!req.isAuth) {
+        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
+      }
+
+      const { id, } = req.params;
+      const text = await TextModel.findOne({ where: { id, }, });
+
+      return res.status(200).json({ ok: true, text, });
     } catch (err) {
       console.log(err);
 

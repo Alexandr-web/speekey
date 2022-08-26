@@ -54,6 +54,10 @@
           title: "Тестирование",
         },
         {
+          link: "/create",
+          title: "Создание текста",
+        },
+        {
           link: "/leaders",
           title: "Лидеры",
         },

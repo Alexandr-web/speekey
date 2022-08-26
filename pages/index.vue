@@ -41,6 +41,26 @@
     },
     mixins: [notificationMixin],
     layout: "default",
+    async asyncData({ store, query: { text, }, }) {
+      try {
+        const requestTextAndSet = (id) => {
+        const token = store.getters["auth/getToken"];
+        const res = id ? store.dispatch("text/getOne", { token, id, }) : store.dispatch("text/getRandom", token);
+        
+        res.then(({ ok, text: textData, }) => {
+          if (ok) {
+            store.commit("text/setTextData", textData);
+          }
+        }).catch((err) => {
+          throw err;
+        });
+      };
+
+        requestTextAndSet(text);
+      } catch (err) {
+        throw err;
+      }
+    },
     data: () => ({
       start: false,
       end: false,
@@ -62,18 +82,6 @@
         "Home"
       ],
     }),
-    async fetch() {
-      try {
-        const token = this.$store.getters["auth/getToken"];
-        const { ok, text: textData, } = await this.$store.dispatch("text/getRandom", token);
-        
-        if (ok) {
-          this.$store.commit("text/setTextData", textData);
-        }
-      } catch (err) {
-        throw err;
-      }
-    },
     head: { title: "Тестирование", },
     computed: {
       getText() {
@@ -129,6 +137,9 @@
         }
       },
     },
+    beforeDestroy() {
+      window.removeEventListener("keydown", this.keydownHandler);
+    },
     methods: {
       againTyping() {
         this.clearParams();
@@ -144,6 +155,7 @@
           this.pendingNextText = false;
 
           if (ok) {
+            this.$router.push({ query: { text: textData.id, }, });
             this.$store.commit("text/setTextData", textData);
             this.clearParams();
             this.end = false;

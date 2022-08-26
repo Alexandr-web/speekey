@@ -56,6 +56,22 @@ export default {
       }
     },
 
+    async getOne({ }, { token, id, }) {
+      try {
+        const res = await fetch(`${host}/text/api/${id}`, {
+          method: "GET",
+          headers: {
+            "Accept-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
     async getOneExceptOne({ }, { id, token, }) {
       try {
         const res = await fetch(`${host}/text/api/except/${id}`, {
@@ -64,6 +80,24 @@ export default {
             "Accept-Type": "application/json",
             Authorization: `Bearer ${token || ""}`,
           },
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async create({ }, { token, fd, }) {
+      try {
+        const res = await fetch(`${host}/text/create`, {
+          method: "POST",
+          headers: {
+            "Accept-Type": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+          body: JSON.stringify(fd),
         });
 
         return res.json();
