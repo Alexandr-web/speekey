@@ -11,8 +11,8 @@ This app will help you train and test your typing speed
 ## Profile page
 <img src="./readmeImages/profile.jpg" alt="profile page" />
 
-## Create page
-<img src="./readmeImages/create.jpg" alt="create page" />
+## Create text page
+<img src="./readmeImages/create.jpg" alt="create text page" />
 
 ## Build Setup
 
