@@ -1,0 +1,269 @@
+@import "../_vars";
+
+body[data-theme=monokai] {
+  background: $monokai_brown;
+  color: $monokai_yellow;
+
+  &::-webkit-scrollbar-thumb {
+    background: $monokai_yellow;
+  }
+
+  &::-webkit-scrollbar {
+    background: $monokai_brown;
+  }
+
+  .active-theme-card {
+    &::after {
+      background: $monokai_yellow;
+    }
+  }
+
+  .auth {
+    &__block {
+      &-title {
+        color: $monokai_white;
+      }
+    }
+  }
+
+  .form {
+
+    &__textarea,
+    &__input {
+      background: $monokai_darkBrown;
+      caret-color: $monokai_green;
+      color: $monokai_white;
+
+      &::placeholder {
+        color: $monokai_yellow;
+      }
+    }
+
+    &__label {
+      &::after {
+        background: $monokai_green;
+      }
+    }
+
+    &__submit {
+      color: $monokai_white;
+      background: $monokai_darkBrown;
+
+      &:hover {
+        color: $monokai_darkBrown;
+        background: $monokai_white;
+      }
+    }
+  }
+
+  .invalid-input {
+    &::after {
+      background: $monokai_red;
+    }
+  }
+
+  .notification {
+    &__title {
+      color: $monokai_brown;
+    }
+
+    &__desc {
+      color: $monokai_brown;
+    }
+
+    &--error {
+      background: $monokai_red;
+    }
+
+    &--warning {
+      background: $monokai_yellow;
+    }
+
+    &--success {
+      background: $monokai_green;
+    }
+  }
+
+  .header {
+    &__list {
+      &-link {
+        color: $monokai_yellow;
+
+        &:hover {
+          color: $monokai_white;
+        }
+      }
+
+      &-user {
+        &-level {
+          background: $serikaDark_grey;
+          color: $serikaDark_dark;
+        }
+      }
+    }
+  }
+
+  .testing {
+    &-focus {
+      &__icon {
+        fill: $monokai_white;
+      }
+
+      &__text {
+        color: $monokai_white;
+      }
+    }
+
+    &__letter {
+      color: $monokai_yellow;
+
+      &--complete {
+        color: $monokai_white;
+      }
+
+      &--failure {
+        color: $monokai_red;
+      }
+    }
+
+    &-result {
+      &__data {
+        background: $monokai_darkBrown;
+
+        &-row {
+          &:not(:last-child) {
+            td {
+              border-bottom-color: $monokai_brown;
+            }
+          }
+        }
+
+        &-title {
+          color: $monokai_white;
+        }
+
+        &-column {
+          &:not(:last-child) {
+            border-right-color: $monokai_brown;
+          }
+        }
+
+        &-value {
+          color: $monokai_yellow;
+        }
+      }
+
+      &__controls {
+        &-btn {
+          color: $monokai_yellow;
+
+          &:hover {
+            color: $monokai_white;
+          }
+        }
+      }
+    }
+  }
+
+  .create-text {
+    &__textarea {
+      &--invalid {
+        border-color: $monokai_red;
+      }
+    }
+  }
+
+  .account {
+    &__info {
+      background: $monokai_darkBrown;
+
+      &-subtitle {
+        color: $monokai_yellow;
+      }
+
+      &-title {
+        color: $monokai_white;
+      }
+    }
+
+    &__user {
+      &::after {
+        background: $monokai_brown;
+      }
+
+      &-level {
+        color: $monokai_yellow;
+
+        &-value {
+          color: $monokai_white;
+        }
+      }
+
+      &-icon {
+        fill: $monokai_yellow;
+
+        .cls-1 {
+          stroke: $monokai_darkBrown;
+        }
+      }
+    }
+
+    &__texts {
+      &-table {
+        &-content {
+          color: $monokai_white;
+        }
+
+        &-header {
+          &-title {
+            color: $monokai_yellow;
+          }
+        }
+
+        &-body {
+          &-row {
+            &:nth-child(odd) {
+              td {
+                background: $monokai_darkBrown;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .settings {
+    &__row {
+      &-title {
+        color: $monokai_yellow;
+
+        &--active {
+          color: $monokai_white;
+        }
+      }
+
+      &-header {
+        &:hover>h2 {
+          color: $monokai_white;
+        }
+
+        &:hover>svg {
+          fill: $monokai_white;
+        }
+      }
+
+      &-icon {
+        fill: $monokai_yellow;
+
+        &--rotate {
+          fill: $monokai_white;
+        }
+      }
+    }
+  }
+
+  .caret {
+    background: $monokai_turquoise;
+  }
+}

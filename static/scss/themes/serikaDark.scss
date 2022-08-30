@@ -1,0 +1,249 @@
+@import "../_vars";
+
+body[data-theme=serika-dark] {
+  background: $serikaDark_dark;
+  color: $serikaDark_lightGrey;
+
+  &::-webkit-scrollbar-thumb {
+    background: $serikaDark_grey;
+  }
+
+  &::-webkit-scrollbar {
+    background: $serikaDark_black;
+  }
+
+  .active-theme-card {
+    &::after {
+      background: $serikaDark_yellow;
+    }
+  }
+
+  .form {
+
+    &__textarea,
+    &__input {
+      background: $serikaDark_black;
+      caret-color: $serikaDark_yellow;
+      color: $serikaDark_grey;
+
+      &:focus {
+        color: $serikaDark_lightGrey;
+      }
+    }
+
+    &__label {
+      &::after {
+        background: $serikaDark_green;
+      }
+    }
+
+    &__submit {
+      color: $serikaDark_lightGrey;
+      background: $serikaDark_black;
+
+      &:hover {
+        color: $serikaDark_black;
+        background: $serikaDark_lightGrey;
+      }
+    }
+  }
+
+  .invalid-input {
+    &::after {
+      background: $serikaDark_red;
+    }
+  }
+
+  .notification {
+    &__title {
+      color: $serikaDark_dark;
+    }
+
+    &__desc {
+      color: $serikaDark_black;
+    }
+
+    &--error {
+      background: $serikaDark_red;
+    }
+
+    &--warning {
+      background: $serikaDark_yellow;
+    }
+
+    &--success {
+      background: $serikaDark_green;
+    }
+  }
+
+  .header {
+    &__list {
+      &-link {
+        color: $serikaDark_grey;
+
+        &:hover {
+          color: $serikaDark_lightGrey;
+        }
+      }
+
+      &-user {
+        &-level {
+          background: $serikaDark_grey;
+          color: $serikaDark_dark;
+        }
+      }
+    }
+  }
+
+  .testing {
+    &-focus {
+      &__icon {
+        fill: $serikaDark_lightGrey;
+      }
+    }
+
+    &__letter {
+      color: $serikaDark_grey;
+
+      &--complete {
+        color: $serikaDark_lightGrey;
+      }
+
+      &--failure {
+        color: $serikaDark_red;
+      }
+    }
+
+    &-result {
+      &__data {
+        background: $serikaDark_black;
+
+        &-row {
+          &:not(:last-child) {
+            td {
+              border-bottom-color: $serikaDark_dark;
+            }
+          }
+        }
+
+        &-column {
+          &:not(:last-child) {
+            border-right-color: $serikaDark_dark;
+          }
+        }
+
+        &-value {
+          color: $serikaDark_yellow;
+        }
+      }
+
+      &__controls {
+        &-btn {
+          color: $serikaDark_grey;
+
+          &:hover {
+            color: $serikaDark_lightGrey;
+          }
+        }
+      }
+    }
+  }
+
+  .create-text {
+    &__textarea {
+      &--invalid {
+        border-color: $serikaDark_red;
+      }
+    }
+  }
+
+  .account {
+    &__info {
+      background: $serikaDark_black;
+
+      &-subtitle {
+        color: $serikaDark_grey;
+      }
+
+      &-title {
+        color: $serikaDark_yellow;
+      }
+    }
+
+    &__user {
+      &::after {
+        background: $serikaDark_dark;
+      }
+
+      &-level {
+        color: $serikaDark_grey;
+
+        &-value {
+          color: $serikaDark_yellow;
+        }
+      }
+
+      &-icon {
+        fill: $serikaDark_dark;
+
+        .cls-1 {
+          stroke: $serikaDark_grey;
+        }
+      }
+    }
+
+    &__texts {
+      &-table {
+        &-header {
+          &-title {
+            color: $serikaDark_grey;
+          }
+        }
+
+        &-body {
+          &-row {
+            &:nth-child(odd) {
+              td {
+                background: $serikaDark_black;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .settings {
+    &__row {
+      &-title {
+        color: $serikaDark_grey;
+
+        &--active {
+          color: $serikaDark_lightGrey;
+        }
+      }
+
+      &-header {
+        &:hover>h2 {
+          color: $serikaDark_lightGrey;
+        }
+
+        &:hover>svg {
+          fill: $serikaDark_lightGrey;
+        }
+      }
+
+      &-icon {
+        fill: $serikaDark_grey;
+
+        &--rotate {
+          fill: $serikaDark_lightGrey;
+        }
+      }
+    }
+  }
+
+  .caret {
+    background: $serikaDark_yellow;
+  }
+}

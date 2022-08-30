@@ -7,9 +7,9 @@ const concat = require("gulp-concat");
 
 const paths = {
   styles: {
-    from: ["./static/scss/*.scss", "!./static/scss/_*.scss"],
+    from: ["./static/scss/**/*.scss", "!./static/scss/**/_*.scss"],
     to: "./static/css/",
-    srcWatch: "./static/scss/*.scss",
+    srcWatch: "./static/scss/**/*.scss",
   },
 };
 

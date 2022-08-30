@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap');
 @import "../../node_modules/normalize.css/normalize.css";
 @import "./_vars";
+@import "./themes/serikaDark";
+@import "./themes/monokai";
 
 *,
 *::after,
@@ -15,18 +17,14 @@
 }
 
 body {
-  background: $dark;
-  color: $lightGrey;
   @extend %roboto-mono-400;
 
   &::-webkit-scrollbar-thumb {
     border-radius: 8px;
-    background: $grey;
   }
 
   &::-webkit-scrollbar {
     border-radius: 8px;
-    background: $black;
     width: 6px;
   }
 }
@@ -73,4 +71,28 @@ h6 {
   padding: 0 10px;
   margin: 0 auto;
   min-height: inherit;
+}
+
+.serika-dark-card {
+  background: $serikaDark_black;
+  color: $serikaDark_yellow;
+}
+
+.monokai-card {
+  background: $monokai_brown;
+  color: $monokai_yellow;
+}
+
+.active-theme-card {
+  position: relative;
+  padding-left: 30px;
+
+  &::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    left: 10px;
+    position: absolute;
+  }
 }

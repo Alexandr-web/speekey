@@ -3,6 +3,7 @@
     <div class="container">
       <div class="notifications">
         <vNotification
+          v-if="notificationData.show"
           :data="notificationData"
           @hideNotification="hideNotification"
         />
@@ -92,6 +93,12 @@
               this.$router.push(`/?text=${id}`);
             }
           }).catch((err) => {
+            this.callNotification({
+              type: "error",
+              desc: `Произошла ошибка сервера: ${err}`,
+              show: true,
+            });
+
             throw err;
           });
         } else {

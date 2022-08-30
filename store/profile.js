@@ -67,5 +67,23 @@ export default {
         throw err;
       }
     },
+
+    async edit({ }, { token, fd, id, }) {
+      try {
+        const res = await fetch(`${host}/profile/${id}/edit`, {
+          method: "PUT",
+          headers: {
+            "Accept-Type": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+          body: JSON.stringify(fd),
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
   },
 };

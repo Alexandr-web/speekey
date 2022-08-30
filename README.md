@@ -1,6 +1,8 @@
 # speekey
 
-This app will help you train and test your typing speed
+This app will help you train and test your typing speed.
+
+P.S. As a design, I chose the project [Monkeytype](https://monkeytype.com/)
 
 ## Authorization page
 <img src="./readmeImages/authorization.jpg" alt="authorization page" />
@@ -13,6 +15,9 @@ This app will help you train and test your typing speed
 
 ## Create text page
 <img src="./readmeImages/create.jpg" alt="create text page" />
+
+## Settings page
+<img src="./readmeImages/settings.jpg" alt="settings page" />
 
 ## Build Setup
 

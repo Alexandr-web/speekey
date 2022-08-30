@@ -47,15 +47,8 @@
   &__textarea,
   &__input {
     border: none;
-    background: $black;
-    caret-color: $yellow;
-    color: $grey;
     padding: 8px 35px 8px 8px;
     border-radius: 8px;
-
-    &:focus {
-      color: $lightGrey;
-    }
   }
 
   &__textarea {
@@ -76,7 +69,6 @@
       bottom: 0;
       margin: auto 0;
       right: 15px;
-      background: $green;
       opacity: 0;
       transition: background, opacity, .3s;
     }
@@ -95,23 +87,10 @@
 
   &__submit {
     cursor: pointer;
-    background: $black;
     padding: 8px;
-    color: $lightGrey;
     border: none;
     border-radius: 8px;
     transition: color, background, .2s;
-
-    &:hover {
-      color: $black;
-      background: $lightGrey;
-    }
-  }
-}
-
-.invalid-input {
-  &::after {
-    background: $red;
   }
 }
 
@@ -136,26 +115,12 @@
 
   &__title {
     font-size: 15px;
-    color: $dark;
     @extend %roboto-mono-400;
     padding-bottom: 5px;
   }
 
   &__desc {
-    color: $black;
     font-size: 17px;
-  }
-
-  &--error {
-    background: $red;
-  }
-
-  &--warning {
-    background: $yellow;
-  }
-
-  &--success {
-    background: $green;
   }
 }
 
@@ -174,13 +139,8 @@
     }
 
     &-link {
-      color: $grey;
       transition: color .3s;
       font-size: 14px;
-
-      &:hover {
-        color: $lightGrey;
-      }
     }
 
     &-signout {
@@ -195,8 +155,6 @@
         padding: 1px 2px;
         display: inline-block;
         border-radius: 2px;
-        background: $grey;
-        color: $dark;
         font-size: 12px;
         margin-left: 4px;
       }
@@ -233,7 +191,6 @@
     }
 
     &__icon {
-      fill: $lightGrey;
       margin-right: 10px;
       width: 40px;
     }
@@ -254,17 +211,8 @@
 
   &__letter {
     font-size: 25px;
-    color: $grey;
     transition: color .3s;
     padding: 0 1px;
-
-    &--complete {
-      color: $lightGrey;
-    }
-
-    &--failure {
-      color: $red;
-    }
   }
 
   &-window {
@@ -281,14 +229,14 @@
     &__data {
       width: 80%;
       margin: 0 auto;
-      background: $black;
       border-radius: 5px;
       margin-bottom: 15px;
 
       &-row {
         &:not(:last-child) {
           td {
-            border-bottom: 1px solid $dark;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
           }
         }
       }
@@ -298,12 +246,12 @@
         font-size: 18px;
 
         &:not(:last-child) {
-          border-right: 1px solid $dark;
+          border-right-width: 1px;
+          border-right-style: solid;
         }
       }
 
       &-value {
-        color: $yellow;
         display: flex;
         justify-content: flex-end;
       }
@@ -317,14 +265,9 @@
       &-btn {
         padding: 0 15px;
         cursor: pointer;
-        color: $grey;
         border: none;
         background: none;
         transition: color .3s;
-
-        &:hover {
-          color: $lightGrey;
-        }
       }
     }
   }
@@ -338,10 +281,6 @@
     resize: vertical;
     min-height: 200px;
     border: 1px solid transparent;
-
-    &--invalid {
-      border-color: $red;
-    }
   }
 }
 
@@ -355,17 +294,14 @@
     grid-gap: 10px;
     border-radius: 10px;
     padding: 10px;
-    background: $black;
 
     &-subtitle {
       margin-bottom: 5px;
-      color: $grey;
       font-size: 16px;
       @extend %roboto-mono-400;
     }
 
     &-title {
-      color: $yellow;
       font-size: 20px;
       @extend %roboto-mono-400;
     }
@@ -388,7 +324,6 @@
       width: 10px;
       height: 100%;
       border-radius: 10px;
-      background: $dark;
       position: absolute;
       top: 0;
       right: 0;
@@ -404,20 +339,10 @@
 
     &-level {
       text-align: center;
-      color: $grey;
-
-      &-value {
-        color: $yellow;
-      }
     }
 
     &-icon {
-      fill: $dark;
       width: 120px;
-
-      .cls-1 {
-        stroke: $grey;
-      }
     }
 
     &-username {
@@ -439,7 +364,6 @@
         &-title {
           font-size: 14px;
           text-align: left;
-          color: $grey;
           @extend %roboto-mono-400;
         }
       }
@@ -450,8 +374,6 @@
 
           &:nth-child(odd) {
             td {
-              background: $black;
-
               &:first-child {
                 border-radius: 10px 0 0 10px;
               }
@@ -471,12 +393,79 @@
   }
 }
 
+.settings {
+  &__rows {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__row {
+    &:last-child {
+      margin-bottom: 15px;
+    }
+
+    &-title {
+      margin-right: 5px;
+      @extend %roboto-mono-400;
+      transition: color .3s;
+    }
+
+    &-header {
+      padding: 15px 0;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    &-icon {
+      width: 45px;
+      transition: fill, transform, .3s;
+      transform: rotateZ(-90deg);
+
+      &--rotate {
+        transform: rotateZ(0);
+      }
+    }
+
+    &-account {
+      .form {
+        width: 500px;
+        margin: 0 auto;
+
+        &__input {
+          width: 100%;
+        }
+      }
+    }
+
+    &-themes {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+
+      &-card {
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__submit-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .caret {
   position: absolute;
   z-index: 99;
   width: 4px;
   border-radius: 4px;
-  background: $yellow;
   animation: hidden .5s infinite alternate ease-out;
   transition: left, height, top, .1s;
 }
