@@ -1,6 +1,9 @@
 <template>
   <div class="settings__row-account">
-    <form class="form">
+    <form
+      class="form"
+      @submit.prevent="edit"
+    >
       <div class="form__field">
         <label
           class="form__label"
@@ -16,7 +19,6 @@
             class="form__input"
             type="text"
             placeholder="Имя"
-            @change="$emit('setUserData', { key: 'username', val: validations.username.model, })"
           >
         </label>
       </div>
@@ -35,7 +37,6 @@
             class="form__input"
             type="text"
             placeholder="Email"
-            @change="$emit('setUserData', { key: 'email', val: validations.email.model, })"
           >
         </label>
       </div>
@@ -54,7 +55,6 @@
             class="form__input"
             type="password"
             placeholder="Пароль"
-            @change="$emit('setUserData', { key: 'password', val: validations.password.model, })"
           >
         </label>
       </div>
@@ -76,6 +76,14 @@
           >
         </label>
       </div>
+      <div class="form__submit-block">
+        <button
+          class="form__submit"
+          :disabled="pendingEdit"
+        >
+          Сохранить
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -89,6 +97,7 @@
       },
     },
     data: () => ({
+      pendingEdit: false,
       validations: {
         username: {
           rules: { minLength: 6, },
@@ -108,17 +117,52 @@
         },
       },
     }),
-    watch: {
-      "validations.$invalid": function (val) {
-        this.$emit("setCheckingOnValidData", val);
-      },
-    },
     mounted() {
       Object.keys(this.user).map((key) => {
         if (key in this.validations && key !== "password") {
           this.validations[key].model = this.user[key];
         }
       });
+    },
+    methods: {
+      edit() {
+        if (!this.validations.$invalid) {
+          const token = this.$store.getters["auth/getToken"];
+          const { id, } = this.user;
+          const fd = this.userData;
+          const res = this.$store.dispatch("profile/edit", { token, fd, id, });
+
+          this.pendingEdit = true;
+
+          res.then(({ ok, message, type, }) => {
+            this.pendingEdit = false;
+            
+            this.$emit("callNotification", {
+              type,
+              desc: message,
+              show: true,
+            });
+
+            if (ok) {
+              this.$router.push("/account");
+            }
+          }).catch((err) => {
+            this.$emit("callNotification", {
+              type: "error",
+              desc: `Произошла ошибка сервера: ${err}`,
+              show: true,
+            });
+
+            throw err;
+          });
+        } else {
+          this.$emit("callNotification", {
+            desc: "Все поля должны быть заполнены правильно",
+            type: "warning",
+            show: true,
+          });
+        }
+      },
     },
   };
 </script>

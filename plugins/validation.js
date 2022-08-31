@@ -14,10 +14,6 @@ function checkModelsOnValid() {
   }
 }
 
-function checkOnValid(models) {
-  this.$invalid = models.some(Boolean);
-}
-
 const validationPlugin = {
   install(globalVue) {
     globalVue.mixin({
@@ -50,7 +46,7 @@ const validationPlugin = {
                   .filter((k) => !/^\$/.test(k))
                   .map((k) => this.validations[k].$invalid);
 
-                checkOnValid.call(this.validations, models);
+                this.validations.$invalid = models.some(Boolean);
               }, { immediate: true, deep: true, });
             }
           });

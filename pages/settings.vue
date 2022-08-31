@@ -44,25 +44,14 @@
                 <vSettingsAccount
                   v-if="item.isAccount"
                   :user="user"
-                  @setUserData="setUserData"
-                  @setCheckingOnValidData="setCheckingOnValidData"
+                  @callNotification="callNotification"
                 />
                 <vSettingsTheme
                   v-if="item.isTheme"
-                  :active-theme="activeTheme"
-                  @setActiveTheme="setActiveTheme"
+                  @callNotification="callNotification"
                 />
               </main>
             </div>
-          </div>
-          <div class="settings__submit-block">
-            <button
-              class="settings__submit form__submit"
-              :disabled="pendingEdit"
-              @click="saveSettings"
-            >
-              Сохранить
-            </button>
           </div>
         </div>
       </div>
@@ -89,10 +78,6 @@
     layout: "default",
     data: () => ({
       user: {},
-      pendingEdit: false,
-      activeTheme: "",
-      userData: {},
-      userDataIsValid: false,
       settings: [
         {
           show: false,
@@ -118,61 +103,7 @@
       }
     },
     head: { title: "Настройки", },
-    mounted() {
-      const localTheme = localStorage.getItem("theme");
-
-      this.activeTheme = localTheme;
-    },
     methods: {
-      saveSettings() {
-        if (!this.userDataIsValid) {
-          const token = this.$store.getters["auth/getToken"];
-          const { id, } = this.user;
-          const fd = this.userData;
-          const res = this.$store.dispatch("profile/edit", { token, fd, id, });
-
-          this.pendingEdit = true;
-
-          res.then(({ ok, message, type, }) => {
-            this.pendingEdit = false;
-            
-            localStorage.setItem("theme", this.activeTheme);
-
-            this.callNotification({
-              type,
-              desc: message,
-              show: true,
-            });
-
-            if (ok) {
-              this.$router.push("/account");
-            }
-          }).catch((err) => {
-            this.callNotification({
-              type: "error",
-              desc: `Произошла ошибка сервера: ${err}`,
-              show: true,
-            });
-
-            throw err;
-          });
-        } else {
-          this.callNotification({
-            desc: "Все поля должны быть заполнены правильно",
-            type: "warning",
-            show: true,
-          });
-        }
-      },
-      setUserData({ key, val, }) {
-        this.userData[key] = val;
-      },
-      setActiveTheme(val) {
-        this.activeTheme = val;
-      },
-      setCheckingOnValidData(val) {
-        this.userDataIsValid = val;
-      },
       setStateTab(index) {
         this.settings = this.settings.map((item, i) => {
           if (i === index) {

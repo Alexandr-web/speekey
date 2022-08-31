@@ -1,32 +1,32 @@
 @import "../_vars";
 
-.monokai-card {
-  background: $monokai_darkBrown;
-  color: $monokai_yellow;
+.oblivion-card {
+  background: $oblivion_dark;
+  color: $oblivion_lightGrey;
 }
 
-body[data-theme=monokai] {
-  background: $monokai_brown;
-  color: $monokai_yellow;
+body[data-theme=oblivion] {
+  background: $oblivion_dark;
+  color: $oblivion_white;
 
   &::-webkit-scrollbar-thumb {
-    background: $monokai_yellow;
+    background: $oblivion_grey;
   }
 
   &::-webkit-scrollbar {
-    background: $monokai_brown;
+    background: $oblivion_dark;
   }
 
   .active-theme-card {
     &::after {
-      background: $monokai_yellow;
+      background: $oblivion_grey;
     }
   }
 
   .auth {
     &__block {
       &-title {
-        color: $monokai_white;
+        color: $oblivion_white;
       }
     }
   }
@@ -35,74 +35,74 @@ body[data-theme=monokai] {
 
     &__textarea,
     &__input {
-      background: $monokai_darkBrown;
-      caret-color: $monokai_green;
-      color: $monokai_white;
+      background: $oblivion_darkGrey;
+      caret-color: $oblivion_white;
+      color: $oblivion_white;
 
       &::placeholder {
-        color: $monokai_yellow;
+        color: $oblivion_grey;
       }
     }
 
     &__label {
       &::after {
-        background: $monokai_green;
+        background: $oblivion_lightGrey;
       }
     }
 
     &__submit {
-      color: $monokai_white;
-      background: $monokai_darkBrown;
+      color: $oblivion_white;
+      background: $oblivion_darkGrey;
 
       &:hover {
-        color: $monokai_darkBrown;
-        background: $monokai_white;
+        color: $oblivion_darkGrey;
+        background: $oblivion_white;
       }
     }
   }
 
   .invalid-input {
     &::after {
-      background: $monokai_red;
+      background: $oblivion_red;
     }
   }
 
   .notification {
     &__title {
-      color: $monokai_brown;
+      color: $oblivion_grey;
     }
 
     &__desc {
-      color: $monokai_brown;
+      color: $oblivion_dark;
     }
 
     &--error {
-      background: $monokai_red;
+      background: $oblivion_red;
     }
 
     &--warning {
-      background: $monokai_yellow;
+      background: $oblivion_yellow;
     }
 
     &--success {
-      background: $monokai_green;
+      background: $oblivion_green;
     }
   }
 
   .header {
     &__list {
       &-link {
-        color: $monokai_yellow;
+        color: $oblivion_grey;
 
         &:hover {
-          color: $monokai_white;
+          color: $oblivion_white;
         }
       }
 
       &-user {
         &-level {
-          background: $monokai_yellow;
-          color: $monokai_brown;
+          background: $oblivion_grey;
+          color: $oblivion_dark;
         }
       }
     }
@@ -111,59 +111,59 @@ body[data-theme=monokai] {
   .testing {
     &-focus {
       &__icon {
-        fill: $monokai_white;
+        fill: $oblivion_white;
       }
 
       &__text {
-        color: $monokai_white;
+        color: $oblivion_white;
       }
     }
 
     &__letter {
-      color: $monokai_yellow;
+      color: $oblivion_grey;
 
       &--complete {
-        color: $monokai_white;
+        color: $oblivion_white;
       }
 
       &--failure {
-        color: $monokai_red;
+        color: $oblivion_red;
       }
     }
 
     &-result {
       &__data {
-        background: $monokai_darkBrown;
+        background: $oblivion_darkGrey;
 
         &-row {
           &:not(:last-child) {
             td {
-              border-bottom-color: $monokai_brown;
+              border-bottom-color: $oblivion_dark;
             }
           }
         }
 
         &-title {
-          color: $monokai_white;
+          color: $oblivion_white;
         }
 
         &-column {
           &:not(:last-child) {
-            border-right-color: $monokai_brown;
+            border-right-color: $oblivion_dark;
           }
         }
 
         &-value {
-          color: $monokai_yellow;
+          color: $oblivion_lightGrey;
         }
       }
 
       &__controls {
         &-btn {
-          color: $monokai_yellow;
+          color: $oblivion_lightGrey;
 
           &:hover {
-            color: $monokai_white;
+            color: $oblivion_white;
           }
         }
       }
@@ -173,42 +173,42 @@ body[data-theme=monokai] {
   .create-text {
     &__textarea {
       &--invalid {
-        border-color: $monokai_red;
+        border-color: $oblivion_red;
       }
     }
   }
 
   .account {
     &__info {
-      background: $monokai_darkBrown;
+      background: $oblivion_darkGrey;
 
       &-subtitle {
-        color: $monokai_yellow;
+        color: $oblivion_grey;
       }
 
       &-title {
-        color: $monokai_white;
+        color: $oblivion_white;
       }
     }
 
     &__user {
       &::after {
-        background: $monokai_brown;
+        background: $oblivion_dark;
       }
 
       &-level {
-        color: $monokai_yellow;
+        color: $oblivion_grey;
 
         &-value {
-          color: $monokai_white;
+          color: $oblivion_white;
         }
       }
 
       &-icon {
-        fill: $monokai_yellow;
+        fill: $oblivion_grey;
 
         .cls-1 {
-          stroke: $monokai_darkBrown;
+          stroke: $oblivion_dark;
         }
       }
     }
@@ -216,12 +216,12 @@ body[data-theme=monokai] {
     &__texts {
       &-table {
         &-content {
-          color: $monokai_white;
+          color: $oblivion_white;
         }
 
         &-header {
           &-title {
-            color: $monokai_yellow;
+            color: $oblivion_grey;
           }
         }
 
@@ -229,7 +229,7 @@ body[data-theme=monokai] {
           &-row {
             &:nth-child(odd) {
               td {
-                background: $monokai_darkBrown;
+                background: $oblivion_darkGrey;
               }
             }
           }
@@ -241,34 +241,34 @@ body[data-theme=monokai] {
   .settings {
     &__row {
       &-title {
-        color: $monokai_yellow;
+        color: $oblivion_grey;
 
         &--active {
-          color: $monokai_white;
+          color: $oblivion_white;
         }
       }
 
       &-header {
         &:hover>h2 {
-          color: $monokai_white;
+          color: $oblivion_white;
         }
 
         &:hover>svg {
-          fill: $monokai_white;
+          fill: $oblivion_white;
         }
       }
 
       &-icon {
-        fill: $monokai_yellow;
+        fill: $oblivion_grey;
 
         &--rotate {
-          fill: $monokai_white;
+          fill: $oblivion_white;
         }
       }
     }
   }
 
   .caret {
-    background: $monokai_turquoise;
+    background: $oblivion_lightGrey;
   }
 }

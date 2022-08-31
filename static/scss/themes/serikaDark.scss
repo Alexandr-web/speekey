@@ -1,5 +1,10 @@
 @import "../_vars";
 
+.serika-dark-card {
+  background: $serikaDark_black;
+  color: $serikaDark_yellow;
+}
+
 body[data-theme=serika-dark] {
   background: $serikaDark_dark;
   color: $serikaDark_lightGrey;

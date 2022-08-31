@@ -1,32 +1,32 @@
 @import "../_vars";
 
-.monokai-card {
-  background: $monokai_darkBrown;
-  color: $monokai_yellow;
+.bushido-card {
+  background: $bushido_dark;
+  color: $bushido_red;
 }
 
-body[data-theme=monokai] {
-  background: $monokai_brown;
-  color: $monokai_yellow;
+body[data-theme=bushido] {
+  background: $bushido_dark;
+  color: $bushido_white;
 
   &::-webkit-scrollbar-thumb {
-    background: $monokai_yellow;
+    background: $bushido_dark;
   }
 
   &::-webkit-scrollbar {
-    background: $monokai_brown;
+    background: $bushido_white;
   }
 
   .active-theme-card {
     &::after {
-      background: $monokai_yellow;
+      background: $bushido_red;
     }
   }
 
   .auth {
     &__block {
       &-title {
-        color: $monokai_white;
+        color: $bushido_white;
       }
     }
   }
@@ -35,74 +35,74 @@ body[data-theme=monokai] {
 
     &__textarea,
     &__input {
-      background: $monokai_darkBrown;
-      caret-color: $monokai_green;
-      color: $monokai_white;
+      background: $bushido_black;
+      caret-color: $bushido_red;
+      color: $bushido_white;
 
       &::placeholder {
-        color: $monokai_yellow;
+        color: $bushido_grey;
       }
     }
 
     &__label {
       &::after {
-        background: $monokai_green;
+        background: $bushido_white;
       }
     }
 
     &__submit {
-      color: $monokai_white;
-      background: $monokai_darkBrown;
+      color: $bushido_white;
+      background: $bushido_black;
 
       &:hover {
-        color: $monokai_darkBrown;
-        background: $monokai_white;
+        color: $bushido_black;
+        background: $bushido_white;
       }
     }
   }
 
   .invalid-input {
     &::after {
-      background: $monokai_red;
+      background: $bushido_red;
     }
   }
 
   .notification {
     &__title {
-      color: $monokai_brown;
+      color: $bushido_grey;
     }
 
     &__desc {
-      color: $monokai_brown;
+      color: $bushido_dark;
     }
 
     &--error {
-      background: $monokai_red;
+      background: $bushido_red;
     }
 
     &--warning {
-      background: $monokai_yellow;
+      background: $bushido_black;
     }
 
     &--success {
-      background: $monokai_green;
+      background: $bushido_white;
     }
   }
 
   .header {
     &__list {
       &-link {
-        color: $monokai_yellow;
+        color: $bushido_grey;
 
         &:hover {
-          color: $monokai_white;
+          color: $bushido_white;
         }
       }
 
       &-user {
         &-level {
-          background: $monokai_yellow;
-          color: $monokai_brown;
+          background: $bushido_grey;
+          color: $bushido_dark;
         }
       }
     }
@@ -111,59 +111,59 @@ body[data-theme=monokai] {
   .testing {
     &-focus {
       &__icon {
-        fill: $monokai_white;
+        fill: $bushido_white;
       }
 
       &__text {
-        color: $monokai_white;
+        color: $bushido_white;
       }
     }
 
     &__letter {
-      color: $monokai_yellow;
+      color: $bushido_grey;
 
       &--complete {
-        color: $monokai_white;
+        color: $bushido_white;
       }
 
       &--failure {
-        color: $monokai_red;
+        color: $bushido_red;
       }
     }
 
     &-result {
       &__data {
-        background: $monokai_darkBrown;
+        background: $bushido_black;
 
         &-row {
           &:not(:last-child) {
             td {
-              border-bottom-color: $monokai_brown;
+              border-bottom-color: $bushido_dark;
             }
           }
         }
 
         &-title {
-          color: $monokai_white;
+          color: $bushido_white;
         }
 
         &-column {
           &:not(:last-child) {
-            border-right-color: $monokai_brown;
+            border-right-color: $bushido_dark;
           }
         }
 
         &-value {
-          color: $monokai_yellow;
+          color: $bushido_red;
         }
       }
 
       &__controls {
         &-btn {
-          color: $monokai_yellow;
+          color: $bushido_grey;
 
           &:hover {
-            color: $monokai_white;
+            color: $bushido_white;
           }
         }
       }
@@ -173,42 +173,42 @@ body[data-theme=monokai] {
   .create-text {
     &__textarea {
       &--invalid {
-        border-color: $monokai_red;
+        border-color: $bushido_red;
       }
     }
   }
 
   .account {
     &__info {
-      background: $monokai_darkBrown;
+      background: $bushido_black;
 
       &-subtitle {
-        color: $monokai_yellow;
+        color: $bushido_grey;
       }
 
       &-title {
-        color: $monokai_white;
+        color: $bushido_white;
       }
     }
 
     &__user {
       &::after {
-        background: $monokai_brown;
+        background: $bushido_dark;
       }
 
       &-level {
-        color: $monokai_yellow;
+        color: $bushido_white;
 
         &-value {
-          color: $monokai_white;
+          color: $bushido_red;
         }
       }
 
       &-icon {
-        fill: $monokai_yellow;
+        fill: $bushido_grey;
 
         .cls-1 {
-          stroke: $monokai_darkBrown;
+          stroke: $bushido_black;
         }
       }
     }
@@ -216,12 +216,12 @@ body[data-theme=monokai] {
     &__texts {
       &-table {
         &-content {
-          color: $monokai_white;
+          color: $bushido_white;
         }
 
         &-header {
           &-title {
-            color: $monokai_yellow;
+            color: $bushido_grey;
           }
         }
 
@@ -229,7 +229,7 @@ body[data-theme=monokai] {
           &-row {
             &:nth-child(odd) {
               td {
-                background: $monokai_darkBrown;
+                background: $bushido_black;
               }
             }
           }
@@ -241,34 +241,34 @@ body[data-theme=monokai] {
   .settings {
     &__row {
       &-title {
-        color: $monokai_yellow;
+        color: $bushido_grey;
 
         &--active {
-          color: $monokai_white;
+          color: $bushido_white;
         }
       }
 
       &-header {
         &:hover>h2 {
-          color: $monokai_white;
+          color: $bushido_white;
         }
 
         &:hover>svg {
-          fill: $monokai_white;
+          fill: $bushido_white;
         }
       }
 
       &-icon {
-        fill: $monokai_yellow;
+        fill: $bushido_grey;
 
         &--rotate {
-          fill: $monokai_white;
+          fill: $bushido_white;
         }
       }
     }
   }
 
   .caret {
-    background: $monokai_turquoise;
+    background: $bushido_red;
   }
 }

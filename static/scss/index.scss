@@ -44,6 +44,10 @@
     }
   }
 
+  &__radio {
+    display: none;
+  }
+
   &__textarea,
   &__input {
     border: none;
@@ -438,11 +442,7 @@
       }
     }
 
-    &-themes {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 10px;
-
+    &-theme {
       &-card {
         padding: 10px;
         border-radius: 10px;
@@ -450,6 +450,12 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+      }
+
+      &-form {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 15px;
       }
     }
   }

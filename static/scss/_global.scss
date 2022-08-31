@@ -3,6 +3,8 @@
 @import "./_vars";
 @import "./themes/serikaDark";
 @import "./themes/monokai";
+@import "./themes/bushido";
+@import "./themes/oblivion";
 
 *,
 *::after,
@@ -71,16 +73,6 @@ h6 {
   padding: 0 10px;
   margin: 0 auto;
   min-height: inherit;
-}
-
-.serika-dark-card {
-  background: $serikaDark_black;
-  color: $serikaDark_yellow;
-}
-
-.monokai-card {
-  background: $monokai_brown;
-  color: $monokai_yellow;
 }
 
 .active-theme-card {
