@@ -1,32 +1,32 @@
-@import "../_vars";
+@import "./_vars";
 
-.bushido-card {
-  background: $bushido_dark;
-  color: $bushido_red;
+.monokai-card {
+  background: $monokai_darkBrown;
+  color: $monokai_yellow;
 }
 
-body[data-theme=bushido] {
-  background: $bushido_dark;
-  color: $bushido_white;
+body[data-theme=monokai] {
+  background: $monokai_brown;
+  color: $monokai_yellow;
 
   &::-webkit-scrollbar-thumb {
-    background: $bushido_dark;
+    background: $monokai_yellow;
   }
 
   &::-webkit-scrollbar {
-    background: $bushido_white;
+    background: $monokai_brown;
   }
 
   .active-theme-card {
     &::after {
-      background: $bushido_red;
+      background: $monokai_yellow;
     }
   }
 
   .auth {
     &__block {
       &-title {
-        color: $bushido_white;
+        color: $monokai_white;
       }
     }
   }
@@ -35,74 +35,74 @@ body[data-theme=bushido] {
 
     &__textarea,
     &__input {
-      background: $bushido_black;
-      caret-color: $bushido_red;
-      color: $bushido_white;
+      background: $monokai_darkBrown;
+      caret-color: $monokai_green;
+      color: $monokai_white;
 
       &::placeholder {
-        color: $bushido_grey;
+        color: $monokai_yellow;
       }
     }
 
     &__label {
       &::after {
-        background: $bushido_white;
+        background: $monokai_green;
       }
     }
 
     &__submit {
-      color: $bushido_white;
-      background: $bushido_black;
+      color: $monokai_white;
+      background: $monokai_darkBrown;
 
       &:hover {
-        color: $bushido_black;
-        background: $bushido_white;
+        color: $monokai_darkBrown;
+        background: $monokai_white;
       }
     }
   }
 
   .invalid-input {
     &::after {
-      background: $bushido_red;
+      background: $monokai_red;
     }
   }
 
   .notification {
     &__title {
-      color: $bushido_grey;
+      color: $monokai_brown;
     }
 
     &__desc {
-      color: $bushido_dark;
+      color: $monokai_brown;
     }
 
     &--error {
-      background: $bushido_red;
+      background: $monokai_red;
     }
 
     &--warning {
-      background: $bushido_black;
+      background: $monokai_yellow;
     }
 
     &--success {
-      background: $bushido_white;
+      background: $monokai_green;
     }
   }
 
   .header {
     &__list {
       &-link {
-        color: $bushido_grey;
+        color: $monokai_yellow;
 
         &:hover {
-          color: $bushido_white;
+          color: $monokai_white;
         }
       }
 
       &-user {
         &-level {
-          background: $bushido_grey;
-          color: $bushido_dark;
+          background: $monokai_yellow;
+          color: $monokai_brown;
         }
       }
     }
@@ -111,59 +111,59 @@ body[data-theme=bushido] {
   .testing {
     &-focus {
       &__icon {
-        fill: $bushido_white;
+        fill: $monokai_white;
       }
 
       &__text {
-        color: $bushido_white;
+        color: $monokai_white;
       }
     }
 
     &__letter {
-      color: $bushido_grey;
+      color: $monokai_yellow;
 
       &--complete {
-        color: $bushido_white;
+        color: $monokai_white;
       }
 
       &--failure {
-        color: $bushido_red;
+        color: $monokai_red;
       }
     }
 
     &-result {
       &__data {
-        background: $bushido_black;
+        background: $monokai_darkBrown;
 
         &-row {
           &:not(:last-child) {
             td {
-              border-bottom-color: $bushido_dark;
+              border-bottom-color: $monokai_brown;
             }
           }
         }
 
         &-title {
-          color: $bushido_white;
+          color: $monokai_white;
         }
 
         &-column {
           &:not(:last-child) {
-            border-right-color: $bushido_dark;
+            border-right-color: $monokai_brown;
           }
         }
 
         &-value {
-          color: $bushido_red;
+          color: $monokai_yellow;
         }
       }
 
       &__controls {
         &-btn {
-          color: $bushido_grey;
+          color: $monokai_yellow;
 
           &:hover {
-            color: $bushido_white;
+            color: $monokai_white;
           }
         }
       }
@@ -173,42 +173,42 @@ body[data-theme=bushido] {
   .create-text {
     &__textarea {
       &--invalid {
-        border-color: $bushido_red;
+        border-color: $monokai_red;
       }
     }
   }
 
   .account {
     &__info {
-      background: $bushido_black;
+      background: $monokai_darkBrown;
 
       &-subtitle {
-        color: $bushido_grey;
+        color: $monokai_yellow;
       }
 
       &-title {
-        color: $bushido_white;
+        color: $monokai_white;
       }
     }
 
     &__user {
       &::after {
-        background: $bushido_dark;
+        background: $monokai_brown;
       }
 
       &-level {
-        color: $bushido_white;
+        color: $monokai_yellow;
 
         &-value {
-          color: $bushido_red;
+          color: $monokai_white;
         }
       }
 
       &-icon {
-        fill: $bushido_grey;
+        fill: $monokai_yellow;
 
         .cls-1 {
-          stroke: $bushido_black;
+          stroke: $monokai_darkBrown;
         }
       }
     }
@@ -216,12 +216,12 @@ body[data-theme=bushido] {
     &__texts {
       &-table {
         &-content {
-          color: $bushido_white;
+          color: $monokai_white;
         }
 
         &-header {
           &-title {
-            color: $bushido_grey;
+            color: $monokai_yellow;
           }
         }
 
@@ -229,7 +229,7 @@ body[data-theme=bushido] {
           &-row {
             &:nth-child(odd) {
               td {
-                background: $bushido_black;
+                background: $monokai_darkBrown;
               }
             }
           }
@@ -241,34 +241,34 @@ body[data-theme=bushido] {
   .settings {
     &__row {
       &-title {
-        color: $bushido_grey;
+        color: $monokai_yellow;
 
         &--active {
-          color: $bushido_white;
+          color: $monokai_white;
         }
       }
 
       &-header {
         &:hover>h2 {
-          color: $bushido_white;
+          color: $monokai_white;
         }
 
         &:hover>svg {
-          fill: $bushido_white;
+          fill: $monokai_white;
         }
       }
 
       &-icon {
-        fill: $bushido_grey;
+        fill: $monokai_yellow;
 
         &--rotate {
-          fill: $bushido_white;
+          fill: $monokai_white;
         }
       }
     }
   }
 
   .caret {
-    background: $bushido_red;
+    background: $monokai_turquoise;
   }
 }

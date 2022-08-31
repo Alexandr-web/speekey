@@ -64,6 +64,11 @@
           name: "oblivion",
           value: "oblivion",
           className: "oblivion-card",
+        },
+        {
+          name: "cyberspace",
+          value: "cyberspace",
+          className: "cyberspace-card",
         }
       ],
     }),

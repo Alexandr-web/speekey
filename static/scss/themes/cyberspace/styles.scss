@@ -1,0 +1,274 @@
+@import "./_vars";
+
+.cyberspace-card {
+  background: $cyberspace_dark;
+  color: $cyberspace_green;
+}
+
+body[data-theme=cyberspace] {
+  background: $cyberspace_dark;
+  color: $cyberspace_lightGreen;
+
+  &::-webkit-scrollbar-thumb {
+    background: $cyberspace_purple;
+  }
+
+  &::-webkit-scrollbar {
+    background: $cyberspace_dark;
+  }
+
+  .active-theme-card {
+    &::after {
+      background: $cyberspace_green;
+    }
+  }
+
+  .auth {
+    &__block {
+      &-title {
+        color: $cyberspace_lightGreen;
+      }
+    }
+  }
+
+  .form {
+
+    &__textarea,
+    &__input {
+      background: $cyberspace_black;
+      caret-color: $cyberspace_green;
+      color: $cyberspace_lightGreen;
+
+      &::placeholder {
+        color: $cyberspace_purple;
+      }
+    }
+
+    &__label {
+      &::after {
+        background: $cyberspace_green;
+      }
+    }
+
+    &__submit {
+      color: $cyberspace_lightGreen;
+      background: $cyberspace_black;
+
+      &:hover {
+        color: $cyberspace_black;
+        background: $cyberspace_lightGreen;
+      }
+    }
+  }
+
+  .invalid-input {
+    &::after {
+      background: $cyberspace_red;
+    }
+  }
+
+  .notification {
+    &__title {
+      color: $cyberspace_dark;
+    }
+
+    &__desc {
+      color: $cyberspace_black;
+    }
+
+    &--error {
+      background: $cyberspace_red;
+    }
+
+    &--warning {
+      background: $cyberspace_purple;
+    }
+
+    &--success {
+      background: $cyberspace_green;
+    }
+  }
+
+  .header {
+    &__list {
+      &-link {
+        color: $cyberspace_purple;
+
+        &:hover {
+          color: $cyberspace_lightGreen;
+        }
+      }
+
+      &-user {
+        &-level {
+          background: $cyberspace_purple;
+          color: $cyberspace_dark;
+        }
+      }
+    }
+  }
+
+  .testing {
+    &-focus {
+      &__icon {
+        fill: $cyberspace_lightGreen;
+      }
+
+      &__text {
+        color: $cyberspace_lightGreen;
+      }
+    }
+
+    &__letter {
+      color: $cyberspace_purple;
+
+      &--complete {
+        color: $cyberspace_lightGreen;
+      }
+
+      &--failure {
+        color: $cyberspace_red;
+      }
+    }
+
+    &-result {
+      &__data {
+        background: $cyberspace_black;
+
+        &-row {
+          &:not(:last-child) {
+            td {
+              border-bottom-color: $cyberspace_dark;
+            }
+          }
+        }
+
+        &-title {
+          color: $cyberspace_lightGreen;
+        }
+
+        &-column {
+          &:not(:last-child) {
+            border-right-color: $cyberspace_dark;
+          }
+        }
+
+        &-value {
+          color: $cyberspace_purple;
+        }
+      }
+
+      &__controls {
+        &-btn {
+          color: $cyberspace_lightGreen;
+
+          &:hover {
+            color: $cyberspace_purple;
+          }
+        }
+      }
+    }
+  }
+
+  .create-text {
+    &__textarea {
+      &--invalid {
+        border-color: $cyberspace_red;
+      }
+    }
+  }
+
+  .account {
+    &__info {
+      background: $cyberspace_black;
+
+      &-subtitle {
+        color: $cyberspace_purple;
+      }
+
+      &-title {
+        color: $cyberspace_lightGreen;
+      }
+    }
+
+    &__user {
+      &::after {
+        background: $cyberspace_dark;
+      }
+
+      &-level {
+        color: $cyberspace_purple;
+
+        &-value {
+          color: $cyberspace_lightGreen;
+        }
+      }
+
+      &-icon {
+        fill: $cyberspace_purple;
+
+        .cls-1 {
+          stroke: $cyberspace_black;
+        }
+      }
+    }
+
+    &__texts {
+      &-table {
+        &-content {
+          color: $cyberspace_lightGreen;
+        }
+
+        &-header {
+          &-title {
+            color: $cyberspace_purple;
+          }
+        }
+
+        &-body {
+          &-row {
+            &:nth-child(odd) {
+              td {
+                background: $cyberspace_black;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .settings {
+    &__row {
+      &-title {
+        color: $cyberspace_purple;
+
+        &--active {
+          color: $cyberspace_lightGreen;
+        }
+      }
+
+      &-header {
+        &:hover>h2 {
+          color: $cyberspace_lightGreen;
+        }
+
+        &:hover>svg {
+          fill: $cyberspace_lightGreen;
+        }
+      }
+
+      &-icon {
+        fill: $cyberspace_purple;
+
+        &--rotate {
+          fill: $cyberspace_lightGreen;
+        }
+      }
+    }
+  }
+
+  .caret {
+    background: $cyberspace_green;
+  }
+}
