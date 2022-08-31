@@ -404,10 +404,6 @@
   }
 
   &__row {
-    &:last-child {
-      margin-bottom: 15px;
-    }
-
     &-title {
       margin-right: 5px;
       @extend %roboto-mono-400;
