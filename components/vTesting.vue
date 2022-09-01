@@ -7,7 +7,7 @@
         :class="{
           'testing-focus--hide': end || start
         }"
-        @click="$emit('startWriting')"
+        @click="$emit('startTyping')"
       >
         <div class="testing-focus__inner">
           <vCursorIcon :classes="['testing-focus__icon']" />

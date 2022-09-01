@@ -19,7 +19,7 @@
           :sec="sec"
           :pending-next-text="pendingNextText"
           :pending-set-favorite="pendingSetFavorite"
-          @startWriting="startWriting"
+          @startTyping="startTyping"
           @nextText="nextText"
           @againTyping="againTyping"
         />
@@ -72,15 +72,7 @@
       res: 0,
       sec: 0,
       indexActiveLetter: 0,
-      invalidKeys: [
-        "Escape", "Tab", "Alt", "Control", "Enter",
-        "Shift", "Backspace", "NumLock", "Delete", "Insert",
-        "CapsLock", "ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown",
-        "OS", "Meta", "F1", "F2", "F3", "F4", "F5", "F6",
-        "F7", "F8", "F9", "F10", "F11", "F12", "End",
-        "PageUp", "PageDown", "ScrollLock", "Pause", "Insert",
-        "Home"
-      ],
+      ignoreKeys: ["CapsLock", "Alt", "Shift", "NumLock"],
     }),
     head: { title: "Тестирование", },
     computed: {
@@ -177,18 +169,37 @@
         this.validLetters = 0;
         this.invalidLetters = 0;
       },
-      startWriting() {
+      startTyping() {
         this.start = true;
         this.end = false;
       },
       keydownHandler(e) {
-        e.preventDefault();
-        
         const key = e.key;
         
-        if (!this.invalidKeys.includes(key)) {
+        if (!this.ignoreKeys.includes(key)) {
           const indexActiveLetter = this.getText.findIndex(({ active, }) => active);
-          const activeLetter = this.getText[indexActiveLetter];
+          const activeLetter = this.getText[indexActiveLetter === -1 ? 0 : indexActiveLetter];
+          
+          if (key === "Backspace" && this.getText[indexActiveLetter - 1]) {
+            if (activeLetter.failure) {
+              this.$store.commit("text/changeLetter", {
+                index: indexActiveLetter,
+                data: { active: true, complete: false, failure: false, },
+              });
+            } else {
+              this.$store.commit("text/changeLetter", {
+                index: indexActiveLetter,
+                data: { active: false, complete: false, failure: false, },
+              });
+
+              this.$store.commit("text/changeLetter", {
+                index: indexActiveLetter - 1,
+                data: { active: true, complete: false, failure: false, },
+              });
+
+              this.indexActiveLetter = indexActiveLetter - 1;
+            }
+          }
 
           if (activeLetter.letter === key) {
             this.$store.commit("text/changeLetter", {
@@ -204,7 +215,7 @@
             } else {
               this.indexActiveLetter = indexActiveLetter + 1;
             }
-          } else {
+          } else if (key !== "Backspace") {
             this.$store.commit("text/changeLetter", {
               index: indexActiveLetter,
               data: { complete: false, failure: true, },

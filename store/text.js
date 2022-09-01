@@ -34,7 +34,7 @@ export default {
         }
       });
 
-      if (!data.active && state.text[index + 1]) {
+      if ([!data.active, state.text[index + 1], data.complete].every(Boolean)) {
         state.text[index + 1].active = true;
       }
     },
