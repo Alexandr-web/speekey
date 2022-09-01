@@ -13,10 +13,10 @@
           :start="start"
           :end="end"
           :res="res"
-          :invalid-letters="invalidLetters"
-          :valid-letters="validLetters"
+          :errors="errors"
           :index-active-letter="indexActiveLetter"
           :sec="sec"
+          :accuracy="accuracy"
           :pending-next-text="pendingNextText"
           :pending-set-favorite="pendingSetFavorite"
           @startTyping="startTyping"
@@ -67,8 +67,8 @@
       pendingNextText: false,
       pendingSetFavorite: false,
       timer: null,
-      validLetters: 0,
-      invalidLetters: 0,
+      errors: 0,
+      accuracy: 0,
       res: 0,
       sec: 0,
       indexActiveLetter: 0,
@@ -106,8 +106,10 @@
           const data = {
             speed: this.res,
             length: this.getText.length,
-            errors: this.invalidLetters,
+            errors: this.errors,
+            accuracy: this.accuracy,
           };
+
           const res = this.$store.dispatch("profile/setTextComplete", { token, id, data, });
 
           res.then(({ message, type, }) => {
@@ -166,8 +168,8 @@
       clearParams() {
         this.sec = 0;
         this.res = 0;
-        this.validLetters = 0;
-        this.invalidLetters = 0;
+        this.errors = 0;
+        this.accuracy = 0;
       },
       startTyping() {
         this.start = true;
@@ -179,7 +181,7 @@
         if (!this.ignoreKeys.includes(key)) {
           const indexActiveLetter = this.getText.findIndex(({ active, }) => active);
           const activeLetter = this.getText[indexActiveLetter === -1 ? 0 : indexActiveLetter];
-          
+
           if (key === "Backspace" && this.getText[indexActiveLetter - 1]) {
             if (activeLetter.failure) {
               this.$store.commit("text/changeLetter", {
@@ -207,8 +209,6 @@
               data: { active: false, complete: true, failure: false, },
             });
 
-            this.validLetters += 1;
-
             if (indexActiveLetter + 1 >= this.getText.length) {
               this.start = false;
               this.$store.commit("text/resetText");
@@ -221,8 +221,10 @@
               data: { complete: false, failure: true, },
             });
 
-            this.invalidLetters += 1;
+            this.errors += 1;
           }
+
+          this.accuracy = Math.floor(((this.getText.length - this.errors) / this.getText.length) * 100);
         }
       },
     },

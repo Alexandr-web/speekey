@@ -39,6 +39,22 @@
                 {{ user.completedTexts }}
               </h2>
             </div>
+            <div class="account__info-block account__params">
+              <h4 class="account__info-subtitle">
+                Точность
+              </h4>
+              <h2 class="account__info-title">
+                {{ user.accuracy }}
+              </h2>
+            </div>
+            <div class="account__info-block account__params">
+              <h4 class="account__info-subtitle">
+                Скорость (с/м)
+              </h4>
+              <h2 class="account__info-title">
+                {{ user.speed }}
+              </h2>
+            </div>
           </div>
           <div
             v-if="(completedTexts || []).length"
@@ -55,6 +71,9 @@
                   </th>
                   <th class="account__texts-table-content account__texts-table-header-title">
                     Кол-во ошибок
+                  </th>
+                  <th class="account__texts-table-content account__texts-table-header-title">
+                    Точность
                   </th>
                   <th class="account__texts-table-content account__texts-table-header-title">
                     Дата
@@ -75,6 +94,9 @@
                   </td>
                   <td class="account__texts-table-content">
                     {{ txt.errors }}
+                  </td>
+                  <td class="account__texts-table-content">
+                    {{ txt.accuracy }}
                   </td>
                   <td class="account__texts-table-content">
                     {{ new Date(txt.updatedAt).toLocaleString() }}

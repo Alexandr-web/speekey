@@ -32,7 +32,7 @@
               Количество ошибок
             </td>
             <td class="testing-result__data-column testing-result__data-value">
-              {{ invalidLetters }}
+              {{ errors }}
             </td>
           </tr>
           <tr class="testing-result__data-row">
@@ -41,6 +41,14 @@
             </td>
             <td class="testing-result__data-column testing-result__data-value">
               {{ getTextData.body.length }}
+            </td>
+          </tr>
+          <tr class="testing-result__data-row">
+            <td class="testing-result__data-column testing-result__data-title">
+              Точность
+            </td>
+            <td class="testing-result__data-column testing-result__data-value">
+              {{ accuracy }}
             </td>
           </tr>
           <tr class="testing-result__data-row">
@@ -116,11 +124,11 @@
     name: "TestingComponent",
     components: { vCursorIcon, },
     props: {
-      validLetters: {
+      errors: {
         type: Number,
         required: true,
       },
-      invalidLetters: {
+      accuracy: {
         type: Number,
         required: true,
       },

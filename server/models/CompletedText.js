@@ -8,6 +8,7 @@ module.exports = sequelize.define("completedText", {
     type: DataTypes.INTEGER,
     defaultValue: 0,
   },
+  accuracy: { type: DataTypes.INTEGER, },
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

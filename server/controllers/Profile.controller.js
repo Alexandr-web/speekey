@@ -33,6 +33,7 @@ class Profile {
         return res.status(404).json({ ok: false, message: "Такого текста не существует", type: "error", });
       }
 
+      const user = await User.findOne({ where: { id: req.userId, }, });
       const completedTexts = await CompletedText.findAll({ where: { userId: req.userId, }, });
       const textData = { ...req.body, textId: text.id, userId: req.userId, };
       const findTextIndex = completedTexts.findIndex(({ textId, }) => textId === text.id);
@@ -43,7 +44,17 @@ class Profile {
         await completedTexts[findTextIndex].update(textData);
       }
 
-      return res.status(200).json({ ok: true, message: "Текст завершен", type: "success", });
+      const updateCompletedTexts = await CompletedText.findAll({ where: { userId: req.userId, }, });
+      const totalAccuracy = updateCompletedTexts.map(({ accuracy, }) => accuracy);
+      const totalSpeed = updateCompletedTexts.map(({ speed, }) => speed);
+      const getAverage = (array) => Math.floor((array.reduce((s, n) => s += n)) / (array.length || 1));
+
+      await user.update({
+        accuracy: getAverage(totalAccuracy),
+        speed: getAverage(totalSpeed),
+      });
+
+      return res.status(200).json({ ok: true, message: "Текст завершен", type: "success", accuracy: textData.accuracy, });
     } catch (err) {
       console.log(err);
 

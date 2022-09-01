@@ -15,6 +15,14 @@ module.exports = sequelize.define("user", {
     unique: true,
   },
   password: { type: DataTypes.TEXT, },
+  speed: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  accuracy: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

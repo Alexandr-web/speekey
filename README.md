@@ -9,7 +9,7 @@ This app will help you train and test your typing speed. As a design, I chose th
 <img src="./readmeImages/testing.jpg" alt="testing page" />
 
 ## Profile page
-<img src="./readmeImages/profile.jpg" alt="profile page" />
+<img src="./readmeImages/account.jpg" alt="profile page" />
 
 ## Create text page
 <img src="./readmeImages/create.jpg" alt="create text page" />
