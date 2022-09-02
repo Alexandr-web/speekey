@@ -212,28 +212,26 @@ body[data-theme=monokai] {
         }
       }
     }
+  }
 
-    &__texts {
-      &-table {
-        &-content {
-          color: $monokai_white;
-        }
+  .table {
+    &__body {
+      &-content {
+        color: $monokai_white;
+      }
 
-        &-header {
-          &-title {
-            color: $monokai_yellow;
+      &-row {
+        &:nth-child(odd) {
+          td {
+            background: $monokai_darkBrown;
           }
         }
+      }
+    }
 
-        &-body {
-          &-row {
-            &:nth-child(odd) {
-              td {
-                background: $monokai_darkBrown;
-              }
-            }
-          }
-        }
+    &__header {
+      &-title {
+        color: $monokai_yellow;
       }
     }
   }
@@ -265,6 +263,12 @@ body[data-theme=monokai] {
           fill: $monokai_white;
         }
       }
+    }
+  }
+
+  .logout {
+    &__title {
+      color: $monokai_white;
     }
   }
 

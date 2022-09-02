@@ -48,7 +48,7 @@
               Точность
             </td>
             <td class="testing-result__data-column testing-result__data-value">
-              {{ accuracy }}
+              {{ accuracy }}%
             </td>
           </tr>
           <tr class="testing-result__data-row">

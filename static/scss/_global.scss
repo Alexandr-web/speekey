@@ -89,3 +89,37 @@ h6 {
     position: absolute;
   }
 }
+
+.table {
+  &__header {
+
+    &-title {
+      padding: 0 10px 10px 10px;
+      font-size: 14px;
+      text-align: left;
+      @extend %roboto-mono-400;
+    }
+  }
+
+  &__body {
+    &-row {
+      padding: 10px;
+
+      &:nth-child(odd) {
+        td {
+          &:first-child {
+            border-radius: 10px 0 0 10px;
+          }
+
+          &:last-child {
+            border-radius: 0 10px 10px 0;
+          }
+        }
+      }
+    }
+
+    &-content {
+      padding: 10px;
+    }
+  }
+}

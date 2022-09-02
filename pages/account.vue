@@ -44,7 +44,7 @@
                 Точность
               </h4>
               <h2 class="account__info-title">
-                {{ user.accuracy }}
+                {{ user.accuracy }}%
               </h2>
             </div>
             <div class="account__info-block account__params">
@@ -60,43 +60,43 @@
             v-if="(completedTexts || []).length"
             class="account__texts"
           >
-            <table class="account__texts-table">
-              <thead class="account__texts-table-header">
-                <tr class="account__texts-table-header-row">
-                  <th class="account__texts-table-content account__texts-table-header-title">
+            <table class="table account__texts-table">
+              <thead class="table__header account__texts-table-header">
+                <tr class="table__header-row account__texts-table-header-row">
+                  <th class="table__header-title account__texts-table-content account__texts-table-header-title">
                     Скорость (с/м)
                   </th>
-                  <th class="account__texts-table-content account__texts-table-header-title">
+                  <th class="table__header-title account__texts-table-content account__texts-table-header-title">
                     Кол-во символов
                   </th>
-                  <th class="account__texts-table-content account__texts-table-header-title">
+                  <th class="table__header-title account__texts-table-content account__texts-table-header-title">
                     Кол-во ошибок
                   </th>
-                  <th class="account__texts-table-content account__texts-table-header-title">
+                  <th class="table__header-title account__texts-table-content account__texts-table-header-title">
                     Точность
                   </th>
-                  <th class="account__texts-table-content account__texts-table-header-title">
+                  <th class="table__header-title account__texts-table-content account__texts-table-header-title">
                     Дата
                   </th>
                 </tr>
               </thead>
-              <tbody class="account__texts-table-body">
+              <tbody class="table__body account__texts-table-body">
                 <tr
                   v-for="(txt, index) in completedTexts"
                   :key="index"
-                  class="account__texts-table-body-row"
+                  class="table__body-row account__texts-table-body-row"
                 >
-                  <td class="account__texts-table-content">
+                  <td class="table__body-content account__texts-table-content">
                     {{ txt.speed }}
                   </td>
-                  <td class="account__texts-table-content">
+                  <td class="table__body-content account__texts-table-content">
                     {{ txt.length }}
                   </td>
-                  <td class="account__texts-table-content">
+                  <td class="table__body-content account__texts-table-content">
                     {{ txt.errors }}
                   </td>
-                  <td class="account__texts-table-content">
-                    {{ txt.accuracy }}
+                  <td class="table__body-content account__texts-table-content">
+                    {{ txt.accuracy }}%
                   </td>
                   <td class="account__texts-table-content">
                     {{ new Date(txt.updatedAt).toLocaleString() }}

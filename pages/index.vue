@@ -177,7 +177,7 @@
       },
       keydownHandler(e) {
         const key = e.key;
-        
+
         if (!this.ignoreKeys.includes(key)) {
           const indexActiveLetter = this.getText.findIndex(({ active, }) => active);
           const activeLetter = this.getText[indexActiveLetter === -1 ? 0 : indexActiveLetter];

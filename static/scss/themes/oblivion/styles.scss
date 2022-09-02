@@ -212,28 +212,26 @@ body[data-theme=oblivion] {
         }
       }
     }
+  }
 
-    &__texts {
-      &-table {
-        &-content {
-          color: $oblivion_white;
-        }
+  .table {
+    &__body {
+      &-content {
+        color: $oblivion_white;
+      }
 
-        &-header {
-          &-title {
-            color: $oblivion_grey;
+      &-row {
+        &:nth-child(odd) {
+          td {
+            background: $oblivion_darkGrey;
           }
         }
+      }
+    }
 
-        &-body {
-          &-row {
-            &:nth-child(odd) {
-              td {
-                background: $oblivion_darkGrey;
-              }
-            }
-          }
-        }
+    &__header {
+      &-title {
+        color: $oblivion_grey;
       }
     }
   }
@@ -265,6 +263,12 @@ body[data-theme=oblivion] {
           fill: $oblivion_white;
         }
       }
+    }
+  }
+
+  .logout {
+    &__title {
+      color: $oblivion_white;
     }
   }
 

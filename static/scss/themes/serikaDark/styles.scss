@@ -196,24 +196,26 @@ body[data-theme=serika-dark] {
         }
       }
     }
+  }
 
-    &__texts {
-      &-table {
-        &-header {
-          &-title {
-            color: $serikaDark_grey;
+  .table {
+    &__body {
+      &-content {
+        color: $serikaDark_lightGrey;
+      }
+
+      &-row {
+        &:nth-child(odd) {
+          td {
+            background: $serikaDark_black;
           }
         }
+      }
+    }
 
-        &-body {
-          &-row {
-            &:nth-child(odd) {
-              td {
-                background: $serikaDark_black;
-              }
-            }
-          }
-        }
+    &__header {
+      &-title {
+        color: $serikaDark_grey;
       }
     }
   }
@@ -245,6 +247,12 @@ body[data-theme=serika-dark] {
           fill: $serikaDark_lightGrey;
         }
       }
+    }
+  }
+
+  .logout {
+    &__title {
+      color: $serikaDark_lightGrey;
     }
   }
 

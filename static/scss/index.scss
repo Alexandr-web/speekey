@@ -362,38 +362,6 @@
 
   &__texts {
     margin-top: 15px;
-
-    &-table {
-      &-header {
-        &-title {
-          font-size: 14px;
-          text-align: left;
-          @extend %roboto-mono-400;
-        }
-      }
-
-      &-body {
-        &-row {
-          padding: 10px;
-
-          &:nth-child(odd) {
-            td {
-              &:first-child {
-                border-radius: 10px 0 0 10px;
-              }
-
-              &:last-child {
-                border-radius: 0 10px 10px 0;
-              }
-            }
-          }
-        }
-      }
-
-      &-content {
-        padding: 10px;
-      }
-    }
   }
 }
 
@@ -460,6 +428,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    @extend %roboto-mono-400;
+    font-size: 16px;
   }
 }
 

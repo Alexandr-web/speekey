@@ -212,28 +212,26 @@ body[data-theme=bushido] {
         }
       }
     }
+  }
 
-    &__texts {
-      &-table {
-        &-content {
-          color: $bushido_white;
-        }
+  .table {
+    &__body {
+      &-content {
+        color: $bushido_white;
+      }
 
-        &-header {
-          &-title {
-            color: $bushido_grey;
+      &-row {
+        &:nth-child(odd) {
+          td {
+            background: $bushido_black;
           }
         }
+      }
+    }
 
-        &-body {
-          &-row {
-            &:nth-child(odd) {
-              td {
-                background: $bushido_black;
-              }
-            }
-          }
-        }
+    &__header {
+      &-title {
+        color: $bushido_grey;
       }
     }
   }
@@ -265,6 +263,12 @@ body[data-theme=bushido] {
           fill: $bushido_white;
         }
       }
+    }
+  }
+
+  .logout {
+    &__title {
+      color: $bushido_white;
     }
   }
 

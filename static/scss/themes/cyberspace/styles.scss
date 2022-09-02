@@ -212,28 +212,26 @@ body[data-theme=cyberspace] {
         }
       }
     }
+  }
 
-    &__texts {
-      &-table {
-        &-content {
-          color: $cyberspace_lightGreen;
-        }
+  .table {
+    &__body {
+      &-content {
+        color: $cyberspace_lightGreen;
+      }
 
-        &-header {
-          &-title {
-            color: $cyberspace_purple;
+      &-row {
+        &:nth-child(odd) {
+          td {
+            background: $cyberspace_black;
           }
         }
+      }
+    }
 
-        &-body {
-          &-row {
-            &:nth-child(odd) {
-              td {
-                background: $cyberspace_black;
-              }
-            }
-          }
-        }
+    &__header {
+      &-title {
+        color: $cyberspace_purple;
       }
     }
   }
@@ -265,6 +263,12 @@ body[data-theme=cyberspace] {
           fill: $cyberspace_lightGreen;
         }
       }
+    }
+  }
+
+  .logout {
+    &__title {
+      color: $cyberspace_lightGreen;
     }
   }
 

@@ -33,7 +33,7 @@
           >
             <nuxt-link
               class="header__list-link"
-              to="/signout"
+              to="/logout"
             >
               Выйти
             </nuxt-link>
