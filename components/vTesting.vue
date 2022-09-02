@@ -199,7 +199,10 @@
       },
       indexActiveLetter() {
         this.moveCaret();
-        this.getActiveLetter.scrollIntoView({ behavior: "smooth", });
+        this.getActiveLetter.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
       },
     },
     methods: {
