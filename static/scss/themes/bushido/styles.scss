@@ -5,6 +5,16 @@
   color: $bushido_red;
 }
 
+* {
+  &::-webkit-scrollbar-thumb {
+    background: $bushido_dark;
+  }
+
+  &::-webkit-scrollbar {
+    background: $bushido_white;
+  }
+}
+
 body[data-theme=bushido] {
   background: $bushido_dark;
   color: $bushido_white;

@@ -1,5 +1,8 @@
 <template>
-  <div class="testing">
+  <div
+    ref="testing"
+    class="testing"
+  >
     <div class="testing__inner">
       <div
         v-if="Object.keys(getTextData).length"
@@ -178,6 +181,9 @@
       getTextData() {
         return this.$store.getters["text/getTextData"];
       },
+      getTestingElement() {
+        return this.$refs.testing;
+      },
     },
     watch: {
       start(val) {
@@ -193,6 +199,7 @@
       },
       indexActiveLetter() {
         this.moveCaret();
+        this.getActiveLetter.scrollIntoView({ behavior: "smooth", });
       },
     },
     methods: {

@@ -5,6 +5,16 @@
   color: $oblivion_lightGrey;
 }
 
+* {
+  &::-webkit-scrollbar-thumb {
+    background: $oblivion_grey;
+  }
+
+  &::-webkit-scrollbar {
+    background: $oblivion_dark;
+  }
+}
+
 body[data-theme=oblivion] {
   background: $oblivion_dark;
   color: $oblivion_white;

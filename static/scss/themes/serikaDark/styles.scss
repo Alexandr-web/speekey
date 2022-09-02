@@ -5,6 +5,16 @@
   color: $serikaDark_yellow;
 }
 
+* {
+  &::-webkit-scrollbar-thumb {
+    background: $serikaDark_grey;
+  }
+
+  &::-webkit-scrollbar {
+    background: $serikaDark_black;
+  }
+}
+
 body[data-theme=serika-dark] {
   background: $serikaDark_dark;
   color: $serikaDark_lightGrey;

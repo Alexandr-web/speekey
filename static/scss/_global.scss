@@ -19,9 +19,8 @@
   text-decoration: none;
 }
 
+*,
 body {
-  @extend %roboto-mono-400;
-
   &::-webkit-scrollbar-thumb {
     border-radius: 8px;
   }
@@ -30,6 +29,10 @@ body {
     border-radius: 8px;
     width: 6px;
   }
+}
+
+body {
+  @extend %roboto-mono-400;
 }
 
 table {

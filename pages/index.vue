@@ -176,6 +176,8 @@
         this.end = false;
       },
       keydownHandler(e) {
+        e.preventDefault();
+
         const key = e.key;
 
         if (!this.ignoreKeys.includes(key)) {

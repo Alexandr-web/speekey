@@ -10,7 +10,7 @@ class Leaders {
       const users = await User.findAll();
       const leaders = users
         .filter(({ speed, accuracy, }) => [speed, accuracy].every((n) => n > 0))
-        .sort(({ speed: speedA, }, { speed: speedB, }) => speedB - speedA);
+        .sort(({ speed: speedA, accuracy: accuracyA, }, { speed: speedB, accuracy: accuracyB, }) => (speedB - speedA) && (accuracyB - accuracyA));
 
       return res.status(200).json({ ok: true, leaders, });
     } catch (err) {

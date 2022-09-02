@@ -5,6 +5,16 @@
   color: $monokai_yellow;
 }
 
+* {
+  &::-webkit-scrollbar-thumb {
+    background: $monokai_yellow;
+  }
+
+  &::-webkit-scrollbar {
+    background: $monokai_brown;
+  }
+}
+
 body[data-theme=monokai] {
   background: $monokai_brown;
   color: $monokai_yellow;

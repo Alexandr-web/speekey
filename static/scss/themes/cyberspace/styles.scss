@@ -5,6 +5,16 @@
   color: $cyberspace_green;
 }
 
+* {
+  &::-webkit-scrollbar-thumb {
+    background: $cyberspace_purple;
+  }
+
+  &::-webkit-scrollbar {
+    background: $cyberspace_dark;
+  }
+}
+
 body[data-theme=cyberspace] {
   background: $cyberspace_dark;
   color: $cyberspace_lightGreen;
