@@ -98,7 +98,7 @@
                   <td class="table__body-content account__texts-table-content">
                     {{ txt.accuracy }}%
                   </td>
-                  <td class="account__texts-table-content">
+                  <td class="table__body-content account__texts-table-content">
                     {{ new Date(txt.updatedAt).toLocaleString() }}
                   </td>
                 </tr>
