@@ -101,8 +101,8 @@
           class="caret"
           :data-view="caretData.view"
           :class="{
-            'caret-animate': caretData.animate,
-            'caret-smooth': caretData.smooth,
+            'caret-animate': caretData.animate === 'on',
+            'caret-smooth': caretData.smooth === 'on',
           }"
           :style="{
             'left': `${caretData.x}px`,
