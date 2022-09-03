@@ -69,6 +69,11 @@
           name: "cyberspace",
           value: "cyberspace",
           className: "cyberspace-card",
+        },
+        {
+          name: "one dark",
+          value: "one-dark",
+          className: "one-dark-card",
         }
       ],
     }),
