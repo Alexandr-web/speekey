@@ -321,12 +321,12 @@ body[data-theme=bushido] {
 
     &__view {
       &-outline {
-        border-color: $bushido_red;
+        border-color: $bushido_white;
       }
 
       &-default,
       &-block {
-        background: $bushido_red;
+        background: $bushido_white;
       }
     }
   }
