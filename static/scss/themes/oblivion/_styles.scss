@@ -273,6 +273,34 @@ body[data-theme=oblivion] {
           fill: $oblivion_white;
         }
       }
+
+      &-caret {
+        &-param {
+          &-title {
+            color: $oblivion_grey;
+          }
+
+          &-label {
+            .form__radio:checked+span {
+              background: $oblivion_lightGrey;
+              color: $oblivion_dark;
+
+              .caret__view-default,
+              .caret__view-block {
+                background: $oblivion_dark;
+              }
+
+              .caret__view-outline {
+                border-color: $oblivion_dark;
+              }
+            }
+          }
+
+          &-radio {
+            background: $oblivion_grey;
+          }
+        }
+      }
     }
   }
 
@@ -283,6 +311,23 @@ body[data-theme=oblivion] {
   }
 
   .caret {
-    background: $oblivion_lightGrey;
+    &:not([data-view=outline]) {
+      background: $oblivion_lightGrey;
+    }
+
+    &[data-view=outline] {
+      border-color: $oblivion_lightGrey;
+    }
+
+    &__view {
+      &-outline {
+        border-color: $oblivion_white;
+      }
+
+      &-default,
+      &-block {
+        background: $oblivion_white;
+      }
+    }
   }
 }

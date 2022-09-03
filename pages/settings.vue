@@ -50,6 +50,10 @@
                   v-if="item.isTheme"
                   @callNotification="callNotification"
                 />
+                <vSettingsCaret
+                  v-if="item.isCaret"
+                  @callNotification="callNotification"
+                />
               </main>
             </div>
           </div>
@@ -63,6 +67,7 @@
   import vMoreIcon from "@/components/icons/vMoreIcon";
   import vSettingsAccount from "@/components/vSettingsAccount";
   import vSettingsTheme from "@/components/vSettingsTheme";
+  import vSettingsCaret from "@/components/vSettingsCaret";
   import vNotification from "@/components/vNotification";
   import notificationMixin from "@/mixins/notificationMixin";
 
@@ -73,6 +78,7 @@
       vSettingsAccount,
       vSettingsTheme,
       vNotification,
+      vSettingsCaret,
     },
     mixins: [notificationMixin],
     layout: "default",
@@ -88,6 +94,11 @@
           show: false,
           title: "Тема",
           isTheme: true,
+        },
+        {
+          show: false,
+          title: "Знак вставки",
+          isCaret: true,
         }
       ],
     }),

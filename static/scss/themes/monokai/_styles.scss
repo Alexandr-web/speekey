@@ -273,6 +273,34 @@ body[data-theme=monokai] {
           fill: $monokai_white;
         }
       }
+
+      &-caret {
+        &-param {
+          &-title {
+            color: $monokai_yellow;
+          }
+
+          &-label {
+            .form__radio:checked+span {
+              background: $monokai_green;
+              color: $monokai_darkBrown;
+
+              .caret__view-default,
+              .caret__view-block {
+                background: $monokai_darkBrown;
+              }
+
+              .caret__view-outline {
+                border-color: $monokai_darkBrown;
+              }
+            }
+          }
+
+          &-radio {
+            background: $monokai_darkBrown;
+          }
+        }
+      }
     }
   }
 
@@ -283,6 +311,23 @@ body[data-theme=monokai] {
   }
 
   .caret {
-    background: $monokai_turquoise;
+    &:not([data-view=outline]) {
+      background: $monokai_turquoise;
+    }
+
+    &[data-view=outline] {
+      border-color: $monokai_turquoise;
+    }
+
+    &__view {
+      &-outline {
+        border-color: $monokai_white;
+      }
+
+      &-default,
+      &-block {
+        background: $monokai_white;
+      }
+    }
   }
 }

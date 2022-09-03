@@ -99,10 +99,17 @@
         <div
           v-if="start"
           class="caret"
+          :data-view="caretData.view"
+          :class="{
+            'caret-animate': caretData.animate,
+            'caret-smooth': caretData.smooth,
+          }"
           :style="{
             'left': `${caretData.x}px`,
             'top': `${caretData.y}px`,
             'height': `${caretData.height}px`,
+            'width': `${caretData.width}px`,
+            'z-index': caretData.zIndex
           }"
         ></div>
         <span
@@ -169,6 +176,11 @@
         x: 0,
         y: 0,
         height: 0,
+        width: 0,
+        zIndex: 1,
+        view: "default",
+        animate: "on",
+        smooth: "on",
       },
     }),
     computed: {
@@ -205,21 +217,37 @@
         });
       },
     },
+    mounted() {
+      const localCaret = JSON.parse(localStorage.getItem("caret"));
+
+      if (localCaret) {
+        this.caretData = {
+          ...this.caretData,
+          ...localCaret,
+        };
+      }
+    },
     methods: {
       clearCaretData() {
         this.caretData = {
+          ...this.caretData,
           x: 0,
           y: 0,
           height: 0,
+          width: 0,
+          zIndex: 1,
         };
       },
       moveCaret() {
-        const { offsetLeft, offsetTop, offsetHeight, } = this.getActiveLetter;
+        const { offsetLeft, offsetTop, offsetHeight, offsetWidth, } = this.getActiveLetter;
 
         this.caretData = {
+          ...this.caretData,
+          width: ["outline", "block"].includes(this.caretData.view) ? offsetWidth : 3,
           x: offsetLeft,
-          y: offsetTop,
+          y: offsetTop < 0 ? 0 : offsetTop,
           height: offsetHeight,
+          zIndex: ["outline", "block"].includes(this.caretData.view) ? -1 : 1,
         };
       },
     },

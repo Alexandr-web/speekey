@@ -273,6 +273,34 @@ body[data-theme=bushido] {
           fill: $bushido_white;
         }
       }
+
+      &-caret {
+        &-param {
+          &-title {
+            color: $bushido_grey;
+          }
+
+          &-label {
+            .form__radio:checked+span {
+              background: $bushido_red;
+              color: $bushido_black;
+
+              .caret__view-default,
+              .caret__view-block {
+                background: $bushido_black;
+              }
+
+              .caret__view-outline {
+                border-color: $bushido_black;
+              }
+            }
+          }
+
+          &-radio {
+            background: $bushido_black;
+          }
+        }
+      }
     }
   }
 
@@ -283,6 +311,23 @@ body[data-theme=bushido] {
   }
 
   .caret {
-    background: $bushido_red;
+    &:not([data-view=outline]) {
+      background: $bushido_red;
+    }
+
+    &[data-view=outline] {
+      border-color: $bushido_red;
+    }
+
+    &__view {
+      &-outline {
+        border-color: $bushido_red;
+      }
+
+      &-default,
+      &-block {
+        background: $bushido_red;
+      }
+    }
   }
 }

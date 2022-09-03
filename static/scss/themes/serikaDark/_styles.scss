@@ -257,6 +257,34 @@ body[data-theme=serika-dark] {
           fill: $serikaDark_lightGrey;
         }
       }
+
+      &-caret {
+        &-param {
+          &-title {
+            color: $serikaDark_grey;
+          }
+
+          &-label {
+            .form__radio:checked+span {
+              background: $serikaDark_yellow;
+              color: $serikaDark_black;
+
+              .caret__view-default,
+              .caret__view-block {
+                background: $serikaDark_black;
+              }
+
+              .caret__view-outline {
+                border-color: $serikaDark_black;
+              }
+            }
+          }
+
+          &-radio {
+            background: $serikaDark_black;
+          }
+        }
+      }
     }
   }
 
@@ -267,6 +295,23 @@ body[data-theme=serika-dark] {
   }
 
   .caret {
-    background: $serikaDark_yellow;
+    &:not([data-view=outline]) {
+      background: $serikaDark_yellow;
+    }
+
+    &[data-view=outline] {
+      border-color: $serikaDark_yellow;
+    }
+
+    &__view {
+      &-outline {
+        border-color: $serikaDark_lightGrey;
+      }
+
+      &-default,
+      &-block {
+        background: $serikaDark_lightGrey;
+      }
+    }
   }
 }

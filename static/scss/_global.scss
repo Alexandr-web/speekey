@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap');
 @import "../../node_modules/normalize.css/normalize.css";
 @import "./_vars";
-@import "./themes/serikaDark/styles";
-@import "./themes/monokai/styles";
-@import "./themes/bushido/styles";
-@import "./themes/oblivion/styles";
-@import "./themes/cyberspace/styles";
+@import "./themes/serikaDark/_styles";
+@import "./themes/monokai/_styles";
+@import "./themes/bushido/_styles";
+@import "./themes/oblivion/_styles";
+@import "./themes/cyberspace/_styles";
 
 *,
 *::after,

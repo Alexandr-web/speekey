@@ -273,6 +273,34 @@ body[data-theme=cyberspace] {
           fill: $cyberspace_lightGreen;
         }
       }
+
+      &-caret {
+        &-param {
+          &-title {
+            color: $cyberspace_purple;
+          }
+
+          &-label {
+            .form__radio:checked+span {
+              background: $cyberspace_green;
+              color: $cyberspace_black;
+
+              .caret__view-default,
+              .caret__view-block {
+                background: $cyberspace_black;
+              }
+
+              .caret__view-outline {
+                border-color: $cyberspace_black;
+              }
+            }
+          }
+
+          &-radio {
+            background: $cyberspace_black;
+          }
+        }
+      }
     }
   }
 
@@ -283,6 +311,23 @@ body[data-theme=cyberspace] {
   }
 
   .caret {
-    background: $cyberspace_green;
+    &:not([data-view=outline]) {
+      background: $cyberspace_green;
+    }
+
+    &[data-view=outline] {
+      border-color: $cyberspace_green;
+    }
+
+    &__view {
+      &-outline {
+        border-color: $cyberspace_lightGreen;
+      }
+
+      &-default,
+      &-block {
+        background: $cyberspace_lightGreen;
+      }
+    }
   }
 }
