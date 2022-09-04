@@ -7,20 +7,12 @@
 
 <script>
   import vHeader from "@/components/vHeader";
+  import setLocalThemeMixin from "@/mixins/setLocalThemeMixin";
 
   export default {
     name: "DefaultLayout",
     components: { vHeader, },
+    mixins: [setLocalThemeMixin],
     middleware: "checkAuth",
-    mounted() {
-      const localTheme = localStorage.getItem("theme");
-
-      if (localTheme) {
-        document.body.dataset.theme = localTheme;
-      } else {
-        localStorage.setItem("theme", "serika-dark");
-        document.body.dataset.theme = "serika-dark";
-      }
-    },
   };
 </script>

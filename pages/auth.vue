@@ -165,11 +165,12 @@
 <script>
   import vNotification from "@/components/vNotification";
   import notificationMixin from "@/mixins/notificationMixin";
+  import setLocalThemeMixin from "@/mixins/setLocalThemeMixin";
 
   export default {
     name: "AuthPage",
     components: { vNotification, },
-    mixins: [notificationMixin],
+    mixins: [notificationMixin, setLocalThemeMixin],
     middleware: "checkAlreadyAuth",
     data: () => ({
       validations: {
