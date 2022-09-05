@@ -117,6 +117,24 @@ body[data-theme=one-dark] {
       }
     }
 
+    &__header {
+      &-param {
+        &-value {
+          color: $oneDark_white;
+        }
+      }
+
+      &-progress {
+        &-slider {
+          background: $oneDark_black;
+
+          &-line {
+            background: $oneDark_blue;
+          }
+        }
+      }
+    }
+
     &__letter {
       color: $oneDark_white;
 

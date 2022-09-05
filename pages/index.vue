@@ -12,7 +12,7 @@
         <vTesting
           :start="start"
           :end="end"
-          :res="res"
+          :speed="speed"
           :errors="errors"
           :index-active-letter="indexActiveLetter"
           :sec="sec"
@@ -69,7 +69,7 @@
       timer: null,
       errors: 0,
       accuracy: 0,
-      res: 0,
+      speed: 0,
       sec: 0,
       indexActiveLetter: 0,
       ignoreKeys: ["CapsLock", "Alt", "Shift", "NumLock"],
@@ -86,7 +86,10 @@
     watch: {
       start(val) {
         if (val) {
-          this.timer = setInterval(() => this.sec += 1, 1000);
+          this.timer = setInterval(() => {
+            this.sec += 1;
+            this.setSpeed();
+          }, 1000);
 
           window.addEventListener("keydown", this.keydownHandler);
         } else {
@@ -94,7 +97,6 @@
 
           clearInterval(this.timer);
 
-          this.res = Math.floor(((this.getTextData.body.split(" ").length || 1) / (this.sec || 1)) * 60);
           this.end = true;
           this.indexActiveLetter = 0;
         }
@@ -104,7 +106,7 @@
           const token = this.$store.getters["auth/getToken"];
           const { id, } = this.getTextData;
           const data = {
-            speed: this.res,
+            speed: this.speed,
             length: this.getText.length,
             errors: this.errors,
             accuracy: this.accuracy,
@@ -167,9 +169,15 @@
       },
       clearParams() {
         this.sec = 0;
-        this.res = 0;
+        this.speed = 0;
         this.errors = 0;
         this.accuracy = 0;
+      },
+      setSpeed() {
+        this.speed = Math.floor(((this.getTextData.body.split(" ").length || 1) / (this.sec || 1)) * 60);
+      },
+      setAccuracy() {
+        this.accuracy = Math.floor(((this.getText.length - this.errors) / this.getText.length) * 100);
       },
       startTyping() {
         this.start = true;
@@ -226,7 +234,7 @@
             this.errors += 1;
           }
 
-          this.accuracy = Math.floor(((this.getText.length - this.errors) / this.getText.length) * 100);
+          this.setAccuracy();
         }
       },
     },

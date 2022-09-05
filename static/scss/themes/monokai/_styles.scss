@@ -129,6 +129,24 @@ body[data-theme=monokai] {
       }
     }
 
+    &__header {
+      &-param {
+        &-value {
+          color: $monokai_white;
+        }
+      }
+
+      &-progress {
+        &-slider {
+          background: $monokai_brown;
+
+          &-line {
+            background: $monokai_green;
+          }
+        }
+      }
+    }
+
     &__letter {
       color: $monokai_yellow;
 

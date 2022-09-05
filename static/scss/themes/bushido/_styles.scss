@@ -129,6 +129,24 @@ body[data-theme=bushido] {
       }
     }
 
+    &__header {
+      &-param {
+        &-value {
+          color: $bushido_white;
+        }
+      }
+
+      &-progress {
+        &-slider {
+          background: $bushido_black;
+
+          &-line {
+            background: $bushido_red;
+          }
+        }
+      }
+    }
+
     &__letter {
       color: $bushido_grey;
 

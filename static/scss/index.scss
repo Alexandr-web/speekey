@@ -167,16 +167,83 @@
 }
 
 .testing {
-  height: 80vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-
   &__inner {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     position: relative;
+  }
+
+  &--blur {
+    opacity: .5;
+    filter: blur(3px);
+  }
+
+  &__header {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    transition: opacity, filter, .3s;
+
+    &-top {
+      margin-bottom: 5px;
+    }
+
+    &-params {
+      display: flex;
+      align-items: center;
+    }
+
+    &-param {
+      display: flex;
+      align-items: center;
+
+      &:not(:last-child) {
+        margin-right: 15px;
+      }
+
+      &-title {
+        margin-right: 5px;
+        font-size: 18px;
+      }
+
+      &-value {
+        font-size: 18px;
+      }
+    }
+
+    &-progress {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &-slider {
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        overflow: hidden;
+        margin: 0 15px;
+
+        &-line {
+          height: 100%;
+          transition: width, .3s;
+        }
+      }
+    }
+  }
+
+  &__main {
+    height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: opacity, filter, .3s;
+  }
+
+  &-window {
+    position: absolute;
+    width: 100%;
+    z-index: 9999;
+    height: 100%;
   }
 
   &-focus {
@@ -188,6 +255,7 @@
 
     &--hide {
       opacity: 0;
+      z-index: -1;
     }
 
     &__inner {
@@ -204,27 +272,14 @@
   &__text {
     line-height: 30px;
     height: 100%;
-    transition: opacity, filter, .3s;
     user-select: none;
     position: relative;
-
-    &--disabled {
-      opacity: .5;
-      filter: blur(3px);
-    }
   }
 
   &__letter {
     font-size: 25px;
     transition: color .3s;
     padding: 0 1px;
-  }
-
-  &-window {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
   }
 
   &-result {
@@ -415,6 +470,11 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        transition: transform .3s;
+
+        &:hover {
+          transform: scale(1.05);
+        }
       }
 
       &-form {
@@ -460,6 +520,7 @@
         }
 
         &-radio {
+          transition: background, color, .3s;
           display: flex;
           justify-content: center;
           align-items: center;

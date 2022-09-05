@@ -129,6 +129,24 @@ body[data-theme=cyberspace] {
       }
     }
 
+    &__header {
+      &-param {
+        &-value {
+          color: $cyberspace_lightGreen;
+        }
+      }
+
+      &-progress {
+        &-slider {
+          background: $cyberspace_black;
+
+          &-line {
+            background: $cyberspace_purple;
+          }
+        }
+      }
+    }
+
     &__letter {
       color: $cyberspace_purple;
 

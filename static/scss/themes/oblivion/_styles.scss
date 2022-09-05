@@ -129,6 +129,24 @@ body[data-theme=oblivion] {
       }
     }
 
+    &__header {
+      &-param {
+        &-value {
+          color: $oblivion_white;
+        }
+      }
+
+      &-progress {
+        &-slider {
+          background: $oblivion_grey;
+
+          &-line {
+            background: $oblivion_green;
+          }
+        }
+      }
+    }
+
     &__letter {
       color: $oblivion_grey;
 
