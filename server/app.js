@@ -28,11 +28,9 @@ connectToDatabase();
 const authRouter = require("./routers/auth.router");
 const profileRouter = require("./routers/profile.router");
 const textRouter = require("./routers/text.router");
-const leadersRouter = require("./routers/leaders.router");
 
 app.use("/auth", authRouter);
 app.use("/profile", profileRouter);
 app.use("/text", textRouter);
-app.use("/leaders", leadersRouter);
 
 module.exports = app;

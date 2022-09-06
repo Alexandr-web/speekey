@@ -58,10 +58,6 @@
           title: "Создание текста",
         },
         {
-          link: "/leaders",
-          title: "Лидеры",
-        },
-        {
           link: "/settings",
           title: "Настройки",
         }
