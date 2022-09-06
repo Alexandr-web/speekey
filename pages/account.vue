@@ -128,9 +128,11 @@
 
           return Promise.all([res2, user]);
         }).then(([{ ok, completedTexts, }, user]) => {
+          const sortCompletedTexts = completedTexts.sort((a, b) => new Date(b.updatedAt).getMilliseconds() - new Date(a.updatedAt).getMilliseconds());
+
           return {
             user,
-            completedTexts: ok ? completedTexts : [],
+            completedTexts: ok ? sortCompletedTexts : [],
           };
         }).catch((err) => {
           throw err;
