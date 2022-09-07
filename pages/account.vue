@@ -19,7 +19,7 @@
               </header>
               <main class="account__user-main">
                 <div class="account__user-level">
-                  Уровень <span class="account__user-level-value">{{ user.level }}</span>
+                  Уровень <span class="account__user-level-value">{{ getLevel ? getLevel : user.level }}</span>
                 </div>
               </main>
             </div>
@@ -139,5 +139,13 @@
         });
     },
     head: { title: "Аккаунт", },
+    computed: {
+      getLevel() {
+        return this.$store.getters["profile/getLevel"];
+      },
+      getExperience() {
+        return this.$store.getters["profile/getExperience"];
+      },
+    },
   };
 </script>

@@ -7,5 +7,6 @@ router.get("/api/:id", profileController.getOne);
 router.get("/api/:id/text/completed", isAuth, profileController.getCompletedTexts);
 router.post("/text/:id/complete", isAuth, profileController.setTextComplete);
 router.put("/:id/edit", isAuth, profileController.edit);
+router.put("/:id/level/update", isAuth, profileController.levelUpdate);
 
 module.exports = router;

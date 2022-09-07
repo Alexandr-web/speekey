@@ -5,6 +5,7 @@
   >
     <div class="testing__inner">
       <vTestingHeader
+        v-if="Object.keys(getTextData).length"
         :speed="speed"
         :accuracy="accuracy"
         :progress="progress"

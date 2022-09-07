@@ -32,6 +32,7 @@
   import vTesting from "@/components/vTesting";
   import vNotification from "@/components/vNotification";
   import notificationMixin from "@/mixins/notificationMixin";
+import exp from "constants";
 
   export default {
     name: "IndexPage",
@@ -112,15 +113,26 @@
             accuracy: this.accuracy,
           };
 
-          const res = this.$store.dispatch("profile/setTextComplete", { token, id, data, });
+          const res1 = this.$store.dispatch("profile/getCurrent");
 
-          res.then(({ message, type, }) => {
+          res1.then(({ id: userId, }) => {
+            const res2 = this.$store.dispatch("profile/setTextComplete", { token, id, data, });
+            const fd = { length: this.getText.length, };
+            const res3 = this.$store.dispatch("profile/levelUpdate", { id: userId, token, fd, });
+
+            return Promise.all([res2, res3]);
+          })
+          .then(([{ message, type, }, { experience, level, }]) => {
+            this.$store.commit("profile/setExperience", experience);
+            this.$store.commit("profile/setLevel", level);
+
             this.callNotification({
               desc: message,
               type,
               show: true,
             });
-          }).catch((err) => {
+          })
+          .catch((err) => {
             this.callNotification({
               title: "Ошибка",
               desc: `Произошла ошибка сервера: ${err}`,

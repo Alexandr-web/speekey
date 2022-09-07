@@ -4,6 +4,22 @@ const host = require("../server/host");
 const Cookie = require("cookie");
 
 export default {
+  state: () => ({
+    experience: null,
+    level: null,
+  }),
+  mutations: {
+    setExperience(state, val) {
+      state.experience = val;
+    },
+    setLevel(state, val) {
+      state.level = val;
+    },
+  },
+  getters: {
+    getExperience: (state) => state.experience,
+    getLevel: (state) => state.level,
+  },
   actions: {
     async getOne({ }, id) {
       try {
@@ -71,6 +87,24 @@ export default {
     async edit({ }, { token, fd, id, }) {
       try {
         const res = await fetch(`${host}/profile/${id}/edit`, {
+          method: "PUT",
+          headers: {
+            "Accept-Type": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+          body: JSON.stringify(fd),
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async levelUpdate({ }, { id, token, fd, }) {
+      try {
+        const res = await fetch(`${host}/profile/${id}/level/update`, {
           method: "PUT",
           headers: {
             "Accept-Type": "application/json",

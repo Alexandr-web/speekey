@@ -25,7 +25,7 @@
             >
               {{ user.username }}
             </nuxt-link>
-            <span class="header__list-user-level">{{ user.level }}</span>
+            <span class="header__list-user-level">{{ getLevel ? getLevel : user.level }}</span>
           </li>
           <li
             v-if="Object.keys(user).length"
@@ -74,6 +74,11 @@
       } catch (err) {
         throw err;
       }
+    },
+    computed: {
+      getLevel() {
+        return this.$store.getters["profile/getLevel"];
+      },
     },
   };
 </script>

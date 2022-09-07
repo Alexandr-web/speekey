@@ -14,6 +14,10 @@ module.exports = sequelize.define("user", {
     type: DataTypes.TEXT,
     unique: true,
   },
+  experience: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
   password: { type: DataTypes.TEXT, },
   speed: {
     type: DataTypes.INTEGER,

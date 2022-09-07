@@ -54,7 +54,7 @@ class Profile {
         speed: getAverage(totalSpeed),
       });
 
-      return res.status(200).json({ ok: true, message: "Текст завершен", type: "success", accuracy: textData.accuracy, });
+      return res.status(200).json({ ok: true, message: "Текст завершен", type: "success", });
     } catch (err) {
       console.log(err);
 
@@ -124,6 +124,36 @@ class Profile {
       await user.update(userData);
 
       return res.status(200).json({ ok: true, message: "Изменения сохранены", type: "success", });
+    } catch (err) {
+      console.log(err);
+
+      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+    }
+  }
+
+  async levelUpdate(req, res) {
+    try {
+      if (!req.isAuth) {
+        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
+      }
+
+      const user = await User.findOne({ where: { id: req.userId, }, });
+      const { length, } = req.body;
+      const newExperience = user.experience + Math.floor(user.level + length / 100);
+      const updates = {};
+
+      if (newExperience >= user.level * 10 * 0.5) {
+        Object.assign(updates, {
+          level: user.level + 1,
+          experience: (user.level * 10 * 0.5) - newExperience,
+        });
+      } else {
+        Object.assign(updates, { experience: newExperience, });
+      }
+
+      await user.update(updates);
+
+      return res.status(200).json({ ok: true, ...updates, });
     } catch (err) {
       console.log(err);
 
