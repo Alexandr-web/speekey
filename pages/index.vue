@@ -116,8 +116,8 @@ import exp from "constants";
           const res1 = this.$store.dispatch("profile/getCurrent");
 
           res1.then(({ id: userId, }) => {
-            const res2 = this.$store.dispatch("profile/setTextComplete", { token, id, data, });
             const fd = { length: this.getText.length, };
+            const res2 = this.$store.dispatch("profile/setTextComplete", { token, id, data, });
             const res3 = this.$store.dispatch("profile/levelUpdate", { id: userId, token, fd, });
 
             return Promise.all([res2, res3]);

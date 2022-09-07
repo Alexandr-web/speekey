@@ -252,6 +252,7 @@
     align-items: center;
     opacity: 1;
     transition: opacity .3s;
+    user-select: none;
 
     &--hide {
       opacity: 0;

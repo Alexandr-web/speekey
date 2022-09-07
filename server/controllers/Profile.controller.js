@@ -137,7 +137,17 @@ class Profile {
         return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
       }
 
-      const user = await User.findOne({ where: { id: req.userId, }, });
+      const { id, } = req.params;
+      const user = await User.findOne({ where: { id, }, });
+
+      if (!user) {
+        return res.status(404).json({ ok: false, message: "Такого пользователя не существует", type: "error", });
+      }
+
+      if (user.id !== req.userId) {
+        return res.status(403).json({ ok: false, message: "Нельзя изменить уровень чужого аккаунта", });
+      }
+
       const { length, } = req.body;
       const newExperience = user.experience + Math.floor(user.level + length / 100);
       const updates = {};
