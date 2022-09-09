@@ -32,7 +32,6 @@
   import vTesting from "@/components/vTesting";
   import vNotification from "@/components/vNotification";
   import notificationMixin from "@/mixins/notificationMixin";
-import exp from "constants";
 
   export default {
     name: "IndexPage",
@@ -161,7 +160,7 @@ import exp from "constants";
 
         res.then(({ ok, text: textData, }) => {
           this.pendingNextText = false;
-
+          
           if (ok) {
             this.$router.push({ query: { text: textData.id, }, });
             this.$store.commit("text/setTextData", textData);

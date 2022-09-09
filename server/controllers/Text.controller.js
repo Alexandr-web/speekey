@@ -59,7 +59,7 @@ class Text {
 
       const { id, } = req.params;
       const texts = await TextModel.findAll();
-      const randomText = texts.filter(({ id: textId, }) => textId !== parseInt(id)).sort(() => Math.random() - 0.5)[0];
+      const randomText = texts.length > 1 ? texts.filter(({ id: textId, }) => textId !== parseInt(id)).sort(() => Math.random() - 0.5)[0] : texts[0];
 
       return res.status(200).json({ ok: true, text: randomText, });
     } catch (err) {

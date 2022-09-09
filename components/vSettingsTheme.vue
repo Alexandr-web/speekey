@@ -45,6 +45,11 @@
     data: () => ({
       activeTheme: "",
       themes: [
+      {
+          name: "milkshake",
+          value: "milkshake",
+          className: "milkshake-card",
+        },
         {
           name: "serika dark",
           value: "serika-dark",
