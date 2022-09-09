@@ -22,6 +22,7 @@
           @startTyping="startTyping"
           @nextText="nextText"
           @againTyping="againTyping"
+          @setFavorite="setFavorite"
         />
       </div>
     </div>
@@ -148,19 +149,44 @@
       window.removeEventListener("keydown", this.keydownHandler);
     },
     methods: {
+      setFavorite() {
+        const token = this.$store.getters["auth/getToken"];
+        const { id, } = this.getTextData;
+        const res = this.$store.dispatch("text/setFavorite", { token, id, });
+
+        this.pendingSetFavorite = true;
+
+        res.then(({ message, type, }) => {
+          this.pendingSetFavorite = false;
+
+          this.callNotification({
+            desc: message,
+            type,
+            show: true,
+          });
+        }).catch((err) => {
+          this.callNotification({
+            title: "Ошибка",
+            desc: `Произошла ошибка сервера: ${err}`,
+            type: "error",
+            show: true,
+          });
+        });
+      },
       againTyping() {
         this.clearParams();
         this.end = false;
       },
       nextText() {
         const token = this.$store.getters["auth/getToken"];
-        const res = this.$store.dispatch("text/getOneExceptOne", { token, id: this.getTextData.id, });
+        const { id, } = this.getTextData;
+        const res = this.$store.dispatch("text/getNext", { token, id, });
 
         this.pendingNextText = true;
 
         res.then(({ ok, text: textData, }) => {
           this.pendingNextText = false;
-          
+
           if (ok) {
             this.$router.push({ query: { text: textData.id, }, });
             this.$store.commit("text/setTextData", textData);

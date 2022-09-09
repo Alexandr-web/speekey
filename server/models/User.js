@@ -6,6 +6,10 @@ module.exports = sequelize.define("user", {
     type: DataTypes.TEXT,
     unique: true,
   },
+  favorites: {
+    type: DataTypes.ARRAY(DataTypes.INTEGER),
+    defaultValue: [],
+  },
   level: {
     type: DataTypes.INTEGER,
     defaultValue: 1,

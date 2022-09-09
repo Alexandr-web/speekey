@@ -72,9 +72,9 @@ export default {
       }
     },
 
-    async getOneExceptOne({ }, { id, token, }) {
+    async getNext({ }, { id, token, }) {
       try {
-        const res = await fetch(`${host}/text/api/except/${id}`, {
+        const res = await fetch(`${host}/text/api/next/${id}`, {
           method: "GET",
           headers: {
             "Accept-Type": "application/json",
@@ -98,6 +98,23 @@ export default {
             Authorization: `Bearer ${token || ""}`,
           },
           body: JSON.stringify(fd),
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async setFavorite({ }, { token, id, }) {
+      try {
+        const res = await fetch(`${host}/text/${id}/favorite`, {
+          method: "POST",
+          headers: {
+            "Accept-Type": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
         });
 
         return res.json();
