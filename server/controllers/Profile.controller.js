@@ -116,7 +116,7 @@ class Profile {
         const userWithEmail = await User.findOne({ where: { email: userData.email || "", }, });
         const userWithUsername = await User.findOne({ where: { username: userData.username || "", }, });
 
-        if (userWithEmail || userWithUsername) {
+        if ((userWithEmail && userWithEmail.id !== user.id) || (userWithUsername && userWithUsername.id !== user.id)) {
           return res.status(400).json({ ok: false, message: "Пользователь с такими данными уже существует, смените имя или электронную почту", type: "error", });
         }
       }
@@ -164,6 +164,72 @@ class Profile {
       await user.update(updates);
 
       return res.status(200).json({ ok: true, ...updates, });
+    } catch (err) {
+      console.log(err);
+
+      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+    }
+  }
+
+  async getFavorites(req, res) {
+    try {
+      if (!req.isAuth) {
+        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
+      }
+
+      const { id, } = req.params;
+      const user = await User.findOne({ where: { id, }, });
+
+      if (!user) {
+        return res.status(404).json({ ok: false, message: "Такого пользователя не существует", type: "error", });
+      }
+
+      if (user.id !== req.userId) {
+        return res.status(403).json({ ok: false, message: "Нельзя получить список избранных текстов у чужого аккаунта", type: "error", });
+      }
+
+      const favoritesId = user.favorites;
+      const texts = favoritesId.map((textId) => Text.findOne({ where: { id: textId, }, }));
+
+      return Promise
+        .all(texts)
+        .then((favorites) => {
+          return res.status(200).json({ ok: true, texts: favorites, type: "success", });
+        }).catch((err) => {
+          console.log(err);
+
+          return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+        });
+    } catch (err) {
+      console.log(err);
+
+      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+    }
+  }
+
+  async removeFavorites(req, res) {
+    try {
+      if (!req.isAuth) {
+        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
+      }
+
+      const { id, } = req.params;
+      const user = await User.findOne({ where: { id, }, });
+
+      if (!user) {
+        return res.status(404).json({ ok: false, message: "Такого пользователя не существует", type: "error", });
+      }
+
+      if (user.id !== req.userId) {
+        return res.status(403).json({ ok: false, message: "Нельзя удалить текст из избранного списка у чужого аккаунта", type: "error", });
+      }
+
+      const { removeTextsId, } = req.body;
+      const updateFavorites = [...user.favorites].filter((textId) => !removeTextsId.includes(textId));
+
+      await user.update({ favorites: updateFavorites, });
+
+      return res.status(200).json({ ok: true, message: "Данные были удалены", type: "success", });
     } catch (err) {
       console.log(err);
 

@@ -113,16 +113,15 @@
             accuracy: this.accuracy,
           };
 
-          const res1 = this.$store.dispatch("profile/getCurrent");
+          const res1 = this.$store.dispatch("profile/getIdByToken", token);
 
-          res1.then(({ id: userId, }) => {
+          res1.then((userId) => {
             const fd = { length: this.getText.length, };
             const res2 = this.$store.dispatch("profile/setTextComplete", { token, id, data, });
             const res3 = this.$store.dispatch("profile/levelUpdate", { id: userId, token, fd, });
 
             return Promise.all([res2, res3]);
-          })
-          .then(([{ message, type, }, { experience, level, }]) => {
+          }).then(([{ message, type, }, { experience, level, }]) => {
             this.$store.commit("profile/setExperience", experience);
             this.$store.commit("profile/setLevel", level);
 
@@ -131,8 +130,7 @@
               type,
               show: true,
             });
-          })
-          .catch((err) => {
+          }).catch((err) => {
             this.callNotification({
               title: "Ошибка",
               desc: `Произошла ошибка сервера: ${err}`,
@@ -142,6 +140,36 @@
 
             throw err;
           });
+
+          // const res1 = this.$store.dispatch("profile/getCurrent");
+
+          // res1.then(({ id: userId, }) => {
+          //   const fd = { length: this.getText.length, };
+          //   const res2 = this.$store.dispatch("profile/setTextComplete", { token, id, data, });
+          //   const res3 = this.$store.dispatch("profile/levelUpdate", { id: userId, token, fd, });
+
+          //   return Promise.all([res2, res3]);
+          // })
+          // .then(([{ message, type, }, { experience, level, }]) => {
+          //   this.$store.commit("profile/setExperience", experience);
+          //   this.$store.commit("profile/setLevel", level);
+
+          //   this.callNotification({
+          //     desc: message,
+          //     type,
+          //     show: true,
+          //   });
+          // })
+          // .catch((err) => {
+          //   this.callNotification({
+          //     title: "Ошибка",
+          //     desc: `Произошла ошибка сервера: ${err}`,
+          //     type: "error",
+          //     show: true,
+          //   });
+
+          //   throw err;
+          // });
         }
       },
     },

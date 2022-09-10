@@ -54,6 +54,10 @@
           title: "Тестирование",
         },
         {
+          link: "/favorites",
+          title: "Избранное",
+        },
+        {
           link: "/create",
           title: "Создание текста",
         },

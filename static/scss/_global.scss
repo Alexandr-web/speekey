@@ -97,12 +97,54 @@ h6 {
 
 .table {
   &__header {
+    &-controls {
+      display: flex;
+      align-items: center;
+
+      &-block {
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+      }
+
+      &-btn {
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+    }
 
     &-title {
       padding: 0 10px 10px 10px;
       font-size: 14px;
       text-align: left;
       @extend %roboto-mono-400;
+    }
+  }
+
+  &__checkbox {
+    &-icon {
+      width: 60%;
+      height: 60%;
+      transition: stroke .2s;
+      stroke: transparent;
+    }
+
+    &-label {
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    &-style {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 15px;
+      height: 15px;
+      border-radius: 3px;
+      border-width: 1px;
+      border-style: solid;
+      transition: border-color, background, .2s;
     }
   }
 

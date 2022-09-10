@@ -20,7 +20,7 @@
 
 <script>
   export default {
-    name: "CursorIconComponent",
+    name: "ProfileIconComponent",
     props: {
       classes: {
         type: Array,

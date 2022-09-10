@@ -11,7 +11,7 @@
       <div class="page__inner">
         <div class="settings">
           <div
-            v-if="Object.keys(user).length"
+            v-if="Object.keys(user || {}).length"
             class="settings__rows"
           >
             <div
@@ -82,8 +82,16 @@
     },
     mixins: [notificationMixin],
     layout: "default",
+    async asyncData({ store, }) {
+      try {
+        const user = await store.dispatch("profile/getCurrent");
+
+        return { user, };
+      } catch (err) {
+        throw err;
+      }
+    },
     data: () => ({
-      user: {},
       settings: [
         {
           show: false,
@@ -102,17 +110,6 @@
         }
       ],
     }),
-    async fetch() {
-      try {
-        const user = await this.$store.dispatch("profile/getCurrent");
-
-        if (user) {
-          this.user = user;
-        }
-      } catch (err) {
-        throw err;
-      }
-    },
     head: { title: "Настройки", },
     methods: {
       setStateTab(index) {

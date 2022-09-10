@@ -5,6 +5,8 @@ const isAuth = require("../middleware/isAuth");
 
 router.get("/api/:id", profileController.getOne);
 router.get("/api/:id/text/completed", isAuth, profileController.getCompletedTexts);
+router.get("/api/:id/favorites", isAuth, profileController.getFavorites);
+router.delete("/:id/favorites/remove", isAuth, profileController.removeFavorites);
 router.post("/text/:id/complete", isAuth, profileController.setTextComplete);
 router.put("/:id/edit", isAuth, profileController.edit);
 router.put("/:id/level/update", isAuth, profileController.levelUpdate);

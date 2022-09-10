@@ -227,6 +227,21 @@ body[data-theme=serika-dark] {
   }
 
   .table {
+    &__checkbox {
+      &:checked+span {
+        border-color: $serikaDark_green;
+        background: $serikaDark_green;
+
+        &>svg {
+          stroke: $serikaDark_black;
+        }
+      }
+
+      &-style {
+        border-color: $serikaDark_lightGrey;
+      }
+    }
+
     &__body {
       &-content {
         color: $serikaDark_lightGrey;
@@ -242,6 +257,14 @@ body[data-theme=serika-dark] {
     }
 
     &__header {
+      &-controls {
+        &-btn {
+          &--remove {
+            color: $serikaDark_red;
+          }
+        }
+      }
+
       &-title {
         color: $serikaDark_grey;
       }
@@ -309,6 +332,14 @@ body[data-theme=serika-dark] {
   .logout {
     &__title {
       color: $serikaDark_lightGrey;
+    }
+  }
+
+  .favorites {
+    &__table {
+      &-link {
+        color: $serikaDark_lightGrey;
+      }
     }
   }
 

@@ -11,6 +11,7 @@
 
 <script>
   export default {
+    name: "MoreIconComponent",
     props: {
       classes: {
         type: Array,

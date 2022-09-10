@@ -129,7 +129,13 @@
         if (!this.validations.$invalid) {
           const token = this.$store.getters["auth/getToken"];
           const { id, } = this.user;
-          const fd = this.userData;
+          const fd = Object.keys(this.validations).reduce((acc, key) => {
+            if ("model" in (this.validations[key] || {}) && this.validations[key].model && key !== "repeatPassword") {
+              acc[key] = this.validations[key].model;
+            }
+
+            return acc;
+          }, {});
           const res = this.$store.dispatch("profile/edit", { token, fd, id, });
 
           this.pendingEdit = true;

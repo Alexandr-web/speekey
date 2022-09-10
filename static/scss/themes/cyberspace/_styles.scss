@@ -243,6 +243,21 @@ body[data-theme=cyberspace] {
   }
 
   .table {
+    &__checkbox {
+      &:checked+span {
+        border-color: $cyberspace_green;
+        background: $cyberspace_green;
+
+        &>svg {
+          stroke: $cyberspace_black;
+        }
+      }
+
+      &-style {
+        border-color: $cyberspace_lightGreen;
+      }
+    }
+
     &__body {
       &-content {
         color: $cyberspace_lightGreen;
@@ -258,6 +273,14 @@ body[data-theme=cyberspace] {
     }
 
     &__header {
+      &-controls {
+        &-btn {
+          &--remove {
+            color: $cyberspace_red;
+          }
+        }
+      }
+
       &-title {
         color: $cyberspace_purple;
       }
@@ -325,6 +348,14 @@ body[data-theme=cyberspace] {
   .logout {
     &__title {
       color: $cyberspace_lightGreen;
+    }
+  }
+
+  .favorites {
+    &__table {
+      &-link {
+        color: $cyberspace_lightGreen;
+      }
     }
   }
 

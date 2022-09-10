@@ -14,6 +14,9 @@ This app will help you train and test your typing speed. As a design, I chose th
 ## Create text page
 <img src="./readmeImages/create.jpg" alt="create text page" />
 
+## Favorites page
+<img src="./readmeImages/favorites.jpg" alt="favorites page" />
+
 ## Settings page
 <img src="./readmeImages/settings.jpg" alt="settings page" />
 

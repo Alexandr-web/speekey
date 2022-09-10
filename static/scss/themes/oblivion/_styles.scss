@@ -243,6 +243,21 @@ body[data-theme=oblivion] {
   }
 
   .table {
+    &__checkbox {
+      &:checked+span {
+        border-color: $oblivion_green;
+        background: $oblivion_green;
+
+        &>svg {
+          stroke: $oblivion_white;
+        }
+      }
+
+      &-style {
+        border-color: $oblivion_grey;
+      }
+    }
+
     &__body {
       &-content {
         color: $oblivion_white;
@@ -258,6 +273,14 @@ body[data-theme=oblivion] {
     }
 
     &__header {
+      &-controls {
+        &-btn {
+          &--remove {
+            color: $oblivion_red;
+          }
+        }
+      }
+
       &-title {
         color: $oblivion_grey;
       }
@@ -325,6 +348,14 @@ body[data-theme=oblivion] {
   .logout {
     &__title {
       color: $oblivion_white;
+    }
+  }
+
+  .favorites {
+    &__table {
+      &-link {
+        color: $oblivion_white;
+      }
     }
   }
 

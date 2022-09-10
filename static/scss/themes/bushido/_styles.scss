@@ -243,6 +243,21 @@ body[data-theme=bushido] {
   }
 
   .table {
+    &__checkbox {
+      &:checked+span {
+        border-color: $bushido_grey;
+        background: $bushido_grey;
+
+        &>svg {
+          stroke: $bushido_white;
+        }
+      }
+
+      &-style {
+        border-color: $bushido_white;
+      }
+    }
+
     &__body {
       &-content {
         color: $bushido_white;
@@ -258,6 +273,14 @@ body[data-theme=bushido] {
     }
 
     &__header {
+      &-controls {
+        &-btn {
+          &--remove {
+            color: $bushido_red;
+          }
+        }
+      }
+
       &-title {
         color: $bushido_grey;
       }
@@ -325,6 +348,14 @@ body[data-theme=bushido] {
   .logout {
     &__title {
       color: $bushido_white;
+    }
+  }
+
+  .favorites {
+    &__table {
+      &-link {
+        color: $bushido_white;
+      }
     }
   }
 

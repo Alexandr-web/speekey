@@ -243,6 +243,21 @@ body[data-theme=monokai] {
   }
 
   .table {
+    &__checkbox {
+      &:checked+span {
+        border-color: $monokai_green;
+        background: $monokai_green;
+
+        &>svg {
+          stroke: $monokai_brown;
+        }
+      }
+
+      &-style {
+        border-color: $monokai_white;
+      }
+    }
+
     &__body {
       &-content {
         color: $monokai_white;
@@ -258,6 +273,14 @@ body[data-theme=monokai] {
     }
 
     &__header {
+      &-controls {
+        &-btn {
+          &--remove {
+            color: $monokai_red;
+          }
+        }
+      }
+
       &-title {
         color: $monokai_yellow;
       }
@@ -325,6 +348,14 @@ body[data-theme=monokai] {
   .logout {
     &__title {
       color: $monokai_white;
+    }
+  }
+
+  .favorites {
+    &__table {
+      &-link {
+        color: $monokai_white;
+      }
     }
   }
 

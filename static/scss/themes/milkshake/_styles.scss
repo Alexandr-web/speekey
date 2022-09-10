@@ -243,6 +243,21 @@ body[data-theme=milkshake] {
   }
 
   .table {
+    &__checkbox {
+      &:checked+span {
+        border-color: $milkshake_blue;
+        background: $milkshake_blue;
+
+        &>svg {
+          stroke: $milkshake_darkBlue;
+        }
+      }
+
+      &-style {
+        border-color: $milkshake_darkBlue;
+      }
+    }
+
     &__body {
       &-content {
         color: $milkshake_darkBlue;
@@ -258,6 +273,14 @@ body[data-theme=milkshake] {
     }
 
     &__header {
+      &-controls {
+        &-btn {
+          &--remove {
+            color: $milkshake_pink;
+          }
+        }
+      }
+
       &-title {
         color: $milkshake_blue;
       }
@@ -325,6 +348,14 @@ body[data-theme=milkshake] {
   .logout {
     &__title {
       color: $milkshake_darkBlue;
+    }
+  }
+
+  .favorites {
+    &__table {
+      &-link {
+        color: $milkshake_darkBlue;
+      }
     }
   }
 

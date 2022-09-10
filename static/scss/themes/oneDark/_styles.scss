@@ -227,6 +227,21 @@ body[data-theme=one-dark] {
   }
 
   .table {
+    &__checkbox {
+      &:checked+span {
+        border-color: $oneDark_green;
+        background: $oneDark_green;
+
+        &>svg {
+          stroke: $oneDark_black;
+        }
+      }
+
+      &-style {
+        border-color: $oneDark_white;
+      }
+    }
+
     &__body {
       &-content {
         color: $oneDark_green;
@@ -242,6 +257,14 @@ body[data-theme=one-dark] {
     }
 
     &__header {
+      &-controls {
+        &-btn {
+          &--remove {
+            color: $oneDark_red;
+          }
+        }
+      }
+
       &-title {
         color: $oneDark_white;
       }
@@ -307,6 +330,20 @@ body[data-theme=one-dark] {
             color: $oneDark_green;
           }
         }
+      }
+    }
+  }
+
+  .logout {
+    &__title {
+      color: $oneDark_green;
+    }
+  }
+
+  .favorites {
+    &__table {
+      &-link {
+        color: $oneDark_green;
       }
     }
   }

@@ -21,6 +21,16 @@ export default {
     getLevel: (state) => state.level,
   },
   actions: {
+    async getIdByToken({ }, token) {
+      try {
+        const data = jwtDecode(token || "");
+
+        return (data || {}).id;
+      } catch (err) {
+        throw err;
+      }
+    },
+
     async getOne({ }, id) {
       try {
         const res = await fetch(`${host}/profile/api/${id}`, {
@@ -84,6 +94,22 @@ export default {
       }
     },
 
+    async getFavoritesTexts({ }, { token, id, }) {
+      try {
+        const res = await fetch(`${host}/profile/api/${id}/favorites`, {
+          method: "GET",
+          headers: {
+            "Accept-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
     async edit({ }, { token, fd, id, }) {
       try {
         const res = await fetch(`${host}/profile/${id}/edit`, {
@@ -106,6 +132,24 @@ export default {
       try {
         const res = await fetch(`${host}/profile/${id}/level/update`, {
           method: "PUT",
+          headers: {
+            "Accept-Type": "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token || ""}`,
+          },
+          body: JSON.stringify(fd),
+        });
+
+        return res.json();
+      } catch (err) {
+        throw err;
+      }
+    },
+
+    async removeFavorites({ }, { token, id, fd, }) {
+      try {
+        const res = await fetch(`${host}/profile/${id}/favorites/remove`, {
+          method: "DELETE",
           headers: {
             "Accept-Type": "application/json",
             "Content-Type": "application/json",
