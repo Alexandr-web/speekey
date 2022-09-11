@@ -90,6 +90,7 @@
 
 <script>
   export default {
+    name: "SettingsAccountComponent",
     props: {
       user: {
         type: Object,

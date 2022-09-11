@@ -551,6 +551,17 @@
   }
 }
 
+.nothing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__text {
+    font-size: 15px;
+    opacity: .8;
+  }
+}
+
 .favorites {
   &__table {
     &-limited-content {

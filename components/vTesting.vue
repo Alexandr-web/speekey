@@ -5,100 +5,25 @@
   >
     <div class="testing__inner">
       <vTestingHeader
-        v-if="Object.keys(getTextData).length"
         :speed="speed"
         :accuracy="accuracy"
         :progress="progress"
         :start="start"
       />
-      <div
-        v-if="Object.keys(getTextData).length"
-        class="testing-focus testing-window"
-        :class="{
-          'testing-focus--hide': end || start
-        }"
-        @click="$emit('startTyping')"
-      >
-        <div class="testing-focus__inner">
-          <vCursorIcon :classes="['testing-focus__icon']" />
-          <span class="testing-focus__text">Нажмите, чтобы начать</span>
-        </div>
-      </div>
-      <div
-        v-if="end"
-        class="testing-result testing-window"
-      >
-        <table class="testing-result__data">
-          <tr class="testing-result__data-row">
-            <td class="testing-result__data-column testing-result__data-title">
-              Слов в минуту
-            </td>
-            <td class="testing-result__data-column testing-result__data-value">
-              {{ speed }}
-            </td>
-          </tr>
-          <tr class="testing-result__data-row">
-            <td class="testing-result__data-column testing-result__data-title">
-              Количество ошибок
-            </td>
-            <td class="testing-result__data-column testing-result__data-value">
-              {{ errors }}
-            </td>
-          </tr>
-          <tr class="testing-result__data-row">
-            <td class="testing-result__data-column testing-result__data-title">
-              Количество символов
-            </td>
-            <td class="testing-result__data-column testing-result__data-value">
-              {{ getTextData.body.length }}
-            </td>
-          </tr>
-          <tr class="testing-result__data-row">
-            <td class="testing-result__data-column testing-result__data-title">
-              Точность
-            </td>
-            <td class="testing-result__data-column testing-result__data-value">
-              {{ accuracy }}%
-            </td>
-          </tr>
-          <tr class="testing-result__data-row">
-            <td class="testing-result__data-column testing-result__data-title">
-              Время
-            </td>
-            <td class="testing-result__data-column testing-result__data-value">
-              {{ sec }}с
-            </td>
-          </tr>
-        </table>
-        <div class="testing-result__controls">
-          <div class="testing-result__controls-item">
-            <button
-              class="testing-result__controls-btn"
-              :disabled="pendingNextText"
-              @click="$emit('nextText')"
-            >
-              Следующий
-            </button>
-          </div>
-          <div class="testing-result__controls-item">
-            <button
-              class="testing-result__controls-btn"
-              @click="$emit('againTyping')"
-            >
-              Заново
-            </button>
-          </div>
-          <div class="testing-result__controls-item">
-            <button
-              class="testing-result__controls-btn"
-              :disabled="pendingSetFavorite"
-              @click="$emit('setFavorite')"
-            >
-              Добавить в избранное
-            </button>
-          </div>
-        </div>
-      </div>
+      <vTestingFocus
+        :end="end"
+        :start="start"
+        @startTyping="$emit('startTyping')"
+      />
+      <vTestingResult
+        :end="end"
+        :pending-set-favorite="pendingSetFavorite"
+        :pending-next-text="pendingNextText"
+        :accuracy="accuracy"
+        :sec="sec"
+        :errors="errors"
+        :speed="speed"
+      />
       <main
         class="testing__main" 
         :class="{ 'testing--blur': !start }"
@@ -137,14 +62,16 @@
 </template>
 
 <script>
-  import vCursorIcon from "@/components/icons/vCursorIcon";
   import vTestingHeader from "@/components/vTestingHeader";
+  import vTestingFocus from "@/components/vTestingFocus";
+  import vTestingResult from "@/components/vTestingResult";
 
   export default {
     name: "TestingComponent",
     components: {
-      vCursorIcon,
       vTestingHeader,
+      vTestingFocus,
+      vTestingResult,
     },
     props: {
       errors: {

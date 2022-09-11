@@ -10,6 +10,7 @@
       </div>
       <div class="page__inner">
         <vTesting
+          v-if="getText.length"
           :start="start"
           :end="end"
           :speed="speed"
@@ -24,6 +25,10 @@
           @againTyping="againTyping"
           @setFavorite="setFavorite"
         />
+        <vNothing
+          v-else
+          text="Текста не найдено"
+        />
       </div>
     </div>
   </div>
@@ -32,6 +37,7 @@
 <script>
   import vTesting from "@/components/vTesting";
   import vNotification from "@/components/vNotification";
+  import vNothing from "@/components/vNothing";
   import notificationMixin from "@/mixins/notificationMixin";
 
   export default {
@@ -39,25 +45,18 @@
     components: {
       vTesting,
       vNotification,
+      vNothing,
     },
     mixins: [notificationMixin],
     layout: "default",
-    async asyncData({ store, query: { text, }, }) {
+    async asyncData({ store, query: { text: id, }, }) {
       try {
-        const requestTextAndSet = (id) => {
         const token = store.getters["auth/getToken"];
-        const res = id ? store.dispatch("text/getOne", { token, id, }) : store.dispatch("text/getRandom", token);
-        
-        res.then(({ ok, text: textData, }) => {
-          if (ok) {
-            store.commit("text/setTextData", textData);
-          }
-        }).catch((err) => {
-          throw err;
-        });
-      };
+        const { ok, text: textData, } = await id ? store.dispatch("text/getOne", { token, id, }) : await store.dispatch("text/getRandom", token);
 
-        requestTextAndSet(text);
+        if (ok) {
+          store.commit("text/setTextData", textData);
+        }
       } catch (err) {
         throw err;
       }
@@ -140,36 +139,6 @@
 
             throw err;
           });
-
-          // const res1 = this.$store.dispatch("profile/getCurrent");
-
-          // res1.then(({ id: userId, }) => {
-          //   const fd = { length: this.getText.length, };
-          //   const res2 = this.$store.dispatch("profile/setTextComplete", { token, id, data, });
-          //   const res3 = this.$store.dispatch("profile/levelUpdate", { id: userId, token, fd, });
-
-          //   return Promise.all([res2, res3]);
-          // })
-          // .then(([{ message, type, }, { experience, level, }]) => {
-          //   this.$store.commit("profile/setExperience", experience);
-          //   this.$store.commit("profile/setLevel", level);
-
-          //   this.callNotification({
-          //     desc: message,
-          //     type,
-          //     show: true,
-          //   });
-          // })
-          // .catch((err) => {
-          //   this.callNotification({
-          //     title: "Ошибка",
-          //     desc: `Произошла ошибка сервера: ${err}`,
-          //     type: "error",
-          //     show: true,
-          //   });
-
-          //   throw err;
-          // });
         }
       },
     },

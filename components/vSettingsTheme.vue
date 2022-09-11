@@ -42,6 +42,7 @@
 
 <script>
   export default {
+    name: "SettingsThemeComponent",
     data: () => ({
       activeTheme: "",
       themes: [

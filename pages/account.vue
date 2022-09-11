@@ -56,11 +56,11 @@
               </h2>
             </div>
           </div>
-          <div
-            v-if="(user.completedTexts || []).length"
-            class="account__texts"
-          >
-            <table class="table account__texts-table">
+          <div class="account__texts">
+            <table
+              v-if="(user.completedTexts || []).length"
+              class="table account__texts-table"
+            >
               <thead class="table__header account__texts-table-header">
                 <tr class="table__header-row account__texts-table-header-row">
                   <th class="table__header-title account__texts-table-content account__texts-table-header-title">
@@ -104,6 +104,10 @@
                 </tr>
               </tbody>
             </table>
+            <vNothing
+              v-else
+              text="Нет выполненных текстов"
+            />
           </div>
         </div>
       </div>
@@ -113,10 +117,14 @@
 
 <script>
   import vProfileIcon from "@/components/icons/vProfileIcon";
+  import vNothing from "@/components/vNothing";
 
   export default {
     name: "AccountPage",
-    components: { vProfileIcon, },
+    components: {
+      vProfileIcon,
+      vNothing,
+    },
     layout: "default",
     async asyncData({ store, }) {
       try {

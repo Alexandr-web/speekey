@@ -91,6 +91,7 @@
               </tr>
             </tbody>
           </table>
+          <vNothing v-else />
         </div>
       </div>
     </div>
@@ -100,6 +101,7 @@
 <script>
   import vCheckmarkIcon from "@/components/icons/vCheckmarkIcon";
   import vNotification from "@/components/vNotification";
+  import vNothing from "@/components/vNothing";
   import notificationMixin from "@/mixins/notificationMixin";
 
   export default {
@@ -107,6 +109,7 @@
     components: {
       vCheckmarkIcon,
       vNotification,
+      vNothing,
     },
     mixins: [notificationMixin],
     layout: "default",
