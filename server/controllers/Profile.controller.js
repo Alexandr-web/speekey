@@ -10,7 +10,7 @@ class Profile {
       const user = await User.findOne({ where: { id, }, });
       const completedTexts = user ? await CompletedText.findAll({ where: { userId: id, }, }) : [];
       const createdTexts = user ? await Text.findAll({ where: { userId: id, }, }) : [];
-      const userData = user ? { ...user.dataValues, completedTexts: completedTexts.length, createdTexts: createdTexts.length, } : null;
+      const userData = user ? { ...user.dataValues, completedTexts, lengthCreatedTexts: createdTexts.length, } : null;
 
       return res.status(200).json({ ok: true, user: userData, });
     } catch (err) {
@@ -22,10 +22,6 @@ class Profile {
 
   async setTextComplete(req, res) {
     try {
-      if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
-      }
-
       const { id, } = req.params;
       const text = await Text.findOne({ where: { id, }, });
 
@@ -64,22 +60,7 @@ class Profile {
 
   async getCompletedTexts(req, res) {
     try {
-      if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
-      }
-
-      const { id, } = req.params;
-      const user = await User.findOne({ where: { id, }, });
-
-      if (!user) {
-        return res.status(404).json({ ok: false, message: "Такого пользователя не существует", type: "error", });
-      }
-
-      if (req.userId !== user.id) {
-        return res.status(403).json({ ok: false, message: "Нельзя получить выполненные тексты у чужого аккаунта", type: "error", });
-      }
-
-      const completedTexts = await CompletedText.findAll({ where: { userId: id, }, });
+      const completedTexts = await CompletedText.findAll({ where: { userId: req.userIdInParams, }, });
 
       return res.status(200).json({ ok: true, completedTexts, });
     } catch (err) {
@@ -91,21 +72,6 @@ class Profile {
 
   async edit(req, res) {
     try {
-      if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
-      }
-
-      const { id, } = req.params;
-      const user = await User.findOne({ where: { id, }, });
-
-      if (!user) {
-        return res.status(404).json({ ok: false, message: "Такого пользователя не существует", type: "error", });
-      }
-
-      if (user.id !== req.userId) {
-        return res.status(403).json({ ok: false, message: "Нельзя изменить настройки чужого аккаунта", type: "error", });
-      }
-
       const userData = req.body;
 
       if ("password" in userData) {
@@ -116,12 +82,12 @@ class Profile {
         const userWithEmail = await User.findOne({ where: { email: userData.email || "", }, });
         const userWithUsername = await User.findOne({ where: { username: userData.username || "", }, });
 
-        if ((userWithEmail && userWithEmail.id !== user.id) || (userWithUsername && userWithUsername.id !== user.id)) {
+        if ((userWithEmail && userWithEmail.id !== req.userByParam.id) || (userWithUsername && userWithUsername.id !== req.userByParam.id)) {
           return res.status(400).json({ ok: false, message: "Пользователь с такими данными уже существует, смените имя или электронную почту", type: "error", });
         }
       }
 
-      await user.update(userData);
+      await req.userByParam.update(userData);
 
       return res.status(200).json({ ok: true, message: "Изменения сохранены", type: "success", });
     } catch (err) {
@@ -133,35 +99,20 @@ class Profile {
 
   async levelUpdate(req, res) {
     try {
-      if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
-      }
-
-      const { id, } = req.params;
-      const user = await User.findOne({ where: { id, }, });
-
-      if (!user) {
-        return res.status(404).json({ ok: false, message: "Такого пользователя не существует", type: "error", });
-      }
-
-      if (user.id !== req.userId) {
-        return res.status(403).json({ ok: false, message: "Нельзя изменить уровень чужого аккаунта", });
-      }
-
       const { length, } = req.body;
-      const newExperience = user.experience + Math.floor(user.level + length / 100);
+      const newExperience = req.userByParam.experience + Math.floor(req.userByParam.level + length / 100);
       const updates = {};
 
-      if (newExperience >= user.level * 10 * 0.5) {
+      if (newExperience >= req.userByParam.level * 10 * 0.5) {
         Object.assign(updates, {
-          level: user.level + 1,
-          experience: (user.level * 10 * 0.5) - newExperience,
+          level: req.userByParam.level + 1,
+          experience: (req.userByParam.level * 10 * 0.5) - newExperience,
         });
       } else {
         Object.assign(updates, { experience: newExperience, });
       }
 
-      await user.update(updates);
+      await req.userByParam.update(updates);
 
       return res.status(200).json({ ok: true, ...updates, });
     } catch (err) {
@@ -173,22 +124,7 @@ class Profile {
 
   async getFavorites(req, res) {
     try {
-      if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
-      }
-
-      const { id, } = req.params;
-      const user = await User.findOne({ where: { id, }, });
-
-      if (!user) {
-        return res.status(404).json({ ok: false, message: "Такого пользователя не существует", type: "error", });
-      }
-
-      if (user.id !== req.userId) {
-        return res.status(403).json({ ok: false, message: "Нельзя получить список избранных текстов у чужого аккаунта", type: "error", });
-      }
-
-      const favoritesId = user.favorites;
+      const favoritesId = req.userByParam.favorites;
       const texts = favoritesId.map((textId) => Text.findOne({ where: { id: textId, }, }));
 
       return Promise
@@ -209,25 +145,10 @@ class Profile {
 
   async removeFavorites(req, res) {
     try {
-      if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
-      }
-
-      const { id, } = req.params;
-      const user = await User.findOne({ where: { id, }, });
-
-      if (!user) {
-        return res.status(404).json({ ok: false, message: "Такого пользователя не существует", type: "error", });
-      }
-
-      if (user.id !== req.userId) {
-        return res.status(403).json({ ok: false, message: "Нельзя удалить текст из избранного списка у чужого аккаунта", type: "error", });
-      }
-
       const { removeTextsId, } = req.body;
-      const updateFavorites = [...user.favorites].filter((textId) => !removeTextsId.includes(textId));
+      const updateFavorites = [...req.userByParam.favorites].filter((textId) => !removeTextsId.includes(textId));
 
-      await user.update({ favorites: updateFavorites, });
+      await req.userByParam.update({ favorites: updateFavorites, });
 
       return res.status(200).json({ ok: true, message: "Данные были удалены", type: "success", });
     } catch (err) {

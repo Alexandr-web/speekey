@@ -28,7 +28,7 @@
                 Создано текстов
               </h4>
               <h2 class="account__info-title">
-                {{ user.createdTexts }}
+                {{ user.lengthCreatedTexts }}
               </h2>
             </div>
             <div class="account__info-block account__params">
@@ -36,7 +36,7 @@
                 Выполнено текстов
               </h4>
               <h2 class="account__info-title">
-                {{ user.completedTexts }}
+                {{ user.completedTexts.length }}
               </h2>
             </div>
             <div class="account__info-block account__params">
@@ -57,7 +57,7 @@
             </div>
           </div>
           <div
-            v-if="(completedTexts || []).length"
+            v-if="(user.completedTexts || []).length"
             class="account__texts"
           >
             <table class="table account__texts-table">
@@ -82,7 +82,7 @@
               </thead>
               <tbody class="table__body account__texts-table-body">
                 <tr
-                  v-for="(txt, index) in completedTexts"
+                  v-for="(txt, index) in user.completedTexts"
                   :key="index"
                   class="table__body-row account__texts-table-body-row"
                 >
@@ -118,25 +118,14 @@
     name: "AccountPage",
     components: { vProfileIcon, },
     layout: "default",
-    asyncData({ store, }) {
-      const res1 = store.dispatch("profile/getCurrent");
-      const token = store.getters["auth/getToken"];
-      
-      return res1
-        .then((user) => {
-          const res2 = store.dispatch("profile/getCompletedTexts", { token, id: user.id, });
+    async asyncData({ store, }) {
+      try {
+        const user = await store.dispatch("profile/getCurrent");
 
-          return Promise.all([res2, user]);
-        }).then(([{ ok, completedTexts, }, user]) => {
-          const sortCompletedTexts = completedTexts.sort((a, b) => new Date(b.updatedAt).getMilliseconds() - new Date(a.updatedAt).getMilliseconds());
-
-          return {
-            user,
-            completedTexts: ok ? sortCompletedTexts : [],
-          };
-        }).catch((err) => {
-          throw err;
-        });
+        return { user, };
+      } catch (err) {
+        throw err;
+      }
     },
     head: { title: "Аккаунт", },
     computed: {
