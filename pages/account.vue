@@ -129,8 +129,9 @@
     async asyncData({ store, }) {
       try {
         const user = await store.dispatch("profile/getCurrent");
-
-        return { user, };
+        const completedTexts = user.completedTexts.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+        
+        return { user: { ...user, completedTexts, }, };
       } catch (err) {
         throw err;
       }
