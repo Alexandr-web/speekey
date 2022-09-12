@@ -161,12 +161,12 @@ body[data-theme=milkshake] {
 
     &-result {
       &__data {
-        background: $milkshake_white;
+        background: $milkshake_grey;
 
         &-row {
           &:not(:last-child) {
             td {
-              border-bottom-color: $milkshake_lightBlue;
+              border-bottom-color: $milkshake_white;
             }
           }
         }
@@ -177,7 +177,7 @@ body[data-theme=milkshake] {
 
         &-column {
           &:not(:last-child) {
-            border-right-color: $milkshake_lightBlue;
+            border-right-color: $milkshake_white;
           }
         }
 

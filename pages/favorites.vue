@@ -28,6 +28,7 @@
                           v-model="selectAllTexts"
                           type="checkbox"
                           class="form__checkbox table__checkbox"
+                          @change="deselectCheckboxes"
                         >
                         <span class="table__checkbox-style">
                           <vCheckmarkIcon :classes="['table__checkbox-icon']" />
@@ -142,15 +143,23 @@
     watch: {
       selectAllTexts(val) {
         if (val) {
-          this.texts = this.texts.map((text) => {
-            text.readyToRemove = true;
-
-            return text;
-          });
+          this.setStateReadyToRemove(true);
         }
       },
     },
     methods: {
+      deselectCheckboxes() {
+        if (!this.selectAllTexts) {
+          this.setStateReadyToRemove(false);
+        }
+      },
+      setStateReadyToRemove(val) {
+        this.texts = this.texts.map((text) => {
+          text.readyToRemove = val;
+
+          return text;
+        });
+      },
       selectToRemove() {
         this.selectAllTexts = this.texts.every(({ readyToRemove, }) => readyToRemove);
       },

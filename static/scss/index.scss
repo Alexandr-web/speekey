@@ -168,11 +168,13 @@
 }
 
 .testing {
+  position: relative;
+
   &__inner {
     height: 100%;
     display: flex;
     flex-direction: column;
-    position: relative;
+    transition: opacity, filter, .2s;
   }
 
   &--blur {
@@ -184,7 +186,6 @@
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
-    transition: opacity, filter, .3s;
 
     &-top {
       margin-bottom: 5px;
@@ -237,7 +238,6 @@
     height: 80vh;
     overflow-y: auto;
     overflow-x: hidden;
-    transition: opacity, filter, .3s;
   }
 
   &-window {
@@ -276,6 +276,7 @@
     height: 100%;
     user-select: none;
     position: relative;
+
   }
 
   &__letter {

@@ -3,31 +3,34 @@
     ref="testing"
     class="testing"
   >
-    <div class="testing__inner">
+    <vTestingFocus
+      :end="end"
+      :start="start"
+      @startTyping="$emit('startTyping')"
+    />
+    <vTestingResult
+      :end="end"
+      :pending-set-favorite="pendingSetFavorite"
+      :pending-next-text="pendingNextText"
+      :accuracy="accuracy"
+      :sec="sec"
+      :errors="errors"
+      :speed="speed"
+      @nextText="$emit('nextText')"
+      @againTyping="$emit('againTyping')"
+      @setFavorite="$emit('setFavorite')"
+    />
+    <div
+      class="testing__inner"
+      :class="{ 'testing--blur': !start }"
+    >
       <vTestingHeader
         :speed="speed"
         :accuracy="accuracy"
         :progress="progress"
         :start="start"
       />
-      <vTestingFocus
-        :end="end"
-        :start="start"
-        @startTyping="$emit('startTyping')"
-      />
-      <vTestingResult
-        :end="end"
-        :pending-set-favorite="pendingSetFavorite"
-        :pending-next-text="pendingNextText"
-        :accuracy="accuracy"
-        :sec="sec"
-        :errors="errors"
-        :speed="speed"
-      />
-      <main
-        class="testing__main" 
-        :class="{ 'testing--blur': !start }"
-      >
+      <main class="testing__main">
         <div class="testing__text">
           <div
             v-if="start"

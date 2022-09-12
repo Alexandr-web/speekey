@@ -52,11 +52,15 @@
     async asyncData({ store, query: { text: id, }, }) {
       try {
         const token = store.getters["auth/getToken"];
-        const { ok, text: textData, } = await id ? store.dispatch("text/getOne", { token, id, }) : await store.dispatch("text/getRandom", token);
+        const handleRequest = async (res) => {
+          const { ok, text: textData, } = await res;
 
-        if (ok) {
-          store.commit("text/setTextData", textData);
-        }
+          if (ok) {
+            store.commit("text/setTextData", textData);
+          }
+        };
+
+        handleRequest(id ? store.dispatch("text/getOne", { token, id, }) : store.dispatch("text/getRandom", token));
       } catch (err) {
         throw err;
       }
