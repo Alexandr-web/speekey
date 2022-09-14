@@ -575,6 +575,29 @@
   }
 }
 
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__center {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  &__title {
+    @extend %roboto-mono-500;
+    font-size: 45px;
+  }
+
+  &__subtitle {
+    @extend %roboto-mono-400;
+    opacity: .8;
+    font-size: 35px;
+  }
+}
+
 .caret {
   position: absolute;
   z-index: 99;
