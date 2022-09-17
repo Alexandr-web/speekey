@@ -7,16 +7,26 @@ class Profile {
   async getOne(req, res) {
     try {
       const { id, } = req.params;
+
+      if (isNaN(parseInt(id))) {
+        return res.status(400).json({ ok: false, status: 400, message: "Неверный формат id пользователя", });
+      }
+
       const user = await User.findOne({ where: { id, }, });
       const completedTexts = user ? await CompletedText.findAll({ where: { userId: id, }, }) : [];
       const createdTexts = user ? await Text.findAll({ where: { userId: id, }, }) : [];
       const userData = user ? { ...user.dataValues, completedTexts, lengthCreatedTexts: createdTexts.length, } : null;
 
-      return res.status(200).json({ ok: true, user: userData, });
+      return res.status(200).json({ ok: true, user: userData, status: 200, });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 
@@ -26,7 +36,12 @@ class Profile {
       const text = await Text.findOne({ where: { id, }, });
 
       if (!text) {
-        return res.status(404).json({ ok: false, message: "Такого текста не существует", type: "error", });
+        return res.status(404).json({
+          ok: false,
+          message: "Такого текста не существует",
+          type: "error",
+          status: 404,
+        });
       }
 
       const user = await User.findOne({ where: { id: req.userId, }, });
@@ -50,11 +65,21 @@ class Profile {
         speed: getAverage(totalSpeed),
       });
 
-      return res.status(200).json({ ok: true, message: "Текст завершен", type: "success", });
+      return res.status(200).json({
+        ok: true,
+        message: "Текст завершен",
+        type: "success",
+        status: 200,
+      });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 
@@ -62,11 +87,16 @@ class Profile {
     try {
       const completedTexts = await CompletedText.findAll({ where: { userId: req.userIdInParams, }, });
 
-      return res.status(200).json({ ok: true, completedTexts, });
+      return res.status(200).json({ ok: true, completedTexts, status: 200, });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 
@@ -83,17 +113,32 @@ class Profile {
         const userWithUsername = await User.findOne({ where: { username: userData.username || "", }, });
 
         if ((userWithEmail && userWithEmail.id !== req.userByParam.id) || (userWithUsername && userWithUsername.id !== req.userByParam.id)) {
-          return res.status(400).json({ ok: false, message: "Пользователь с такими данными уже существует, смените имя или электронную почту", type: "error", });
+          return res.status(400).json({
+            ok: false,
+            message: "Пользователь с такими данными уже существует, смените имя или электронную почту",
+            type: "error",
+            status: 400,
+          });
         }
       }
 
       await req.userByParam.update(userData);
 
-      return res.status(200).json({ ok: true, message: "Изменения сохранены", type: "success", });
+      return res.status(200).json({
+        ok: true,
+        message: "Изменения сохранены",
+        type: "success",
+        status: 200,
+      });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 
@@ -114,11 +159,16 @@ class Profile {
 
       await req.userByParam.update(updates);
 
-      return res.status(200).json({ ok: true, ...updates, });
+      return res.status(200).json({ ok: true, ...updates, status: 200, });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 
@@ -130,16 +180,31 @@ class Profile {
       return Promise
         .all(texts)
         .then((favorites) => {
-          return res.status(200).json({ ok: true, texts: favorites, type: "success", });
+          return res.status(200).json({
+            ok: true,
+            texts: favorites,
+            type: "success",
+            status: 200,
+          });
         }).catch((err) => {
           console.log(err);
 
-          return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+          return res.status(500).json({
+            ok: false,
+            message: "Произошла ошибка сервера",
+            type: "error",
+            status: 500,
+          });
         });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 
@@ -150,11 +215,21 @@ class Profile {
 
       await req.userByParam.update({ favorites: updateFavorites, });
 
-      return res.status(200).json({ ok: true, message: "Данные были удалены", type: "success", });
+      return res.status(200).json({
+        ok: true,
+        message: "Данные были удалены",
+        type: "success",
+        status: 200,
+      });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 }

@@ -5,67 +5,127 @@ class Text {
   async create(req, res) {
     try {
       if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
+        return res.status(403).json({
+          ok: false,
+          message: "Для выполнения данной операции нужно быть авторизованным",
+          type: "error",
+          status: 403,
+        });
       }
 
       const textData = { ...req.body, userId: req.userId, };
       const text = await TextModel.create(textData);
 
-      return res.status(200).json({ ok: true, message: "Текст создан", type: "success", id: text.id, });
+      return res.status(200).json({
+        ok: true,
+        message: "Текст создан",
+        type: "success",
+        id: text.id,
+        status: 200,
+      });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 
   async getRandom(req, res) {
     try {
       if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
+        return res.status(403).json({
+          ok: false,
+          message: "Для выполнения данной операции нужно быть авторизованным",
+          type: "error",
+          status: 403,
+        });
       }
 
       const texts = await TextModel.findAll();
 
-      return res.status(200).json({ ok: true, text: texts.sort(() => Math.random() - 0.5)[0], });
+      return res.status(200).json({
+        ok: true,
+        text: texts.sort(() => Math.random() - 0.5)[0],
+        status: 200,
+      });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 
   async getOne(req, res) {
     try {
       if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
+        return res.status(403).json({
+          ok: false,
+          message: "Для выполнения данной операции нужно быть авторизованным",
+          type: "error",
+          status: 403,
+        });
       }
 
       const { id, } = req.params;
+
+      if (isNaN(parseInt(id))) {
+        return res.status(400).json({ ok: false, status: 400, message: "Неверный формат id текста", });
+      }
+
       const text = await TextModel.findOne({ where: { id, }, });
 
-      return res.status(200).json({ ok: true, text, });
+      return res.status(200).json({ ok: true, text, status: 200, });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 
   async getNext(req, res) {
     try {
       if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
+        return res.status(403).json({
+          ok: false,
+          message: "Для выполнения данной операции нужно быть авторизованным",
+          type: "error",
+          status: 403,
+        });
       }
 
       const { id, } = req.params;
+
+      if (isNaN(parseInt(id))) {
+        return res.status(400).json({ ok: false, status: 400, message: "Неверный формат id текста", });
+      }
+
       const texts = await TextModel.findAll();
       const findIndexText = texts.findIndex(({ id: textId, }) => textId === parseInt(id));
 
       let text = null;
 
       if (findIndexText === -1) {
-        return res.status(404).json({ ok: false, message: "Такого текста не существует", type: "error", });
+        return res.status(404).json({
+          ok: false,
+          message: "Такого текста не существует",
+          type: "error",
+          status: 404,
+        });
       }
 
       if (texts[findIndexText + 1]) {
@@ -76,25 +136,40 @@ class Text {
         text = texts[0];
       }
 
-      return res.status(200).json({ ok: true, text, });
+      return res.status(200).json({ ok: true, text, status: 200, });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 
   async setFavorite(req, res) {
     try {
       if (!req.isAuth) {
-        return res.status(403).json({ ok: false, message: "Для выполнения данной операции нужно быть авторизованным", type: "error", });
+        return res.status(403).json({
+          ok: false,
+          message: "Для выполнения данной операции нужно быть авторизованным",
+          type: "error",
+          status: 403,
+        });
       }
 
       const { id, } = req.params;
       const text = await TextModel.findOne({ where: { id, }, });
 
       if (!text) {
-        return res.status(404).json({ ok: false, message: "Такого текста не существует", type: "error", });
+        return res.status(404).json({
+          ok: false,
+          message: "Такого текста не существует",
+          type: "error",
+          status: 404,
+        });
       }
 
       const user = await User.findOne({ where: { id: req.userId, }, });
@@ -115,11 +190,16 @@ class Text {
 
       await user.update({ favorites: copyFavorites, });
 
-      return res.status(200).json({ ok: true, message, type: "success", });
+      return res.status(200).json({ ok: true, message, type: "success", status: 200, });
     } catch (err) {
       console.log(err);
 
-      return res.status(500).json({ ok: false, message: "Произошла ошибка сервера", type: "error", });
+      return res.status(500).json({
+        ok: false,
+        message: "Произошла ошибка сервера",
+        type: "error",
+        status: 500,
+      });
     }
   }
 }
