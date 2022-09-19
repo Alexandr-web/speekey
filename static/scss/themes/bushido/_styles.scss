@@ -1,382 +1,42 @@
 @import "./_vars";
+@import "../../_mixins";
 
 .bushido-card {
-  background: $bushido_dark;
-  color: $bushido_red;
-}
-
-* {
-  &::-webkit-scrollbar-thumb {
-    background: $bushido_dark;
-  }
-
-  &::-webkit-scrollbar {
-    background: $bushido_white;
-  }
+  @include setStylesForCurrentThemeCard($bushido_dark, $bushido_red);
 }
 
 body[data-theme=bushido] {
-  background: $bushido_dark;
-  color: $bushido_white;
+  @include setStylesForPage($bushido_dark, $bushido_white, $bushido_white, $bushido_dark);
 
-  &::-webkit-scrollbar-thumb {
-    background: $bushido_dark;
+  * {
+    @include setScrollbarStyles($bushido_white, $bushido_dark);
   }
 
-  &::-webkit-scrollbar {
-    background: $bushido_white;
-  }
+  @include setStylesForActiveThemeCard($bushido_red);
 
-  .active-theme-card {
-    &::after {
-      background: $bushido_red;
-    }
-  }
+  @include setStylesForAuth($bushido_white);
 
-  .auth {
-    &__block {
-      &-title {
-        color: $bushido_white;
-      }
-    }
-  }
+  @include setStylesForForm($bushido_black, $bushido_red, $bushido_white, none, $bushido_grey, $bushido_white, $bushido_white, $bushido_black, $bushido_black, $bushido_white);
 
-  .form {
+  @include setStylesForInvalidInput($bushido_red);
 
-    &__textarea,
-    &__input {
-      background: $bushido_black;
-      caret-color: $bushido_red;
-      color: $bushido_white;
+  @include setStylesForNotification($bushido_grey, $bushido_dark, $bushido_red, $bushido_black, $bushido_white);
 
-      &::placeholder {
-        color: $bushido_grey;
-      }
-    }
+  @include setStylesForHeader($bushido_grey, $bushido_white, $bushido_grey, $bushido_dark);
 
-    &__label {
-      &::after {
-        background: $bushido_white;
-      }
-    }
+  @include setStylesForTesting($bushido_white, $bushido_white, $bushido_white, $bushido_black, $bushido_red, $bushido_grey, $bushido_white, $bushido_red, $bushido_black, $bushido_dark, $bushido_white, $bushido_red, $bushido_grey, $bushido_white);
 
-    &__submit {
-      color: $bushido_white;
-      background: $bushido_black;
+  @include setStylesForCreateText($bushido_red);
 
-      &:hover {
-        color: $bushido_black;
-        background: $bushido_white;
-      }
-    }
-  }
+  @include setStylesForAccount($bushido_black, $bushido_grey, $bushido_white, $bushido_dark, $bushido_white, $bushido_red, $bushido_grey, $bushido_black);
 
-  .invalid-input {
-    &::after {
-      background: $bushido_red;
-    }
-  }
+  @include setStylesForTable($bushido_white, $bushido_grey, $bushido_grey, $bushido_white, $bushido_white, $bushido_black, $bushido_red, $bushido_grey);
 
-  .notification {
-    &__title {
-      color: $bushido_grey;
-    }
+  @include setStylesForSettings($bushido_grey, $bushido_white, $bushido_white, $bushido_grey, $bushido_grey, none, $bushido_black, none, $bushido_red, $bushido_black, $bushido_black, $bushido_black);
 
-    &__desc {
-      color: $bushido_dark;
-    }
+  @include setStylesForLogout($bushido_white);
 
-    &--error {
-      background: $bushido_red;
-    }
+  @include setStylesForFavorites($bushido_white);
 
-    &--warning {
-      background: $bushido_black;
-    }
-
-    &--success {
-      background: $bushido_white;
-    }
-  }
-
-  .header {
-    &__list {
-      &-link {
-        color: $bushido_grey;
-
-        &:hover {
-          color: $bushido_white;
-        }
-      }
-
-      &-user {
-        &-level {
-          background: $bushido_grey;
-          color: $bushido_dark;
-        }
-      }
-    }
-  }
-
-  .testing {
-    &-focus {
-      &__icon {
-        fill: $bushido_white;
-      }
-
-      &__text {
-        color: $bushido_white;
-      }
-    }
-
-    &__header {
-      &-param {
-        &-value {
-          color: $bushido_white;
-        }
-      }
-
-      &-progress {
-        &-slider {
-          background: $bushido_black;
-
-          &-line {
-            background: $bushido_red;
-          }
-        }
-      }
-    }
-
-    &__letter {
-      color: $bushido_grey;
-
-      &--complete {
-        color: $bushido_white;
-      }
-
-      &--failure {
-        color: $bushido_red;
-      }
-    }
-
-    &-result {
-      &__data {
-        background: $bushido_black;
-
-        &-row {
-          &:not(:last-child) {
-            td {
-              border-bottom-color: $bushido_dark;
-            }
-          }
-        }
-
-        &-title {
-          color: $bushido_white;
-        }
-
-        &-column {
-          &:not(:last-child) {
-            border-right-color: $bushido_dark;
-          }
-        }
-
-        &-value {
-          color: $bushido_red;
-        }
-      }
-
-      &__controls {
-        &-btn {
-          color: $bushido_grey;
-
-          &:hover {
-            color: $bushido_white;
-          }
-        }
-      }
-    }
-  }
-
-  .create-text {
-    &__textarea {
-      &--invalid {
-        border-color: $bushido_red;
-      }
-    }
-  }
-
-  .account {
-    &__info {
-      background: $bushido_black;
-
-      &-subtitle {
-        color: $bushido_grey;
-      }
-
-      &-title {
-        color: $bushido_white;
-      }
-    }
-
-    &__user {
-      &::after {
-        background: $bushido_dark;
-      }
-
-      &-level {
-        color: $bushido_white;
-
-        &-value {
-          color: $bushido_red;
-        }
-      }
-
-      &-icon {
-        fill: $bushido_grey;
-
-        .cls-1 {
-          stroke: $bushido_black;
-        }
-      }
-    }
-  }
-
-  .table {
-    &__checkbox {
-      &:checked+span {
-        border-color: $bushido_grey;
-        background: $bushido_grey;
-
-        &>svg {
-          stroke: $bushido_white;
-        }
-      }
-
-      &-style {
-        border-color: $bushido_white;
-      }
-    }
-
-    &__body {
-      &-content {
-        color: $bushido_white;
-      }
-
-      &-row {
-        &:nth-child(odd) {
-          td {
-            background: $bushido_black;
-          }
-        }
-      }
-    }
-
-    &__header {
-      &-controls {
-        &-btn {
-          &--remove {
-            color: $bushido_red;
-          }
-        }
-      }
-
-      &-title {
-        color: $bushido_grey;
-      }
-    }
-  }
-
-  .settings {
-    &__row {
-      &-title {
-        color: $bushido_grey;
-
-        &--active {
-          color: $bushido_white;
-        }
-      }
-
-      &-header {
-        &:hover>h2 {
-          color: $bushido_white;
-        }
-
-        &:hover>svg {
-          fill: $bushido_white;
-        }
-      }
-
-      &-icon {
-        fill: $bushido_grey;
-
-        &--rotate {
-          fill: $bushido_white;
-        }
-      }
-
-      &-caret {
-        &-param {
-          &-title {
-            color: $bushido_grey;
-          }
-
-          &-label {
-            .form__radio:checked+span {
-              background: $bushido_red;
-              color: $bushido_black;
-
-              .caret__view-default,
-              .caret__view-block {
-                background: $bushido_black;
-              }
-
-              .caret__view-outline {
-                border-color: $bushido_black;
-              }
-            }
-          }
-
-          &-radio {
-            background: $bushido_black;
-          }
-        }
-      }
-    }
-  }
-
-  .logout {
-    &__title {
-      color: $bushido_white;
-    }
-  }
-
-  .favorites {
-    &__table {
-      &-link {
-        color: $bushido_white;
-      }
-    }
-  }
-
-  .caret {
-    &:not([data-view=outline]) {
-      background: $bushido_red;
-    }
-
-    &[data-view=outline] {
-      border-color: $bushido_red;
-    }
-
-    &__view {
-      &-outline {
-        border-color: $bushido_white;
-      }
-
-      &-default,
-      &-block {
-        background: $bushido_white;
-      }
-    }
-  }
+  @include setStylesForCaret($bushido_red, $bushido_red, $bushido_white, $bushido_white);
 }

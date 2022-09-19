@@ -1,382 +1,42 @@
 @import "./_vars";
+@import "../../_mixins";
 
 .cyberspace-card {
-  background: $cyberspace_dark;
-  color: $cyberspace_green;
-}
-
-* {
-  &::-webkit-scrollbar-thumb {
-    background: $cyberspace_purple;
-  }
-
-  &::-webkit-scrollbar {
-    background: $cyberspace_dark;
-  }
+  @include setStylesForCurrentThemeCard($cyberspace_dark, $cyberspace_green);
 }
 
 body[data-theme=cyberspace] {
-  background: $cyberspace_dark;
-  color: $cyberspace_lightGreen;
+  @include setStylesForPage($cyberspace_dark, $cyberspace_lightGreen, $cyberspace_purple, $cyberspace_dark);
 
-  &::-webkit-scrollbar-thumb {
-    background: $cyberspace_purple;
+  * {
+    @include setScrollbarStyles($cyberspace_purple, $cyberspace_dark);
   }
 
-  &::-webkit-scrollbar {
-    background: $cyberspace_dark;
-  }
+  @include setStylesForActiveThemeCard($cyberspace_green);
 
-  .active-theme-card {
-    &::after {
-      background: $cyberspace_green;
-    }
-  }
+  @include setStylesForAuth($cyberspace_lightGreen);
 
-  .auth {
-    &__block {
-      &-title {
-        color: $cyberspace_lightGreen;
-      }
-    }
-  }
+  @include setStylesForForm($cyberspace_black, $cyberspace_green, $cyberspace_lightGreen, none, $cyberspace_purple, $cyberspace_green, $cyberspace_lightGreen, $cyberspace_black, $cyberspace_black, $cyberspace_lightGreen);
 
-  .form {
+  @include setStylesForInvalidInput($cyberspace_red);
 
-    &__textarea,
-    &__input {
-      background: $cyberspace_black;
-      caret-color: $cyberspace_green;
-      color: $cyberspace_lightGreen;
+  @include setStylesForNotification($cyberspace_dark, $cyberspace_black, $cyberspace_red, $cyberspace_purple, $cyberspace_green);
 
-      &::placeholder {
-        color: $cyberspace_purple;
-      }
-    }
+  @include setStylesForHeader($cyberspace_purple, $cyberspace_lightGreen, $cyberspace_purple, $cyberspace_dark);
 
-    &__label {
-      &::after {
-        background: $cyberspace_green;
-      }
-    }
+  @include setStylesForTesting($cyberspace_lightGreen, $cyberspace_lightGreen, $cyberspace_lightGreen, $cyberspace_black, $cyberspace_purple, $cyberspace_purple, $cyberspace_lightGreen, $cyberspace_red, $cyberspace_black, $cyberspace_dark, $cyberspace_lightGreen, $cyberspace_purple, $cyberspace_lightGreen, $cyberspace_purple);
 
-    &__submit {
-      color: $cyberspace_lightGreen;
-      background: $cyberspace_black;
+  @include setStylesForCreateText($cyberspace_red);
 
-      &:hover {
-        color: $cyberspace_black;
-        background: $cyberspace_lightGreen;
-      }
-    }
-  }
+  @include setStylesForAccount($cyberspace_black, $cyberspace_purple, $cyberspace_lightGreen, $cyberspace_dark, $cyberspace_purple, $cyberspace_lightGreen, $cyberspace_purple, $cyberspace_black);
 
-  .invalid-input {
-    &::after {
-      background: $cyberspace_red;
-    }
-  }
+  @include setStylesForTable($cyberspace_lightGreen, $cyberspace_green, $cyberspace_green, $cyberspace_black, $cyberspace_lightGreen, $cyberspace_black, $cyberspace_red, $cyberspace_purple);
 
-  .notification {
-    &__title {
-      color: $cyberspace_dark;
-    }
+  @include setStylesForSettings($cyberspace_purple, $cyberspace_lightGreen, $cyberspace_lightGreen, $cyberspace_purple, $cyberspace_purple, none, $cyberspace_black, none, $cyberspace_green, $cyberspace_black, $cyberspace_black, $cyberspace_black);
 
-    &__desc {
-      color: $cyberspace_black;
-    }
+  @include setStylesForLogout($cyberspace_lightGreen);
 
-    &--error {
-      background: $cyberspace_red;
-    }
+  @include setStylesForFavorites($cyberspace_lightGreen);
 
-    &--warning {
-      background: $cyberspace_purple;
-    }
-
-    &--success {
-      background: $cyberspace_green;
-    }
-  }
-
-  .header {
-    &__list {
-      &-link {
-        color: $cyberspace_purple;
-
-        &:hover {
-          color: $cyberspace_lightGreen;
-        }
-      }
-
-      &-user {
-        &-level {
-          background: $cyberspace_purple;
-          color: $cyberspace_dark;
-        }
-      }
-    }
-  }
-
-  .testing {
-    &-focus {
-      &__icon {
-        fill: $cyberspace_lightGreen;
-      }
-
-      &__text {
-        color: $cyberspace_lightGreen;
-      }
-    }
-
-    &__header {
-      &-param {
-        &-value {
-          color: $cyberspace_lightGreen;
-        }
-      }
-
-      &-progress {
-        &-slider {
-          background: $cyberspace_black;
-
-          &-line {
-            background: $cyberspace_purple;
-          }
-        }
-      }
-    }
-
-    &__letter {
-      color: $cyberspace_purple;
-
-      &--complete {
-        color: $cyberspace_lightGreen;
-      }
-
-      &--failure {
-        color: $cyberspace_red;
-      }
-    }
-
-    &-result {
-      &__data {
-        background: $cyberspace_black;
-
-        &-row {
-          &:not(:last-child) {
-            td {
-              border-bottom-color: $cyberspace_dark;
-            }
-          }
-        }
-
-        &-title {
-          color: $cyberspace_lightGreen;
-        }
-
-        &-column {
-          &:not(:last-child) {
-            border-right-color: $cyberspace_dark;
-          }
-        }
-
-        &-value {
-          color: $cyberspace_purple;
-        }
-      }
-
-      &__controls {
-        &-btn {
-          color: $cyberspace_lightGreen;
-
-          &:hover {
-            color: $cyberspace_purple;
-          }
-        }
-      }
-    }
-  }
-
-  .create-text {
-    &__textarea {
-      &--invalid {
-        border-color: $cyberspace_red;
-      }
-    }
-  }
-
-  .account {
-    &__info {
-      background: $cyberspace_black;
-
-      &-subtitle {
-        color: $cyberspace_purple;
-      }
-
-      &-title {
-        color: $cyberspace_lightGreen;
-      }
-    }
-
-    &__user {
-      &::after {
-        background: $cyberspace_dark;
-      }
-
-      &-level {
-        color: $cyberspace_purple;
-
-        &-value {
-          color: $cyberspace_lightGreen;
-        }
-      }
-
-      &-icon {
-        fill: $cyberspace_purple;
-
-        .cls-1 {
-          stroke: $cyberspace_black;
-        }
-      }
-    }
-  }
-
-  .table {
-    &__checkbox {
-      &:checked+span {
-        border-color: $cyberspace_green;
-        background: $cyberspace_green;
-
-        &>svg {
-          stroke: $cyberspace_black;
-        }
-      }
-
-      &-style {
-        border-color: $cyberspace_lightGreen;
-      }
-    }
-
-    &__body {
-      &-content {
-        color: $cyberspace_lightGreen;
-      }
-
-      &-row {
-        &:nth-child(odd) {
-          td {
-            background: $cyberspace_black;
-          }
-        }
-      }
-    }
-
-    &__header {
-      &-controls {
-        &-btn {
-          &--remove {
-            color: $cyberspace_red;
-          }
-        }
-      }
-
-      &-title {
-        color: $cyberspace_purple;
-      }
-    }
-  }
-
-  .settings {
-    &__row {
-      &-title {
-        color: $cyberspace_purple;
-
-        &--active {
-          color: $cyberspace_lightGreen;
-        }
-      }
-
-      &-header {
-        &:hover>h2 {
-          color: $cyberspace_lightGreen;
-        }
-
-        &:hover>svg {
-          fill: $cyberspace_lightGreen;
-        }
-      }
-
-      &-icon {
-        fill: $cyberspace_purple;
-
-        &--rotate {
-          fill: $cyberspace_lightGreen;
-        }
-      }
-
-      &-caret {
-        &-param {
-          &-title {
-            color: $cyberspace_purple;
-          }
-
-          &-label {
-            .form__radio:checked+span {
-              background: $cyberspace_green;
-              color: $cyberspace_black;
-
-              .caret__view-default,
-              .caret__view-block {
-                background: $cyberspace_black;
-              }
-
-              .caret__view-outline {
-                border-color: $cyberspace_black;
-              }
-            }
-          }
-
-          &-radio {
-            background: $cyberspace_black;
-          }
-        }
-      }
-    }
-  }
-
-  .logout {
-    &__title {
-      color: $cyberspace_lightGreen;
-    }
-  }
-
-  .favorites {
-    &__table {
-      &-link {
-        color: $cyberspace_lightGreen;
-      }
-    }
-  }
-
-  .caret {
-    &:not([data-view=outline]) {
-      background: $cyberspace_green;
-    }
-
-    &[data-view=outline] {
-      border-color: $cyberspace_green;
-    }
-
-    &__view {
-      &-outline {
-        border-color: $cyberspace_lightGreen;
-      }
-
-      &-default,
-      &-block {
-        background: $cyberspace_lightGreen;
-      }
-    }
-  }
+  @include setStylesForCaret($cyberspace_green, $cyberspace_green, $cyberspace_lightGreen, $cyberspace_lightGreen);
 }

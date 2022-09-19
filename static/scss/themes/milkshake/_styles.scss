@@ -1,382 +1,42 @@
 @import "./_vars";
+@import "../../_mixins";
 
 .milkshake-card {
-  background: $milkshake_white;
-  color: $milkshake_darkBlue;
-}
-
-* {
-  &::-webkit-scrollbar-thumb {
-    background: $milkshake_blue;
-  }
-
-  &::-webkit-scrollbar {
-    background: $milkshake_white;
-  }
+  @include setStylesForCurrentThemeCard($milkshake_white, $milkshake_darkBlue);
 }
 
 body[data-theme=milkshake] {
-  background: $milkshake_white;
-  color: $milkshake_darkBlue;
+  @include setStylesForPage($milkshake_white, $milkshake_darkBlue, $milkshake_blue, $milkshake_white);
 
-  &::-webkit-scrollbar-thumb {
-    background: $milkshake_blue;
+  * {
+    @include setScrollbarStyles($milkshake_blue, $milkshake_blue);
   }
 
-  &::-webkit-scrollbar {
-    background: $milkshake_white;
-  }
+  @include setStylesForActiveThemeCard($milkshake_darkBlue);
 
-  .active-theme-card {
-    &::after {
-      background: $milkshake_darkBlue;
-    }
-  }
+  @include setStylesForAuth($milkshake_darkBlue);
 
-  .auth {
-    &__block {
-      &-title {
-        color: $milkshake_darkBlue;
-      }
-    }
-  }
+  @include setStylesForForm($milkshake_lightBlue, $milkshake_darkBlue, $milkshake_darkBlue, none, $milkshake_blue, $milkshake_darkBlue, $milkshake_darkBlue, $milkshake_lightBlue, $milkshake_lightBlue, $milkshake_darkBlue);
 
-  .form {
+  @include setStylesForInvalidInput($milkshake_pink);
 
-    &__textarea,
-    &__input {
-      background: $milkshake_lightBlue;
-      caret-color: $milkshake_darkBlue;
-      color: $milkshake_darkBlue;
+  @include setStylesForNotification($milkshake_darkBlue, $milkshake_darkBlue, $milkshake_orange, $milkshake_yellow, $milkshake_lightBlue);
 
-      &::placeholder {
-        color: $milkshake_blue;
-      }
-    }
+  @include setStylesForHeader($milkshake_blue, $milkshake_darkBlue, $milkshake_blue, $milkshake_white);
 
-    &__label {
-      &::after {
-        background: $milkshake_darkBlue;
-      }
-    }
+  @include setStylesForTesting($milkshake_darkBlue, $milkshake_darkBlue, $milkshake_darkBlue, $milkshake_darkBlue, $milkshake_blue, $milkshake_blue, $milkshake_darkBlue, $milkshake_pink, $milkshake_grey, $milkshake_white, $milkshake_darkBlue, $milkshake_pink, $milkshake_blue, $milkshake_darkBlue);
 
-    &__submit {
-      color: $milkshake_darkBlue;
-      background: $milkshake_lightBlue;
+  @include setStylesForCreateText($bushido_red);
 
-      &:hover {
-        color: $milkshake_lightBlue;
-        background: $milkshake_darkBlue;
-      }
-    }
-  }
+  @include setStylesForAccount($milkshake_lightBlue, $milkshake_blue, $milkshake_darkBlue, $milkshake_white, $milkshake_blue, $milkshake_darkBlue, $milkshake_blue, $milkshake_white);
 
-  .invalid-input {
-    &::after {
-      background: $milkshake_pink;
-    }
-  }
+  @include setStylesForTable($milkshake_darkBlue, $milkshake_blue, $milkshake_blue, $milkshake_darkBlue, $milkshake_darkBlue, $milkshake_lightBlue, $milkshake_pink, $milkshake_blue);
 
-  .notification {
-    &__title {
-      color: $milkshake_darkBlue;
-    }
+  @include setStylesForSettings($milkshake_blue, $milkshake_darkBlue, $milkshake_darkBlue, $milkshake_blue, $milkshake_blue, none, $milkshake_lightBlue, none, $milkshake_darkBlue, $milkshake_lightBlue, $milkshake_lightBlue, $milkshake_lightBlue);
 
-    &__desc {
-      color: $milkshake_darkBlue;
-    }
+  @include setStylesForLogout($milkshake_darkBlue);
 
-    &--error {
-      background: $milkshake_orange;
-    }
+  @include setStylesForFavorites($milkshake_darkBlue);
 
-    &--warning {
-      background: $milkshake_yellow;
-    }
-
-    &--success {
-      background: $milkshake_lightBlue;
-    }
-  }
-
-  .header {
-    &__list {
-      &-link {
-        color: $milkshake_blue;
-
-        &:hover {
-          color: $milkshake_darkBlue;
-        }
-      }
-
-      &-user {
-        &-level {
-          background: $milkshake_blue;
-          color: $milkshake_white;
-        }
-      }
-    }
-  }
-
-  .testing {
-    &-focus {
-      &__icon {
-        fill: $milkshake_darkBlue;
-      }
-
-      &__text {
-        color: $milkshake_darkBlue;
-      }
-    }
-
-    &__header {
-      &-param {
-        &-value {
-          color: $milkshake_darkBlue;
-        }
-      }
-
-      &-progress {
-        &-slider {
-          background: $milkshake_darkBlue;
-
-          &-line {
-            background: $milkshake_blue;
-          }
-        }
-      }
-    }
-
-    &__letter {
-      color: $milkshake_blue;
-
-      &--complete {
-        color: $milkshake_darkBlue;
-      }
-
-      &--failure {
-        color: $milkshake_pink;
-      }
-    }
-
-    &-result {
-      &__data {
-        background: $milkshake_grey;
-
-        &-row {
-          &:not(:last-child) {
-            td {
-              border-bottom-color: $milkshake_white;
-            }
-          }
-        }
-
-        &-title {
-          color: $milkshake_darkBlue;
-        }
-
-        &-column {
-          &:not(:last-child) {
-            border-right-color: $milkshake_white;
-          }
-        }
-
-        &-value {
-          color: $milkshake_pink;
-        }
-      }
-
-      &__controls {
-        &-btn {
-          color: $milkshake_blue;
-
-          &:hover {
-            color: $milkshake_darkBlue;
-          }
-        }
-      }
-    }
-  }
-
-  .create-text {
-    &__textarea {
-      &--invalid {
-        border-color: $bushido_red;
-      }
-    }
-  }
-
-  .account {
-    &__info {
-      background: $milkshake_lightBlue;
-
-      &-subtitle {
-        color: $milkshake_blue;
-      }
-
-      &-title {
-        color: $milkshake_darkBlue;
-      }
-    }
-
-    &__user {
-      &::after {
-        background: $milkshake_white;
-      }
-
-      &-level {
-        color: $milkshake_blue;
-
-        &-value {
-          color: $milkshake_darkBlue;
-        }
-      }
-
-      &-icon {
-        fill: $milkshake_blue;
-
-        .cls-1 {
-          stroke: $milkshake_white;
-        }
-      }
-    }
-  }
-
-  .table {
-    &__checkbox {
-      &:checked+span {
-        border-color: $milkshake_blue;
-        background: $milkshake_blue;
-
-        &>svg {
-          stroke: $milkshake_darkBlue;
-        }
-      }
-
-      &-style {
-        border-color: $milkshake_darkBlue;
-      }
-    }
-
-    &__body {
-      &-content {
-        color: $milkshake_darkBlue;
-      }
-
-      &-row {
-        &:nth-child(odd) {
-          td {
-            background: $milkshake_lightBlue;
-          }
-        }
-      }
-    }
-
-    &__header {
-      &-controls {
-        &-btn {
-          &--remove {
-            color: $milkshake_pink;
-          }
-        }
-      }
-
-      &-title {
-        color: $milkshake_blue;
-      }
-    }
-  }
-
-  .settings {
-    &__row {
-      &-title {
-        color: $milkshake_blue;
-
-        &--active {
-          color: $milkshake_darkBlue;
-        }
-      }
-
-      &-header {
-        &:hover>h2 {
-          color: $milkshake_darkBlue;
-        }
-
-        &:hover>svg {
-          fill: $milkshake_darkBlue;
-        }
-      }
-
-      &-icon {
-        fill: $milkshake_blue;
-
-        &--rotate {
-          fill: $milkshake_darkBlue;
-        }
-      }
-
-      &-caret {
-        &-param {
-          &-title {
-            color: $milkshake_blue;
-          }
-
-          &-label {
-            .form__radio:checked+span {
-              background: $milkshake_darkBlue;
-              color: $milkshake_lightBlue;
-
-              .caret__view-default,
-              .caret__view-block {
-                background: $milkshake_lightBlue;
-              }
-
-              .caret__view-outline {
-                border-color: $milkshake_lightBlue;
-              }
-            }
-          }
-
-          &-radio {
-            background: $milkshake_lightBlue;
-          }
-        }
-      }
-    }
-  }
-
-  .logout {
-    &__title {
-      color: $milkshake_darkBlue;
-    }
-  }
-
-  .favorites {
-    &__table {
-      &-link {
-        color: $milkshake_darkBlue;
-      }
-    }
-  }
-
-  .caret {
-    &:not([data-view=outline]) {
-      background: $milkshake_darkBlue;
-    }
-
-    &[data-view=outline] {
-      border-color: $milkshake_darkBlue;
-    }
-
-    &__view {
-      &-outline {
-        border-color: $milkshake_darkBlue;
-      }
-
-      &-default,
-      &-block {
-        background: $milkshake_darkBlue;
-      }
-    }
-  }
+  @include setStylesForCaret($milkshake_darkBlue, $milkshake_darkBlue, $milkshake_darkBlue, $milkshake_darkBlue);
 }

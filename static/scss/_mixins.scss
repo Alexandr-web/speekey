@@ -1,0 +1,427 @@
+@mixin setStylesForCurrentThemeCard($background, $color) {
+  background: $background;
+  color: $color;
+}
+
+@mixin setScrollbarStyles($scrollbarThumb_background, $scrollbar_background) {
+  &::-webkit-scrollbar-thumb {
+    background: $scrollbarThumb_background;
+  }
+
+  &::-webkit-scrollbar {
+    background: $scrollbar_background;
+  }
+}
+
+@mixin setStylesForPage($backgroundPage, $colorElements, $scrollbarThumb_background, $scrollbar_background) {
+  background: $backgroundPage;
+  color: $colorElements;
+
+  @include setScrollbarStyles($scrollbarThumb_background, $scrollbar_background);
+}
+
+@mixin setStylesForAuth($title_color) {
+  .auth {
+    &__block {
+      &-title {
+        color: $title_color;
+      }
+    }
+  }
+}
+
+@mixin setStylesForActiveThemeCard($dot_background) {
+  .active-theme-card {
+    &::after {
+      background: $dot_background;
+    }
+  }
+}
+
+@mixin setStylesForForm($input_background, $input_caretColor, $input_color, $input_hoverColor, $inputPlaceholder_color, $labelDot_background, $submit_color, $submit_background, $submit_hoverColor, $submit_hoverBackground) {
+  .form {
+
+    &__textarea,
+    &__input {
+      background: $input_background;
+      caret-color: $input_caretColor;
+      color: $input_color;
+
+      @if $input_hoverColor != none {
+        &:focus {
+          color: $input_hoverColor;
+        }
+      }
+
+      @if $inputPlaceholder_color != none {
+        &::placeholder {
+          color: $inputPlaceholder_color;
+        }
+      }
+    }
+
+    &__label {
+      &::after {
+        background: $labelDot_background;
+      }
+    }
+
+    &__submit {
+      color: $submit_color;
+      background: $submit_background;
+
+      &:hover {
+        color: $submit_hoverColor;
+        background: $submit_hoverBackground;
+      }
+    }
+  }
+}
+
+@mixin setStylesForInvalidInput($background) {
+  .invalid-input {
+    &::after {
+      background: $serikaDark_red;
+    }
+  }
+}
+
+@mixin setStylesForNotification($title_color, $desc_color, $notificationError_background, $notificationWarning_background, $notificationSuccess_background) {
+  .notification {
+    &__title {
+      color: $title_color;
+    }
+
+    &__desc {
+      color: $desc_color;
+    }
+
+    &--error {
+      background: $notificationError_background;
+    }
+
+    &--warning {
+      background: $notificationWarning_background;
+    }
+
+    &--success {
+      background: $notificationSuccess_background;
+    }
+  }
+}
+
+@mixin setStylesForHeader($link_color, $link_hoverColor, $userLevel_background, $userLevel_color) {
+  .header {
+    &__list {
+      &-link {
+        color: $link_color;
+
+        &:hover {
+          color: $link_hoverColor;
+        }
+      }
+
+      &-user {
+        &-level {
+          background: $userLevel_background;
+          color: $userLevel_color;
+        }
+      }
+    }
+  }
+}
+
+@mixin setStylesForTesting($focusIcon_fill, $focusText_color, $headerParamValue_color, $headerProgressSlider_background, $headerProgressSliderLine_background, $letter_color, $letterComplete_color, $letterFailure_color, 
+$resultData_background, $resultRowAndColumn_borderColor, $resultTitle_color, $resultValue_color, $resultControlsBtn_color, $resultControlsBtn_hoverColor) {
+  .testing {
+    &-focus {
+      &__icon {
+        fill: $focusIcon_fill;
+      }
+
+      @if $focusText_color != none {
+        &__text {
+          color: $focusText_color;
+        }
+      }
+    }
+
+    &__header {
+      &-param {
+        &-value {
+          color: $headerParamValue_color;
+        }
+      }
+
+      &-progress {
+        &-slider {
+          background: $headerProgressSlider_background;
+
+          &-line {
+            background: $headerProgressSliderLine_background;
+          }
+        }
+      }
+    }
+
+    &__letter {
+      color: $letter_color;
+
+      &--complete {
+        color: $letterComplete_color;
+      }
+
+      &--failure {
+        color: $letterFailure_color;
+      }
+    }
+
+    &-result {
+      &__data {
+        background: $resultData_background;
+
+        &-row {
+          &:not(:last-child) {
+            td {
+              border-bottom-color: $resultRowAndColumn_borderColor;
+            }
+          }
+        }
+
+        @if $resultTitle_color != none {
+          &-title {
+            color: $resultTitle_color;
+          }
+        }
+
+        &-column {
+          &:not(:last-child) {
+            border-right-color: $resultRowAndColumn_borderColor;
+          }
+        }
+
+        &-value {
+          color: $resultValue_color;
+        }
+      }
+
+      &__controls {
+        &-btn {
+          color: $resultControlsBtn_color;
+
+          &:hover {
+            color: $resultControlsBtn_hoverColor;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin setStylesForCreateText($invalid_borderColor) {
+  .create-text {
+    &__textarea {
+      &--invalid {
+        border-color: $invalid_borderColor;
+      }
+    }
+  }
+}
+
+@mixin setStylesForAccount($accountInfo_background, $accountInfoSubtitle_color, $accountInfoTitle_color, $accountUserLine_background, $accountUserLevel_color, $accountUserLevelValue_color, $accountUserIcon_fill, $accountUserIcon_stroke) {
+  .account {
+    &__info {
+      background: $accountInfo_background;
+
+      &-subtitle {
+        color: $accountInfoSubtitle_color;
+      }
+
+      &-title {
+        color: $accountInfoTitle_color;
+      }
+    }
+
+    &__user {
+      &::after {
+        background: $accountUserLine_background;
+      }
+
+      &-level {
+        color: $accountUserLevel_color;
+
+        &-value {
+          color: $accountUserLevelValue_color;
+        }
+      }
+
+      &-icon {
+        fill: $accountUserIcon_fill;
+
+        .cls-1 {
+          stroke: $accountUserIcon_stroke;
+        }
+      }
+    }
+  }
+}
+
+@mixin setStylesForTable($checkboxStyle_borderColor, $checkboxSpan_checkedBorderColor, $checkboxSpan_checkedBackground, $checkboxSpan_checkedStroke, $tableBodyContent_color, $tableOddRow_background, $tableHeaderControlsBtnRemove_color,
+$tableHeaderTitle_color) {
+  .table {
+    &__checkbox {
+      &:checked+span {
+        border-color: $checkboxSpan_checkedBorderColor;
+        background: $checkboxSpan_checkedBackground;
+
+        &>svg {
+          stroke: $checkboxSpan_checkedStroke;
+        }
+      }
+
+      &-style {
+        border-color: $checkboxStyle_borderColor;
+      }
+    }
+
+    &__body {
+      &-content {
+        color: $tableBodyContent_color;
+      }
+
+      &-row {
+        &:nth-child(odd) {
+          td {
+            background: $tableOddRow_background;
+          }
+        }
+      }
+    }
+
+    &__header {
+      &-controls {
+        &-btn {
+          &--remove {
+            color: $tableHeaderControlsBtnRemove_color;
+          }
+        }
+      }
+
+      &-title {
+        color: $tableHeaderTitle_color;
+      }
+    }
+  }
+}
+
+@mixin setStylesForSettings($rowTitle_color, $rowTitle_hoverColor, $rowIcon_hoverFill, $rowIcon_fill, $caretTitle_color, $caretDesc_color, $caretLabelRadio_background, $caretLabelRadio_color, $caretLabelRadioSpan_checkedBackground, $caretLabelRadioSpan_checkedColor,
+$caretDefaultAndBlock_checkedBackground, $caretOutline_checkedBorderColor) {
+  .settings {
+    &__row {
+      &-title {
+        color: $rowTitle_color;
+
+        &--active {
+          color: $rowTitle_hoverColor;
+        }
+      }
+
+      &-header {
+        &:hover>h2 {
+          color: $rowTitle_hoverColor;
+        }
+
+        &:hover>svg {
+          fill: $rowIcon_hoverFill;
+        }
+      }
+
+      &-icon {
+        fill: $rowIcon_fill;
+
+        &--rotate {
+          fill: $rowIcon_hoverFill;
+        }
+      }
+
+      &-caret {
+        &-param {
+          &-title {
+            color: $caretTitle_color;
+          }
+
+          @if $caretDesc_color != none {
+            &-desc {
+              color: $caretDesc_color;
+            }
+          }
+
+          &-label {
+            .form__radio:checked+span {
+              background: $caretLabelRadioSpan_checkedBackground;
+              color: $caretLabelRadioSpan_checkedColor;
+
+              .caret__view-default,
+              .caret__view-block {
+                background: $caretDefaultAndBlock_checkedBackground;
+              }
+
+              .caret__view-outline {
+                border-color: $caretOutline_checkedBorderColor;
+              }
+            }
+          }
+
+          &-radio {
+            background: $caretLabelRadio_background;
+
+            @if $caretLabelRadio_color != none {
+              color: $caretLabelRadio_color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin setStylesForLogout($title_color) {
+  .logout {
+    &__title {
+      color: $title_color;
+    }
+  }
+}
+
+@mixin setStylesForFavorites($tableLink_color) {
+  .favorites {
+    &__table {
+      &-link {
+        color: $tableLink_color;
+      }
+    }
+  }
+}
+
+@mixin setStylesForCaret($allCaretExceptOutline_background, $caretOutline_borderColor, $caretViewOutline_borderColor, $caretViewBlockAndDefault_background) {
+  .caret {
+    &:not([data-view=outline]) {
+      background: $allCaretExceptOutline_background;
+    }
+
+    &[data-view=outline] {
+      border-color: $caretOutline_borderColor;
+    }
+
+    &__view {
+      &-outline {
+        border-color: $caretViewOutline_borderColor;
+      }
+
+      &-default,
+      &-block {
+        background: $caretViewBlockAndDefault_background;
+      }
+    }
+  }
+}

@@ -1,382 +1,42 @@
 @import "./_vars";
+@import "../../_mixins";
 
 .oblivion-card {
-  background: $oblivion_dark;
-  color: $oblivion_lightGrey;
-}
-
-* {
-  &::-webkit-scrollbar-thumb {
-    background: $oblivion_grey;
-  }
-
-  &::-webkit-scrollbar {
-    background: $oblivion_dark;
-  }
+  @include setStylesForCurrentThemeCard($oblivion_dark, $oblivion_lightGrey);
 }
 
 body[data-theme=oblivion] {
-  background: $oblivion_dark;
-  color: $oblivion_white;
+  @include setStylesForPage($oblivion_dark, $oblivion_white, $oblivion_grey, $oblivion_dark);
 
-  &::-webkit-scrollbar-thumb {
-    background: $oblivion_grey;
+  * {
+    @include setScrollbarStyles($oblivion_grey, $oblivion_dark);
   }
 
-  &::-webkit-scrollbar {
-    background: $oblivion_dark;
-  }
+  @include setStylesForActiveThemeCard($oblivion_grey);
 
-  .active-theme-card {
-    &::after {
-      background: $oblivion_grey;
-    }
-  }
+  @include setStylesForAuth($oblivion_white);
 
-  .auth {
-    &__block {
-      &-title {
-        color: $oblivion_white;
-      }
-    }
-  }
+  @include setStylesForForm($oblivion_darkGrey, $oblivion_white, $oblivion_white, none, $oblivion_grey, $oblivion_lightGrey, $oblivion_white, $oblivion_darkGrey, $oblivion_darkGrey, $oblivion_white);
 
-  .form {
+  @include setStylesForInvalidInput($oblivion_red);
 
-    &__textarea,
-    &__input {
-      background: $oblivion_darkGrey;
-      caret-color: $oblivion_white;
-      color: $oblivion_white;
+  @include setStylesForNotification($oblivion_grey, $oblivion_dark, $oblivion_red, $oblivion_yellow, $oblivion_green);
 
-      &::placeholder {
-        color: $oblivion_grey;
-      }
-    }
+  @include setStylesForHeader($oblivion_grey, $oblivion_white, $oblivion_grey, $oblivion_dark);
 
-    &__label {
-      &::after {
-        background: $oblivion_lightGrey;
-      }
-    }
+  @include setStylesForTesting($oblivion_white, $oblivion_white, $oblivion_white, $oblivion_grey, $oblivion_green, $oblivion_grey, $oblivion_white, $oblivion_red, $oblivion_darkGrey, $oblivion_dark, $oblivion_white, $oblivion_lightGrey, $oblivion_lightGrey, $oblivion_white);
 
-    &__submit {
-      color: $oblivion_white;
-      background: $oblivion_darkGrey;
+  @include setStylesForCreateText($oblivion_red);
 
-      &:hover {
-        color: $oblivion_darkGrey;
-        background: $oblivion_white;
-      }
-    }
-  }
+  @include setStylesForAccount($oblivion_darkGrey, $oblivion_grey, $oblivion_white, $oblivion_dark, $oblivion_grey, $oblivion_white, $oblivion_grey, $oblivion_dark);
 
-  .invalid-input {
-    &::after {
-      background: $oblivion_red;
-    }
-  }
+  @include setStylesForTable($oblivion_grey, $oblivion_green, $oblivion_green, $oblivion_white, $oblivion_white, $oblivion_darkGrey, $oblivion_red, $oblivion_grey);
 
-  .notification {
-    &__title {
-      color: $oblivion_grey;
-    }
+  @include setStylesForSettings($oblivion_grey, $oblivion_white, $oblivion_white, $oblivion_grey, $oblivion_grey, none, $oblivion_grey, none, $oblivion_lightGrey, $oblivion_dark, $oblivion_dark, $oblivion_dark);
 
-    &__desc {
-      color: $oblivion_dark;
-    }
+  @include setStylesForLogout($oblivion_white);
 
-    &--error {
-      background: $oblivion_red;
-    }
+  @include setStylesForFavorites($oblivion_white);
 
-    &--warning {
-      background: $oblivion_yellow;
-    }
-
-    &--success {
-      background: $oblivion_green;
-    }
-  }
-
-  .header {
-    &__list {
-      &-link {
-        color: $oblivion_grey;
-
-        &:hover {
-          color: $oblivion_white;
-        }
-      }
-
-      &-user {
-        &-level {
-          background: $oblivion_grey;
-          color: $oblivion_dark;
-        }
-      }
-    }
-  }
-
-  .testing {
-    &-focus {
-      &__icon {
-        fill: $oblivion_white;
-      }
-
-      &__text {
-        color: $oblivion_white;
-      }
-    }
-
-    &__header {
-      &-param {
-        &-value {
-          color: $oblivion_white;
-        }
-      }
-
-      &-progress {
-        &-slider {
-          background: $oblivion_grey;
-
-          &-line {
-            background: $oblivion_green;
-          }
-        }
-      }
-    }
-
-    &__letter {
-      color: $oblivion_grey;
-
-      &--complete {
-        color: $oblivion_white;
-      }
-
-      &--failure {
-        color: $oblivion_red;
-      }
-    }
-
-    &-result {
-      &__data {
-        background: $oblivion_darkGrey;
-
-        &-row {
-          &:not(:last-child) {
-            td {
-              border-bottom-color: $oblivion_dark;
-            }
-          }
-        }
-
-        &-title {
-          color: $oblivion_white;
-        }
-
-        &-column {
-          &:not(:last-child) {
-            border-right-color: $oblivion_dark;
-          }
-        }
-
-        &-value {
-          color: $oblivion_lightGrey;
-        }
-      }
-
-      &__controls {
-        &-btn {
-          color: $oblivion_lightGrey;
-
-          &:hover {
-            color: $oblivion_white;
-          }
-        }
-      }
-    }
-  }
-
-  .create-text {
-    &__textarea {
-      &--invalid {
-        border-color: $oblivion_red;
-      }
-    }
-  }
-
-  .account {
-    &__info {
-      background: $oblivion_darkGrey;
-
-      &-subtitle {
-        color: $oblivion_grey;
-      }
-
-      &-title {
-        color: $oblivion_white;
-      }
-    }
-
-    &__user {
-      &::after {
-        background: $oblivion_dark;
-      }
-
-      &-level {
-        color: $oblivion_grey;
-
-        &-value {
-          color: $oblivion_white;
-        }
-      }
-
-      &-icon {
-        fill: $oblivion_grey;
-
-        .cls-1 {
-          stroke: $oblivion_dark;
-        }
-      }
-    }
-  }
-
-  .table {
-    &__checkbox {
-      &:checked+span {
-        border-color: $oblivion_green;
-        background: $oblivion_green;
-
-        &>svg {
-          stroke: $oblivion_white;
-        }
-      }
-
-      &-style {
-        border-color: $oblivion_grey;
-      }
-    }
-
-    &__body {
-      &-content {
-        color: $oblivion_white;
-      }
-
-      &-row {
-        &:nth-child(odd) {
-          td {
-            background: $oblivion_darkGrey;
-          }
-        }
-      }
-    }
-
-    &__header {
-      &-controls {
-        &-btn {
-          &--remove {
-            color: $oblivion_red;
-          }
-        }
-      }
-
-      &-title {
-        color: $oblivion_grey;
-      }
-    }
-  }
-
-  .settings {
-    &__row {
-      &-title {
-        color: $oblivion_grey;
-
-        &--active {
-          color: $oblivion_white;
-        }
-      }
-
-      &-header {
-        &:hover>h2 {
-          color: $oblivion_white;
-        }
-
-        &:hover>svg {
-          fill: $oblivion_white;
-        }
-      }
-
-      &-icon {
-        fill: $oblivion_grey;
-
-        &--rotate {
-          fill: $oblivion_white;
-        }
-      }
-
-      &-caret {
-        &-param {
-          &-title {
-            color: $oblivion_grey;
-          }
-
-          &-label {
-            .form__radio:checked+span {
-              background: $oblivion_lightGrey;
-              color: $oblivion_dark;
-
-              .caret__view-default,
-              .caret__view-block {
-                background: $oblivion_dark;
-              }
-
-              .caret__view-outline {
-                border-color: $oblivion_dark;
-              }
-            }
-          }
-
-          &-radio {
-            background: $oblivion_grey;
-          }
-        }
-      }
-    }
-  }
-
-  .logout {
-    &__title {
-      color: $oblivion_white;
-    }
-  }
-
-  .favorites {
-    &__table {
-      &-link {
-        color: $oblivion_white;
-      }
-    }
-  }
-
-  .caret {
-    &:not([data-view=outline]) {
-      background: $oblivion_lightGrey;
-    }
-
-    &[data-view=outline] {
-      border-color: $oblivion_lightGrey;
-    }
-
-    &__view {
-      &-outline {
-        border-color: $oblivion_white;
-      }
-
-      &-default,
-      &-block {
-        background: $oblivion_white;
-      }
-    }
-  }
+  @include setStylesForCaret($oblivion_lightGrey, $oblivion_lightGrey, $oblivion_white, $oblivion_white);
 }

@@ -1,371 +1,40 @@
 @import "./_vars";
+@import "../../_mixins";
 
 .one-dark-card {
-  background: $oneDark_dark;
-  color: $oneDark_green;
-}
-
-* {
-  &::-webkit-scrollbar-thumb {
-    background: $oneDark_white;
-  }
-
-  &::-webkit-scrollbar {
-    background: $oneDark_black;
-  }
+  @include setStylesForCurrentThemeCard($oneDark_dark, $oneDark_green);
 }
 
 body[data-theme=one-dark] {
-  background: $oneDark_dark;
-  color: $oneDark_white;
+  @include setStylesForPage($oneDark_dark, $oneDark_white, $oneDark_white, $oneDark_black);
 
-  &::-webkit-scrollbar-thumb {
-    background: $oneDark_white;
+  * {
+    @include setScrollbarStyles($oneDark_white, $oneDark_black);
   }
 
-  &::-webkit-scrollbar {
-    background: $oneDark_black;
-  }
+  @include setStylesForActiveThemeCard($oneDark_green);
 
-  .active-theme-card {
-    &::after {
-      background: $oneDark_green;
-    }
-  }
+  @include setStylesForForm($oneDark_black, $oneDark_blue, $oneDark_green, none, none, $oneDark_blue, $oneDark_green, $oneDark_black, $oneDark_black, $oneDark_green);
 
-  .form {
+  @include setStylesForInvalidInput($oneDark_red);
 
-    &__textarea,
-    &__input {
-      background: $oneDark_black;
-      caret-color: $oneDark_blue;
-      color: $oneDark_green;
-    }
+  @include setStylesForNotification($oneDark_dark, $oneDark_black, $oneDark_red, $oneDark_blue, $oneDark_green);
 
-    &__label {
-      &::after {
-        background: $oneDark_blue;
-      }
-    }
+  @include setStylesForHeader($oneDark_white, $oneDark_green, $oneDark_white, $oneDark_dark);
 
-    &__submit {
-      color: $oneDark_green;
-      background: $oneDark_black;
+  @include setStylesForTesting($oneDark_green, $oneDark_green, $oneDark_green, $oneDark_white, $oneDark_black, $oneDark_white, $oneDark_green, $oneDark_red, $oneDark_black, $oneDark_dark, none, $oneDark_green, $oneDark_white, $oneDark_green);
 
-      &:hover {
-        color: $oneDark_black;
-        background: $oneDark_green;
-      }
-    }
-  }
+  @include setStylesForCreateText($oneDark_red);
 
-  .invalid-input {
-    &::after {
-      background: $oneDark_red;
-    }
-  }
+  @include setStylesForAccount($oneDark_black, $oneDark_white, $oneDark_green, $oneDark_dark, $oneDark_white, $oneDark_green, $oneDark_white, $oneDark_black);
 
-  .notification {
-    &__title {
-      color: $oneDark_dark;
-    }
+  @include setStylesForTable($oneDark_white, $oneDark_green, $oneDark_green, $oneDark_black, $oneDark_green, $oneDark_black, $oneDark_red, $oneDark_white);
 
-    &__desc {
-      color: $oneDark_black;
-    }
+  @include setStylesForSettings($oneDark_white, $oneDark_green, $oneDark_green, $oneDark_white, $oneDark_white, $oneDark_green, $oneDark_black, $oneDark_green, $oneDark_blue, $oneDark_black, $oneDark_black, $oneDark_black);
 
-    &--error {
-      background: $oneDark_red;
-    }
+  @include setStylesForLogout($oneDark_green);
 
-    &--warning {
-      background: $oneDark_blue;
-    }
+  @include setStylesForFavorites($oneDark_green);
 
-    &--success {
-      background: $oneDark_green;
-    }
-  }
-
-  .header {
-    &__list {
-      &-link {
-        color: $oneDark_white;
-
-        &:hover {
-          color: $oneDark_green;
-        }
-      }
-
-      &-user {
-        &-level {
-          background: $oneDark_white;
-          color: $oneDark_dark;
-        }
-      }
-    }
-  }
-
-  .testing {
-    &-focus {
-      &__icon {
-        fill: $oneDark_green;
-      }
-
-      &__text {
-        color: $oneDark_green;
-      }
-    }
-
-    &__header {
-      &-param {
-        &-value {
-          color: $oneDark_white;
-        }
-      }
-
-      &-progress {
-        &-slider {
-          background: $oneDark_black;
-
-          &-line {
-            background: $oneDark_blue;
-          }
-        }
-      }
-    }
-
-    &__letter {
-      color: $oneDark_white;
-
-      &--complete {
-        color: $oneDark_green;
-      }
-
-      &--failure {
-        color: $oneDark_red;
-      }
-    }
-
-    &-result {
-      &__data {
-        background: $oneDark_black;
-
-        &-row {
-          &:not(:last-child) {
-            td {
-              border-bottom-color: $oneDark_dark;
-            }
-          }
-        }
-
-        &-column {
-          &:not(:last-child) {
-            border-right-color: $oneDark_dark;
-          }
-        }
-
-        &-value {
-          color: $oneDark_green;
-        }
-      }
-
-      &__controls {
-        &-btn {
-          color: $oneDark_white;
-
-          &:hover {
-            color: $oneDark_green;
-          }
-        }
-      }
-    }
-  }
-
-  .create-text {
-    &__textarea {
-      &--invalid {
-        border-color: $oneDark_red;
-      }
-    }
-  }
-
-  .account {
-    &__info {
-      background: $oneDark_black;
-
-      &-subtitle {
-        color: $oneDark_white;
-      }
-
-      &-title {
-        color: $oneDark_green;
-      }
-    }
-
-    &__user {
-      &::after {
-        background: $oneDark_dark;
-      }
-
-      &-level {
-        color: $oneDark_white;
-
-        &-value {
-          color: $oneDark_green;
-        }
-      }
-
-      &-icon {
-        fill: $oneDark_white;
-
-        .cls-1 {
-          stroke: $oneDark_black;
-        }
-      }
-    }
-  }
-
-  .table {
-    &__checkbox {
-      &:checked+span {
-        border-color: $oneDark_green;
-        background: $oneDark_green;
-
-        &>svg {
-          stroke: $oneDark_black;
-        }
-      }
-
-      &-style {
-        border-color: $oneDark_white;
-      }
-    }
-
-    &__body {
-      &-content {
-        color: $oneDark_green;
-      }
-
-      &-row {
-        &:nth-child(odd) {
-          td {
-            background: $oneDark_black;
-          }
-        }
-      }
-    }
-
-    &__header {
-      &-controls {
-        &-btn {
-          &--remove {
-            color: $oneDark_red;
-          }
-        }
-      }
-
-      &-title {
-        color: $oneDark_white;
-      }
-    }
-  }
-
-  .settings {
-    &__row {
-      &-title {
-        color: $oneDark_white;
-
-        &--active {
-          color: $oneDark_green;
-        }
-      }
-
-      &-header {
-        &:hover>h2 {
-          color: $oneDark_green;
-        }
-
-        &:hover>svg {
-          fill: $oneDark_green;
-        }
-      }
-
-      &-icon {
-        fill: $oneDark_white;
-
-        &--rotate {
-          fill: $oneDark_green;
-        }
-      }
-
-      &-caret {
-        &-param {
-          &-title {
-            color: $oneDark_white;
-          }
-
-          &-desc {
-            color: $oneDark_green;
-          }
-
-          &-label {
-            .form__radio:checked+span {
-              background: $oneDark_blue;
-              color: $oneDark_black;
-
-              .caret__view-default,
-              .caret__view-block {
-                background: $oneDark_black;
-              }
-
-              .caret__view-outline {
-                border-color: $oneDark_black;
-              }
-            }
-          }
-
-          &-radio {
-            background: $oneDark_black;
-            color: $oneDark_green;
-          }
-        }
-      }
-    }
-  }
-
-  .logout {
-    &__title {
-      color: $oneDark_green;
-    }
-  }
-
-  .favorites {
-    &__table {
-      &-link {
-        color: $oneDark_green;
-      }
-    }
-  }
-
-  .caret {
-    &:not([data-view=outline]) {
-      background: $oneDark_blue;
-    }
-
-    &[data-view=outline] {
-      border-color: $oneDark_blue;
-    }
-
-    &__view {
-      &-outline {
-        border-color: $oneDark_green;
-      }
-
-      &-default,
-      &-block {
-        background: $oneDark_green;
-      }
-    }
-  }
+  @include setStylesForCaret($oneDark_blue, $oneDark_blue, $oneDark_green, $oneDark_green);
 }

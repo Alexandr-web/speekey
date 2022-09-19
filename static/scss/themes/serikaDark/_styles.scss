@@ -1,366 +1,40 @@
 @import "./_vars";
+@import "../../_mixins";
 
 .serika-dark-card {
-  background: $serikaDark_black;
-  color: $serikaDark_yellow;
-}
-
-* {
-  &::-webkit-scrollbar-thumb {
-    background: $serikaDark_grey;
-  }
-
-  &::-webkit-scrollbar {
-    background: $serikaDark_black;
-  }
+  @include setStylesForCurrentThemeCard($serikaDark_black, $serikaDark_yellow);
 }
 
 body[data-theme=serika-dark] {
-  background: $serikaDark_dark;
-  color: $serikaDark_lightGrey;
+  @include setStylesForPage($serikaDark_dark, $serikaDark_lightGrey, $serikaDark_grey, $serikaDark_black);
 
-  &::-webkit-scrollbar-thumb {
-    background: $serikaDark_grey;
+  * {
+    @include setScrollbarStyles($serikaDark_grey, $serikaDark_black);
   }
 
-  &::-webkit-scrollbar {
-    background: $serikaDark_black;
-  }
+  @include setStylesForActiveThemeCard($serikaDark_yellow);
 
-  .active-theme-card {
-    &::after {
-      background: $serikaDark_yellow;
-    }
-  }
+  @include setStylesForForm($serikaDark_black, $serikaDark_yellow, $serikaDark_grey, $serikaDark_lightGrey, none, $serikaDark_green, $serikaDark_lightGrey, $serikaDark_black, $serikaDark_black, $serikaDark_lightGrey);
 
-  .form {
+  @include setStylesForInvalidInput($serikaDark_red);
 
-    &__textarea,
-    &__input {
-      background: $serikaDark_black;
-      caret-color: $serikaDark_yellow;
-      color: $serikaDark_grey;
+  @include setStylesForNotification($serikaDark_dark, $serikaDark_black, $serikaDark_red, $serikaDark_yellow, $serikaDark_green);
 
-      &:focus {
-        color: $serikaDark_lightGrey;
-      }
-    }
+  @include setStylesForHeader($serikaDark_grey, $serikaDark_lightGrey, $serikaDark_grey, $serikaDark_dark);
 
-    &__label {
-      &::after {
-        background: $serikaDark_green;
-      }
-    }
+  @include setStylesForTesting($serikaDark_lightGrey, none, $serikaDark_yellow, $serikaDark_black, $serikaDark_yellow, $serikaDark_grey, $serikaDark_lightGrey, $serikaDark_red, $serikaDark_black, $serikaDark_dark, $serikaDark_yellow, none, $serikaDark_grey, $serikaDark_lightGrey);
 
-    &__submit {
-      color: $serikaDark_lightGrey;
-      background: $serikaDark_black;
+  @include setStylesForCreateText($serikaDark_red);
 
-      &:hover {
-        color: $serikaDark_black;
-        background: $serikaDark_lightGrey;
-      }
-    }
-  }
+  @include setStylesForAccount($serikaDark_black, $serikaDark_grey, $serikaDark_yellow, $serikaDark_dark, $serikaDark_grey, $serikaDark_yellow, $serikaDark_dark, $serikaDark_grey);
 
-  .invalid-input {
-    &::after {
-      background: $serikaDark_red;
-    }
-  }
+  @include setStylesForTable($serikaDark_lightGrey, $serikaDark_green, $serikaDark_green, $serikaDark_black, $serikaDark_lightGrey, $serikaDark_black, $serikaDark_red, $serikaDark_grey);
 
-  .notification {
-    &__title {
-      color: $serikaDark_dark;
-    }
+  @include setStylesForSettings($serikaDark_grey, $serikaDark_lightGrey, $serikaDark_lightGrey, $serikaDark_grey, $serikaDark_grey, none, $serikaDark_black, none, $serikaDark_yellow, $serikaDark_black, $serikaDark_black, $serikaDark_black);
 
-    &__desc {
-      color: $serikaDark_black;
-    }
+  @include setStylesForLogout($serikaDark_lightGrey);
 
-    &--error {
-      background: $serikaDark_red;
-    }
+  @include setStylesForFavorites($serikaDark_lightGrey);
 
-    &--warning {
-      background: $serikaDark_yellow;
-    }
-
-    &--success {
-      background: $serikaDark_green;
-    }
-  }
-
-  .header {
-    &__list {
-      &-link {
-        color: $serikaDark_grey;
-
-        &:hover {
-          color: $serikaDark_lightGrey;
-        }
-      }
-
-      &-user {
-        &-level {
-          background: $serikaDark_grey;
-          color: $serikaDark_dark;
-        }
-      }
-    }
-  }
-
-  .testing {
-    &-focus {
-      &__icon {
-        fill: $serikaDark_lightGrey;
-      }
-    }
-
-    &__header {
-      &-param {
-        &-value {
-          color: $serikaDark_yellow;
-        }
-      }
-
-      &-progress {
-        &-slider {
-          background: $serikaDark_black;
-
-          &-line {
-            background: $serikaDark_yellow;
-          }
-        }
-      }
-    }
-
-    &__letter {
-      color: $serikaDark_grey;
-
-      &--complete {
-        color: $serikaDark_lightGrey;
-      }
-
-      &--failure {
-        color: $serikaDark_red;
-      }
-    }
-
-    &-result {
-      &__data {
-        background: $serikaDark_black;
-
-        &-row {
-          &:not(:last-child) {
-            td {
-              border-bottom-color: $serikaDark_dark;
-            }
-          }
-        }
-
-        &-column {
-          &:not(:last-child) {
-            border-right-color: $serikaDark_dark;
-          }
-        }
-
-        &-value {
-          color: $serikaDark_yellow;
-        }
-      }
-
-      &__controls {
-        &-btn {
-          color: $serikaDark_grey;
-
-          &:hover {
-            color: $serikaDark_lightGrey;
-          }
-        }
-      }
-    }
-  }
-
-  .create-text {
-    &__textarea {
-      &--invalid {
-        border-color: $serikaDark_red;
-      }
-    }
-  }
-
-  .account {
-    &__info {
-      background: $serikaDark_black;
-
-      &-subtitle {
-        color: $serikaDark_grey;
-      }
-
-      &-title {
-        color: $serikaDark_yellow;
-      }
-    }
-
-    &__user {
-      &::after {
-        background: $serikaDark_dark;
-      }
-
-      &-level {
-        color: $serikaDark_grey;
-
-        &-value {
-          color: $serikaDark_yellow;
-        }
-      }
-
-      &-icon {
-        fill: $serikaDark_dark;
-
-        .cls-1 {
-          stroke: $serikaDark_grey;
-        }
-      }
-    }
-  }
-
-  .table {
-    &__checkbox {
-      &:checked+span {
-        border-color: $serikaDark_green;
-        background: $serikaDark_green;
-
-        &>svg {
-          stroke: $serikaDark_black;
-        }
-      }
-
-      &-style {
-        border-color: $serikaDark_lightGrey;
-      }
-    }
-
-    &__body {
-      &-content {
-        color: $serikaDark_lightGrey;
-      }
-
-      &-row {
-        &:nth-child(odd) {
-          td {
-            background: $serikaDark_black;
-          }
-        }
-      }
-    }
-
-    &__header {
-      &-controls {
-        &-btn {
-          &--remove {
-            color: $serikaDark_red;
-          }
-        }
-      }
-
-      &-title {
-        color: $serikaDark_grey;
-      }
-    }
-  }
-
-  .settings {
-    &__row {
-      &-title {
-        color: $serikaDark_grey;
-
-        &--active {
-          color: $serikaDark_lightGrey;
-        }
-      }
-
-      &-header {
-        &:hover>h2 {
-          color: $serikaDark_lightGrey;
-        }
-
-        &:hover>svg {
-          fill: $serikaDark_lightGrey;
-        }
-      }
-
-      &-icon {
-        fill: $serikaDark_grey;
-
-        &--rotate {
-          fill: $serikaDark_lightGrey;
-        }
-      }
-
-      &-caret {
-        &-param {
-          &-title {
-            color: $serikaDark_grey;
-          }
-
-          &-label {
-            .form__radio:checked+span {
-              background: $serikaDark_yellow;
-              color: $serikaDark_black;
-
-              .caret__view-default,
-              .caret__view-block {
-                background: $serikaDark_black;
-              }
-
-              .caret__view-outline {
-                border-color: $serikaDark_black;
-              }
-            }
-          }
-
-          &-radio {
-            background: $serikaDark_black;
-          }
-        }
-      }
-    }
-  }
-
-  .logout {
-    &__title {
-      color: $serikaDark_lightGrey;
-    }
-  }
-
-  .favorites {
-    &__table {
-      &-link {
-        color: $serikaDark_lightGrey;
-      }
-    }
-  }
-
-  .caret {
-    &:not([data-view=outline]) {
-      background: $serikaDark_yellow;
-    }
-
-    &[data-view=outline] {
-      border-color: $serikaDark_yellow;
-    }
-
-    &__view {
-      &-outline {
-        border-color: $serikaDark_lightGrey;
-      }
-
-      &-default,
-      &-block {
-        background: $serikaDark_lightGrey;
-      }
-    }
-  }
+  @include setStylesForCaret($serikaDark_yellow, $serikaDark_yellow, $serikaDark_lightGrey, $serikaDark_lightGrey);
 }
