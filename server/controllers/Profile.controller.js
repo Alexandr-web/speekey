@@ -32,7 +32,21 @@ class Profile {
 
   async setTextComplete(req, res) {
     try {
+      if (!req.isAuth) {
+        return res.status(403).json({
+          ok: false,
+          message: "Для выполнения данной операции нужно быть авторизованным",
+          type: "error",
+          status: 403,
+        });
+      }
+
       const { id, } = req.params;
+
+      if (isNaN(parseInt(id))) {
+        return res.status(400).json({ ok: false, status: 400, message: "Неверный формат id текста", });
+      }
+
       const text = await Text.findOne({ where: { id, }, });
 
       if (!text) {

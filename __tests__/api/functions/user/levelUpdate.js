@@ -6,26 +6,25 @@ export default () => {
   const { id, } = jwtDecode(token);
   const reqData = [
     {
-      url: `http://localhost:3000/profile/api/${id}/favorites`,
+      url: `http://localhost:3000/profile/${id}/level/update`,
       method: {
         name: "toBe",
         args: [403],
       },
     },
     {
-      url: `http://localhost:3000/profile/api/${id}/favorites`,
-      token,
-      method: {
-        name: "toBe",
-        args: [200],
-      },
-    },
-    {
-      url: "http://localhost:3000/profile/api/no-id/favorites",
+      url: "http://localhost:3000/profile/no-id/level/update",
       token,
       method: {
         name: "toBe",
         args: [400],
+      },
+    },
+    {
+      url: "http://localhost:3000/profile/no-id/level/update",
+      method: {
+        name: "toBe",
+        args: [403],
       },
     }
   ];
@@ -33,9 +32,10 @@ export default () => {
   return reqData.map(({ url, method, token: tokenKey, }) => {
     return {
       promise: fetch(url, {
-        method: "GET",
+        method: "PUT",
         headers: {
           "Accept-Type": "application/json",
+          "Content-Type": "application/json",
           Authorization: `Bearer ${tokenKey || ""}`,
         },
       }),

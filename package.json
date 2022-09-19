@@ -5,7 +5,8 @@
   "jest": {
     "modulePathIgnorePatterns": [
       "<rootDir>/node_modules/",
-      "<rootDir>/__tests__/api/functions/"
+      "<rootDir>/__tests__/api/functions/",
+      "<rootDir>/__tests__/api/requestHandler"
     ]
   },
   "scripts": {

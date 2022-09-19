@@ -2,7 +2,7 @@ const User = require("../models/User");
 
 module.exports = async (req, res, next) => {
   try {
-    if (!req.userId) {
+    if (!req.isAuth) {
       return res.status(403).json({
         ok: false,
         message: "Для выполнения данной операции нужно быть авторизованным",

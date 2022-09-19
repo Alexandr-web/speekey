@@ -161,6 +161,11 @@ class Text {
       }
 
       const { id, } = req.params;
+
+      if (isNaN(parseInt(id))) {
+        return res.status(400).json({ ok: false, status: 400, message: "Неверный формат id текста", });
+      }
+
       const text = await TextModel.findOne({ where: { id, }, });
 
       if (!text) {
