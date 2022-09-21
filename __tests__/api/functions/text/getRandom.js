@@ -6,21 +6,15 @@ export default () => {
     {
       url: "http://localhost:3000/text/api/random",
       token,
-      method: {
-        name: "toBe",
-        args: [200],
-      },
+      code: 200,
     },
     {
       url: "http://localhost:3000/text/api/random",
-      method: {
-        name: "toBe",
-        args: [403],
-      },
+      code: 403,
     }
   ];
 
-  return reqData.map(({ url, token: tokenKey, method, }) => {
+  return reqData.map(({ url, token: tokenKey, code, }) => {
     return {
       promise: fetch(url, {
         method: "GET",
@@ -29,7 +23,7 @@ export default () => {
           Authorization: `Bearer ${tokenKey || ""}`,
         },
       }),
-      method,
+      code,
     };
   });
 };

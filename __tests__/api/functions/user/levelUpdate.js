@@ -7,29 +7,20 @@ export default () => {
   const reqData = [
     {
       url: `http://localhost:3000/profile/${id}/level/update`,
-      method: {
-        name: "toBe",
-        args: [403],
-      },
+      code: 403,
     },
     {
       url: "http://localhost:3000/profile/no-id/level/update",
       token,
-      method: {
-        name: "toBe",
-        args: [400],
-      },
+      code: 400,
     },
     {
       url: "http://localhost:3000/profile/no-id/level/update",
-      method: {
-        name: "toBe",
-        args: [403],
-      },
+      code: 403,
     }
   ];
 
-  return reqData.map(({ url, method, token: tokenKey, }) => {
+  return reqData.map(({ url, code, token: tokenKey, }) => {
     return {
       promise: fetch(url, {
         method: "PUT",
@@ -39,7 +30,7 @@ export default () => {
           Authorization: `Bearer ${tokenKey || ""}`,
         },
       }),
-      method,
+      code,
     };
   });
 };

@@ -1,9 +1,9 @@
 import { expect, } from "@jest/globals";
 
 export default (reqData) => {
-  reqData.map(({ promise, method, }) => {
+  reqData.map(({ promise, code, }) => {
     promise.then(({ status, }) => {
-      expect(status)[method.name](...method.args);
+      expect(status).toBe(code);
     });
   });
 };

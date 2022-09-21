@@ -6,36 +6,24 @@ export default () => {
     {
       url: "http://localhost:3000/profile/text/no-id/complete",
       token,
-      method: {
-        name: "toBe",
-        args: [400],
-      },
+      code: 400,
     },
     {
       url: "http://localhost:3000/profile/text/1/complete",
-      method: {
-        name: "toBe",
-        args: [403],
-      },
+      code: 403,
     },
     {
       url: "http://localhost:3000/profile/text/13131321/complete",
-      method: {
-        name: "toBe",
-        args: [403],
-      },
+      code: 403,
     },
     {
       url: "http://localhost:3000/profile/text/13131321/complete",
       token,
-      method: {
-        name: "toBe",
-        args: [404],
-      },
+      code: 404,
     }
   ];
 
-  return reqData.map(({ url, method, token: tokenKey, }) => {
+  return reqData.map(({ url, code, token: tokenKey, }) => {
     return {
       promise: fetch(url, {
         method: "POST",
@@ -45,7 +33,7 @@ export default () => {
           Authorization: `Bearer ${tokenKey || ""}`,
         },
       }),
-      method,
+      code,
     };
   });
 };

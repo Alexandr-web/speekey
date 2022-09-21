@@ -4,14 +4,11 @@ export default () => {
   const reqData = [
     {
       url: "http://localhost:3000/text/create",
-      method: {
-        name: "toBe",
-        args: [403],
-      },
+      code: 403,
     }
   ];
 
-  return reqData.map(({ url, token: tokenKey, method, }) => {
+  return reqData.map(({ url, token: tokenKey, code, }) => {
     return {
       promise: fetch(url, {
         method: "POST",
@@ -21,7 +18,7 @@ export default () => {
           Authorization: `Bearer ${tokenKey || ""}`,
         },
       }),
-      method,
+      code,
     };
   });
 };

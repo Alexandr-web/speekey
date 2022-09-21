@@ -8,36 +8,24 @@ export default () => {
     {
       url: `http://localhost:3000/profile/api/${id}/text/completed`,
       token,
-      method: {
-        name: "toBe",
-        args: [200],
-      },
+      code: 200,
     },
     {
       url: "http://localhost:3000/profile/api/no-id/text/completed",
       token,
-      method: {
-        name: "toBe",
-        args: [400],
-      },
+      code: 400,
     },
     {
       url: `http://localhost:3000/profile/api/${id + 1}/text/completed`,
-      method: {
-        name: "toBe",
-        args: [403],
-      },
+      code: 403,
     },
     {
       url: `http://localhost:3000/profile/api/${id}/text/completed`,
-      method: {
-        name: "toBe",
-        args: [403],
-      },
+      code: 403,
     }
   ];
 
-  return reqData.map(({ url, method, token: tokenKey, }) => {
+  return reqData.map(({ url, code, token: tokenKey, }) => {
     return {
       promise: fetch(url, {
         method: "GET",
@@ -46,7 +34,7 @@ export default () => {
           Authorization: `Bearer ${tokenKey || ""}`,
         },
       }),
-      method,
+      code,
     };
   });
 };
