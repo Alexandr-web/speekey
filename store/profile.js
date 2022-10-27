@@ -7,6 +7,7 @@ export default {
   state: () => ({
     experience: null,
     level: null,
+    user: null,
   }),
   mutations: {
     setExperience(state, val) {
@@ -15,10 +16,14 @@ export default {
     setLevel(state, val) {
       state.level = val;
     },
+    setUser(state, val) {
+      state.user = val;
+    },
   },
   getters: {
     getExperience: (state) => state.experience,
     getLevel: (state) => state.level,
+    getUser: (state) => state.user,
   },
   actions: {
     async getIdByToken({ }, token) {

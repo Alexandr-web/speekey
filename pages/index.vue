@@ -60,7 +60,7 @@
           }
         };
 
-        handleRequest(id ? store.dispatch("text/getOne", { token, id, }) : store.dispatch("text/getRandom", token));
+        await handleRequest(id ? store.dispatch("text/getOne", { token, id, }) : store.dispatch("text/getRandom", token));
       } catch (err) {
         throw err;
       }

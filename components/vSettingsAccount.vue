@@ -91,12 +91,6 @@
 <script>
   export default {
     name: "SettingsAccountComponent",
-    props: {
-      user: {
-        type: Object,
-        required: true,
-      },
-    },
     data: () => ({
       pendingEdit: false,
       validations: {
@@ -118,10 +112,15 @@
         },
       },
     }),
+    computed: {
+      getUser() {
+        return this.$store.getters["profile/getUser"] || {};
+      },
+    },
     mounted() {
-      Object.keys(this.user).map((key) => {
+      Object.keys(this.getUser).map((key) => {
         if (key in this.validations && key !== "password") {
-          this.validations[key].model = this.user[key];
+          this.validations[key].model = this.getUser[key];
         }
       });
     },
@@ -129,7 +128,7 @@
       edit() {
         if (!this.validations.$invalid) {
           const token = this.$store.getters["auth/getToken"];
-          const { id, } = this.user;
+          const { id, } = this.getUser;
           const fd = Object.keys(this.validations).reduce((acc, key) => {
             if ("model" in (this.validations[key] || {}) && this.validations[key].model && key !== "repeatPassword") {
               acc[key] = this.validations[key].model;

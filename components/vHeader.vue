@@ -16,19 +16,19 @@
             </nuxt-link>
           </li>
           <li
-            v-if="Object.keys(user).length"
+            v-if="Object.keys(getUser).length"
             class="header__list-item header__list-user"
           >
             <nuxt-link
               class="header__list-link"
               to="/account"
             >
-              {{ user.username }}
+              {{ getUser.username }}
             </nuxt-link>
-            <span class="header__list-user-level">{{ getLevel ? getLevel : user.level }}</span>
+            <span class="header__list-user-level">{{ getLevel ? getLevel : getUser.level }}</span>
           </li>
           <li
-            v-if="Object.keys(user).length"
+            v-if="Object.keys(getUser).length"
             class="header__list-item header__list-signout"
           >
             <nuxt-link
@@ -66,22 +66,13 @@
           title: "Настройки",
         }
       ],
-      user: {},
     }),
-    async fetch() {
-      try {
-        const user = await this.$store.dispatch("profile/getCurrent");
-        
-        if (user) {
-          this.user = user;
-        }
-      } catch (err) {
-        throw err;
-      }
-    },
     computed: {
       getLevel() {
         return this.$store.getters["profile/getLevel"];
+      },
+      getUser() {
+        return this.$store.getters["profile/getUser"] || {};
       },
     },
   };

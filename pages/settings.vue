@@ -11,7 +11,7 @@
       <div class="page__inner">
         <div class="settings">
           <div
-            v-if="Object.keys(user || {}).length"
+            v-if="Object.keys(getUser || {}).length"
             class="settings__rows"
           >
             <div
@@ -43,7 +43,6 @@
               >
                 <vSettingsAccount
                   v-if="item.isAccount"
-                  :user="user"
                   @callNotification="callNotification"
                 />
                 <vSettingsTheme
@@ -82,15 +81,6 @@
     },
     mixins: [notificationMixin],
     layout: "default",
-    async asyncData({ store, }) {
-      try {
-        const user = await store.dispatch("profile/getCurrent");
-
-        return { user, };
-      } catch (err) {
-        throw err;
-      }
-    },
     data: () => ({
       settings: [
         {
@@ -111,6 +101,11 @@
       ],
     }),
     head: { title: "Настройки", },
+    computed: {
+      getUser() {
+        return this.$store.getters["profile/getUser"] || {};
+      },
+    },
     methods: {
       setStateTab(index) {
         this.settings = this.settings.map((item, i) => {

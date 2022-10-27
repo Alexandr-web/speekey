@@ -13,8 +13,16 @@ export default async ({ store, redirect, }) => {
 
     if (!res.user) {
       store.commit("auth/clearToken");
+      store.commit("profile/clearUser");
 
       return redirect("/auth");
+    }
+
+    const { id, } = data;
+    const { ok, user, } = await store.dispatch("profile/getOne", id);
+
+    if (ok) {
+      store.commit("profile/setUser", user);
     }
   } catch (err) {
     throw err;

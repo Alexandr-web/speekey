@@ -3,7 +3,7 @@
     <div class="container">
       <div class="page__inner">
         <div
-          v-if="Object.keys(user || {}).length"
+          v-if="Object.keys(getUser || {}).length"
           class="account"
         >
           <div class="account__info">
@@ -12,14 +12,14 @@
                 <vProfileIcon :classes="['account__user-icon']" />
                 <h2
                   class="account__user-username"
-                  :title="user.username"
+                  :title="getUser.username"
                 >
-                  {{ user.username }}
+                  {{ getUser.username }}
                 </h2>
               </header>
               <main class="account__user-main">
                 <div class="account__user-level">
-                  Уровень <span class="account__user-level-value">{{ getLevel ? getLevel : user.level }}</span>
+                  Уровень <span class="account__user-level-value">{{ getLevel ? getLevel : getUser.level }}</span>
                 </div>
               </main>
             </div>
@@ -28,7 +28,7 @@
                 Создано текстов
               </h4>
               <h2 class="account__info-title">
-                {{ user.lengthCreatedTexts }}
+                {{ getUser.lengthCreatedTexts }}
               </h2>
             </div>
             <div class="account__info-block account__params">
@@ -36,7 +36,7 @@
                 Выполнено текстов
               </h4>
               <h2 class="account__info-title">
-                {{ user.completedTexts.length }}
+                {{ getUser.completedTexts.length }}
               </h2>
             </div>
             <div class="account__info-block account__params">
@@ -44,7 +44,7 @@
                 Точность
               </h4>
               <h2 class="account__info-title">
-                {{ user.accuracy }}%
+                {{ getUser.accuracy }}%
               </h2>
             </div>
             <div class="account__info-block account__params">
@@ -52,13 +52,13 @@
                 Скорость (с/м)
               </h4>
               <h2 class="account__info-title">
-                {{ user.speed }}
+                {{ getUser.speed }}
               </h2>
             </div>
           </div>
           <div class="account__texts">
             <table
-              v-if="(user.completedTexts || []).length"
+              v-if="(getUser.completedTexts || []).length"
               class="table account__texts-table"
             >
               <thead class="table__header account__texts-table-header">
@@ -82,7 +82,7 @@
               </thead>
               <tbody class="table__body account__texts-table-body">
                 <tr
-                  v-for="(txt, index) in user.completedTexts"
+                  v-for="(txt, index) in getUser.completedTexts"
                   :key="index"
                   class="table__body-row account__texts-table-body-row"
                 >
@@ -111,7 +111,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>r
   </div>
 </template>
 
@@ -126,16 +126,6 @@
       vNothing,
     },
     layout: "default",
-    async asyncData({ store, }) {
-      try {
-        const user = await store.dispatch("profile/getCurrent");
-        const completedTexts = user.completedTexts.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
-        
-        return { user: { ...user, completedTexts, }, };
-      } catch (err) {
-        throw err;
-      }
-    },
     head: { title: "Аккаунт", },
     computed: {
       getLevel() {
@@ -144,6 +134,18 @@
       getExperience() {
         return this.$store.getters["profile/getExperience"];
       },
+      getUser() {
+        return this.$store.getters["profile/getUser"] || {};
+      },
+    },
+    mounted() {
+      const compiltedTextsCopy = [...this.getUser.completedTexts];
+      const completedTexts = compiltedTextsCopy.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+
+      this.$store.commit("profile/setUser", {
+        ...this.getUser,
+        completedTexts,
+      });
     },
   };
 </script>
