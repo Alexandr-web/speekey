@@ -49,6 +49,7 @@
     },
     mixins: [notificationMixin],
     layout: "default",
+    // Setting the active text depending on the query parameter
     async asyncData({ store, query: { text: id, }, }) {
       try {
         const token = store.getters["auth/getToken"];
@@ -90,6 +91,7 @@
     watch: {
       start(val) {
         if (val) {
+          // Turn on the timer, add an event for printing
           this.timer = setInterval(() => {
             this.sec += 1;
             this.setSpeed();
@@ -97,6 +99,7 @@
 
           window.addEventListener("keydown", this.keydownHandler);
         } else {
+          // Turn off the timer, delete the event for printing
           window.removeEventListener("keydown", this.keydownHandler);
 
           clearInterval(this.timer);
@@ -107,6 +110,7 @@
       },
       end(val) {
         if (val) {
+          // Sending a request with test results
           const token = this.$store.getters["auth/getToken"];
           const { id, } = this.getTextData;
           const data = {
@@ -120,8 +124,8 @@
 
           res1.then((userId) => {
             const fd = { length: this.getText.length, };
-            const res2 = this.$store.dispatch("profile/setTextComplete", { token, id, data, });
-            const res3 = this.$store.dispatch("profile/levelUpdate", { id: userId, token, fd, });
+            const res2 = this.$store.dispatch("profile/setTextComplete", { token, id, data, }); // Increase in executed texts
+            const res3 = this.$store.dispatch("profile/levelUpdate", { id: userId, token, fd, }); // Level up
 
             return Promise.all([res2, res3]);
           }).then(([{ message, type, }, { experience, level, }]) => {
@@ -146,10 +150,12 @@
         }
       },
     },
+    // Removing the print event after leaving the page
     beforeDestroy() {
       window.removeEventListener("keydown", this.keydownHandler);
     },
     methods: {
+      // Adds active text to favorites
       setFavorite() {
         const token = this.$store.getters["auth/getToken"];
         const { id, } = this.getTextData;
@@ -178,6 +184,7 @@
         this.clearParams();
         this.end = false;
       },
+      // Switches texts
       nextText() {
         const token = this.$store.getters["auth/getToken"];
         const { id, } = this.getTextData;
@@ -221,15 +228,21 @@
         this.start = true;
         this.end = false;
       },
+      /**
+       * Text printing logic
+       * @param {object} e Event object
+       */
       keydownHandler(e) {
         e.preventDefault();
 
         const key = e.key;
 
         if (!this.ignoreKeys.includes(key)) {
+          // Looking for an active symbol
           const indexActiveLetter = this.getText.findIndex(({ active, }) => active);
           const activeLetter = this.getText[indexActiveLetter === -1 ? 0 : indexActiveLetter];
 
+          // Removing letters when pressing BackSpace
           if (key === "Backspace" && this.getText[indexActiveLetter - 1]) {
             if (activeLetter.failure) {
               this.$store.commit("text/changeLetter", {
@@ -251,12 +264,14 @@
             }
           }
 
+          // If the pressed letter matches the active character
           if (activeLetter.letter === key) {
             this.$store.commit("text/changeLetter", {
               index: indexActiveLetter,
               data: { active: false, complete: true, failure: false, },
             });
 
+            // Determine the end of testing
             if (indexActiveLetter + 1 >= this.getText.length) {
               this.start = false;
               this.$store.commit("text/resetText");
@@ -264,6 +279,7 @@
               this.indexActiveLetter = indexActiveLetter + 1;
             }
           } else if (key !== "Backspace") {
+            // If the pressed character does not match
             this.$store.commit("text/changeLetter", {
               index: indexActiveLetter,
               data: { complete: false, failure: true, },

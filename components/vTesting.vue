@@ -142,6 +142,10 @@
       },
     },
     watch: {
+      /**
+       * Caret behavior when changing the start key
+       * @param {boolean} val start key value
+       */
       start(val) {
         if (val) {
           this.moveCaret();
@@ -156,6 +160,8 @@
       indexActiveLetter() {
         this.moveCaret();
         this.setProgressTyping();
+
+        // Scroll to the active symbol
         this.getActiveLetter.scrollIntoView({
           behavior: "smooth",
           block: "center",
@@ -173,6 +179,7 @@
       }
     },
     methods: {
+      // Determining print progress
       setProgressTyping() {
         const lengthCompletedLetters = this.getText.filter(({ complete, }) => complete).length;
         const lengthText = this.getText.length;

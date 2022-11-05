@@ -2,6 +2,7 @@ const TextModel = require("../models/Text");
 const User = require("../models/User");
 
 class Text {
+  // Adds new text to the database
   async create(req, res) {
     try {
       if (!req.isAuth) {
@@ -35,6 +36,7 @@ class Text {
     }
   }
 
+  // Gets random text
   async getRandom(req, res) {
     try {
       if (!req.isAuth) {
@@ -65,6 +67,7 @@ class Text {
     }
   }
 
+  // Gets one text by id
   async getOne(req, res) {
     try {
       if (!req.isAuth) {
@@ -97,6 +100,7 @@ class Text {
     }
   }
 
+  // Gets the next text in the list
   async getNext(req, res) {
     try {
       if (!req.isAuth) {
@@ -149,6 +153,7 @@ class Text {
     }
   }
 
+  // Sets the text to favorites
   async setFavorite(req, res) {
     try {
       if (!req.isAuth) {

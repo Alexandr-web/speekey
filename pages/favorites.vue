@@ -114,6 +114,7 @@
     },
     mixins: [notificationMixin],
     layout: "default",
+    // Retrieving favorite texts to which the key readyToRemove is added
     async asyncData({ store, }) {
       try {
         const token = store.getters["auth/getToken"];
@@ -153,6 +154,10 @@
           this.setStateReadyToRemove(false);
         }
       },
+      /**
+       * Sets the value of the readyToRemove key to ALL CHECKBOX
+       * @param {boolean} val readyToRemove key value
+       */
       setStateReadyToRemove(val) {
         this.texts = this.texts.map((text) => {
           text.readyToRemove = val;
@@ -163,6 +168,7 @@
       selectToRemove() {
         this.selectAllTexts = this.texts.every(({ readyToRemove, }) => readyToRemove);
       },
+      // Deletes favorite texts
       removeFavoriteText() {
         const token = this.$store.getters["auth/getToken"];
         const fd = { removeTextsId: this.getRemovedTexts.map(({ id, }) => id), };
@@ -171,9 +177,8 @@
         this.pendingRemove = true;
 
         res
-          .then((userId) => {
-            return this.$store.dispatch("profile/removeFavorites", { id: userId, token, fd, });
-          }).then(({ ok, message, type, }) => {
+          .then((userId) => this.$store.dispatch("profile/removeFavorites", { id: userId, token, fd, }))
+          .then(({ ok, message, type, }) => {
             this.pendingRemove = false;
 
             this.callNotification({

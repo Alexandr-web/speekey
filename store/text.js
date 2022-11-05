@@ -40,6 +40,11 @@ export default {
     },
   },
   actions: {
+    /**
+     * Gets random text
+     * @param {string} token User token
+     * @returns {promise} Request result
+     */
     async getRandom({ }, token) {
       try {
         const res = await fetch(`${host}/text/api/random`, {
@@ -56,6 +61,12 @@ export default {
       }
     },
 
+    /**
+     * Gets text by its id
+     * @param {string|number} id Text id
+     * @param {string} token User token
+     * @returns {promise} Request result
+     */
     async getOne({ }, { token, id, }) {
       try {
         const res = await fetch(`${host}/text/api/${id}`, {
@@ -72,6 +83,12 @@ export default {
       }
     },
 
+    /**
+     * Gets the next text in the list
+     * @param {string|number} id Text id
+     * @param {string} token User token
+     * @returns {promise} Request result
+     */
     async getNext({ }, { id, token, }) {
       try {
         const res = await fetch(`${host}/text/api/next/${id}`, {
@@ -88,6 +105,12 @@ export default {
       }
     },
 
+    /**
+     * Sends a request to add text
+     * @param {string} token User token
+     * @param {object} fd Text data
+     * @returns {promise} Request result
+     */
     async create({ }, { token, fd, }) {
       try {
         const res = await fetch(`${host}/text/create`, {
@@ -106,6 +129,12 @@ export default {
       }
     },
 
+    /**
+     * Sends a request to add text to favorites
+     * @param {string} token User token
+     * @param {string|number} id Text id
+     * @returns {promise} Request result
+     */
     async setFavorite({ }, { token, id, }) {
       try {
         const res = await fetch(`${host}/text/${id}/favorite`, {

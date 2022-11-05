@@ -1,5 +1,6 @@
 const User = require("../models/User");
 
+// This middleware is used to check user permissions
 module.exports = async (req, res, next) => {
   try {
     if (!req.isAuth) {

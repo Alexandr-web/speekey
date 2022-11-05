@@ -222,8 +222,10 @@
     }),
     head: { title: "Авторизация", },
     methods: {
+      // User registration
       registration() {
         if (this.getValidData("registration")) {
+          // We take keys whose names begin with registration and which have a model
           const fd = Object.keys(this.validations).reduce((acc, key) => {
             if (/^registration/.test(key) && typeof this.validations[key] === "object" && "model" in this.validations[key]) {
               acc[key] = this.validations[key].model;
@@ -267,6 +269,10 @@
         }
       },
 
+      /**
+       * Takes from the validations object all keys that start with type and checks their validity
+       * @param {string} type Start of keys to check
+       */
       getValidData(type) {
         return Object
           .keys(this.validations)
@@ -274,8 +280,10 @@
           .every((key) => !this.validations[key].$invalid);
       },
 
+      // User login
       login() {
         if (this.getValidData("login")) {
+          // We take keys whose names begin with login and which have a model
           const fd = Object.keys(this.validations).reduce((acc, key) => {
             if (/^login/.test(key) && typeof this.validations[key] === "object" && "model" in this.validations[key]) {
               acc[key] = this.validations[key].model;

@@ -19,6 +19,9 @@ export default {
     setUser(state, val) {
       state.user = val;
     },
+    clearUser(state) {
+      state.user = null;
+    },
   },
   getters: {
     getExperience: (state) => state.experience,
@@ -26,6 +29,11 @@ export default {
     getUser: (state) => state.user,
   },
   actions: {
+    /**
+     * Gets the user id by its token
+     * @param {string} token User token
+     * @returns {promise} Request result
+     */
     async getIdByToken({ }, token) {
       try {
         const data = jwtDecode(token || "");
@@ -36,6 +44,11 @@ export default {
       }
     },
 
+    /**
+     * Gets a user by their id
+     * @param {string|number} id User id
+     * @returns {promise} Request result
+     */
     async getOne({ }, id) {
       try {
         const res = await fetch(`${host}/profile/api/${id}`, {
@@ -49,6 +62,7 @@ export default {
       }
     },
 
+    // Gets the current user's data
     async getCurrent({ dispatch, }) {
       try {
         const cookieStr = process.browser ? document.cookie : this.app.context.req.headers.cookie || "";
@@ -65,6 +79,13 @@ export default {
       }
     },
 
+    /**
+     * Sends a request to add text to completed
+     * @param {string} token User token
+     * @param {string|number} id Text id
+     * @param {object} data Text data
+     * @returns {promise} Request result
+     */
     async setTextComplete({ }, { token, id, data, }) {
       try {
         const res = await fetch(`${host}/profile/text/${id}/complete`, {
@@ -83,6 +104,12 @@ export default {
       }
     },
 
+    /**
+     * Gets the user's completed texts
+     * @param {string} token User token
+     * @param {string|number} id User id
+     * @returns {promise} Request result
+     */
     async getCompletedTexts({ }, { token, id, }) {
       try {
         const res = await fetch(`${host}/profile/api/${id}/text/completed`, {
@@ -99,6 +126,12 @@ export default {
       }
     },
 
+    /**
+     * Gets favorites texts
+     * @param {string} token User token
+     * @param {string|number} id User id
+     * @returns {promise} Request result
+     */
     async getFavoritesTexts({ }, { token, id, }) {
       try {
         const res = await fetch(`${host}/profile/api/${id}/favorites`, {
@@ -115,6 +148,13 @@ export default {
       }
     },
 
+    /**
+     * Sends a request to change user data
+     * @param {string} token User token
+     * @param {object} fd User data to be changed
+     * @param {string|number} id User id
+     * @returns {promise} Request result
+     */
     async edit({ }, { token, fd, id, }) {
       try {
         const res = await fetch(`${host}/profile/${id}/edit`, {
@@ -133,6 +173,13 @@ export default {
       }
     },
 
+    /**
+     * Sends a request to update the user level
+     * @param {string|number} id User id
+     * @param {string} token User token
+     * @param {object} fd Data required to update the level
+     * @returns {promise} Request result
+     */
     async levelUpdate({ }, { id, token, fd, }) {
       try {
         const res = await fetch(`${host}/profile/${id}/level/update`, {
@@ -151,6 +198,13 @@ export default {
       }
     },
 
+    /**
+     * Deletes favorite texts
+     * @param {string} token User token
+     * @param {string|number} id User id
+     * @param {object} fd List of id texts to be deleted
+     * @returns {promise} Request result
+     */
     async removeFavorites({ }, { token, id, fd, }) {
       try {
         const res = await fetch(`${host}/profile/${id}/favorites/remove`, {

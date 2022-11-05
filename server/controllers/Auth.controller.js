@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 class Auth {
+  // Registers a user in the database
   async registration(req, res) {
     try {
       const { registrationEmail: email, registrationUsername: username, registrationPassword: password, } = req.body;
@@ -18,6 +19,7 @@ class Auth {
         });
       }
 
+      // Hashing the password
       const hashPassword = await bcrypt.hash(password, 7);
       const userData = { email, username, password: hashPassword, };
 
@@ -41,6 +43,7 @@ class Auth {
     }
   }
 
+  // Authorizes the user
   async login(req, res) {
     try {
       const { loginEmail: email, loginPassword: password, } = req.body;
@@ -66,6 +69,7 @@ class Auth {
         });
       }
 
+      // Creating a token that contains user data
       const token = jwt.sign(user.dataValues, process.env.SECRET_KEY, { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60), });
 
       return res.status(200).json({

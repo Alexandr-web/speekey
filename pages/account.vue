@@ -111,7 +111,7 @@
           </div>
         </div>
       </div>
-    </div>r
+    </div>
   </div>
 </template>
 
@@ -138,6 +138,7 @@
         return this.$store.getters["profile/getUser"] || {};
       },
     },
+    // Adding new user data
     mounted() {
       const compiltedTextsCopy = [...this.getUser.completedTexts];
       const completedTexts = compiltedTextsCopy.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());

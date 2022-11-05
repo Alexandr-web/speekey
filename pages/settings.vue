@@ -107,6 +107,10 @@
       },
     },
     methods: {
+      /**
+       * Opens/hides the active tab
+       * @param {number} index Index of the tab we want to open/close
+       */
       setStateTab(index) {
         this.settings = this.settings.map((item, i) => {
           if (i === index) {

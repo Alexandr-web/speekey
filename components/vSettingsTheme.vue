@@ -91,12 +91,17 @@
     methods: {
       saveTheme() {
         localStorage.setItem("theme", this.activeTheme);
+
         this.$emit("callNotification", {
           desc: "Тема установлена",
           type: "success",
           show: true,
         });
       },
+      /**
+       * Sets the active theme
+       * @param {string} val theme name
+       */
       setTheme(val) {
         document.body.dataset.theme = val;
         this.activeTheme = val;

@@ -117,6 +117,7 @@
         return this.$store.getters["profile/getUser"] || {};
       },
     },
+    // Setting Initial Values in a Form
     mounted() {
       Object.keys(this.getUser).map((key) => {
         if (key in this.validations && key !== "password") {
@@ -125,10 +126,13 @@
       });
     },
     methods: {
+      // Changes user data
       edit() {
         if (!this.validations.$invalid) {
           const token = this.$store.getters["auth/getToken"];
           const { id, } = this.getUser;
+
+          // We take all the keys in which there is a model, except for repeatPassword
           const fd = Object.keys(this.validations).reduce((acc, key) => {
             if ("model" in (this.validations[key] || {}) && this.validations[key].model && key !== "repeatPassword") {
               acc[key] = this.validations[key].model;

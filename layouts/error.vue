@@ -31,6 +31,7 @@
         y: 0,
       },
     }),
+    // Set parallax
     mounted() {
       window.addEventListener("mousemove", (e) => {
         const offsetX = (e.clientX / window.innerWidth) * 30 - 15;

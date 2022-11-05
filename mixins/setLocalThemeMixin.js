@@ -1,4 +1,5 @@
 export default {
+  // Getting a theme or setting its initial value
   mounted() {
     const localTheme = localStorage.getItem("theme");
 

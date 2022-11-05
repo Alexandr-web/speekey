@@ -4,6 +4,7 @@ const CompletedText = require("../models/CompletedText");
 const bcrypt = require("bcrypt");
 
 class Profile {
+  // Gets one user by id
   async getOne(req, res) {
     try {
       const { id, } = req.params;
@@ -30,6 +31,7 @@ class Profile {
     }
   }
 
+  // Writes text to completed texts
   async setTextComplete(req, res) {
     try {
       if (!req.isAuth) {
@@ -97,6 +99,7 @@ class Profile {
     }
   }
 
+  // Gets the user's completed texts
   async getCompletedTexts(req, res) {
     try {
       const completedTexts = await CompletedText.findAll({ where: { userId: req.userIdInParams, }, });
@@ -114,6 +117,7 @@ class Profile {
     }
   }
 
+  // Changes user data
   async edit(req, res) {
     try {
       const userData = req.body;
@@ -156,6 +160,7 @@ class Profile {
     }
   }
 
+  // Updates the user level
   async levelUpdate(req, res) {
     try {
       const { length, } = req.body;
@@ -186,6 +191,7 @@ class Profile {
     }
   }
 
+  // Gets the user's favorite texts
   async getFavorites(req, res) {
     try {
       const favoritesId = req.userByParam.favorites;
@@ -222,6 +228,7 @@ class Profile {
     }
   }
 
+  // Deletes the user's favorite texts
   async removeFavorites(req, res) {
     try {
       const { removeTextsId, } = req.body;

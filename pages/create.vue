@@ -72,6 +72,7 @@
       this.$refs.text.focus();
     },
     methods: {
+      // Creates new text
       createText() {
         if (!this.validations.$invalid) {
           const token = this.$store.getters["auth/getToken"];

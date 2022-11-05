@@ -25,6 +25,7 @@
         required: true,
       },
     },
+    // Sends an emit to hide itself
     mounted() {
       setTimeout(() => {
         this.$emit("hideNotification");
