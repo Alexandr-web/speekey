@@ -15,7 +15,7 @@ module.exports = async (req, res, next) => {
     const idInToken = req.userId;
     const { id: idInParams, } = req.params;
 
-    if (isNaN(parseInt(idInParams))) {
+    if (!idInParams || isNaN(+idInParams)) {
       return res.status(400).json({
         ok: false,
         message: "Неверный формат id пользователя",
@@ -35,7 +35,7 @@ module.exports = async (req, res, next) => {
       });
     }
 
-    if (parseInt(idInParams) !== idInToken) {
+    if (!idInParams || +idInParams !== idInToken) {
       return res.status(403).json({
         ok: false,
         message: "Вы выполняете операцию, которая не связана с вашим аккаунтом",

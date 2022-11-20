@@ -1,5 +1,6 @@
 const TextModel = require("../models/Text");
 const User = require("../models/User");
+const sequelize = require("../db");
 
 class Text {
   // Adds new text to the database
@@ -48,11 +49,11 @@ class Text {
         });
       }
 
-      const texts = await TextModel.findAll();
+      const texts = await TextModel.findAll({ order: sequelize.random(), });
 
       return res.status(200).json({
         ok: true,
-        text: texts.sort(() => Math.random() - 0.5)[0],
+        text: texts[0],
         status: 200,
       });
     } catch (err) {
@@ -81,7 +82,7 @@ class Text {
 
       const { id, } = req.params;
 
-      if (isNaN(parseInt(id))) {
+      if (!id || isNaN(+id)) {
         return res.status(400).json({ ok: false, status: 400, message: "Неверный формат id текста", });
       }
 
@@ -114,7 +115,7 @@ class Text {
 
       const { id, } = req.params;
 
-      if (isNaN(parseInt(id))) {
+      if (!id || isNaN(+id)) {
         return res.status(400).json({ ok: false, status: 400, message: "Неверный формат id текста", });
       }
 
@@ -167,7 +168,7 @@ class Text {
 
       const { id, } = req.params;
 
-      if (isNaN(parseInt(id))) {
+      if (!id || isNaN(+id)) {
         return res.status(400).json({ ok: false, status: 400, message: "Неверный формат id текста", });
       }
 
