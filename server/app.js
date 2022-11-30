@@ -29,8 +29,8 @@ const authRouter = require("./routers/auth.router");
 const profileRouter = require("./routers/profile.router");
 const textRouter = require("./routers/text.router");
 
-app.use("/auth", authRouter);
-app.use("/profile", profileRouter);
-app.use("/text", textRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/profile", profileRouter);
+app.use("/api/text", textRouter);
 
 module.exports = app;

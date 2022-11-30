@@ -51,7 +51,7 @@ export default {
      */
     async getOne({ }, id) {
       try {
-        const res = await fetch(`${host}/profile/api/${id}`, {
+        const res = await fetch(`${host}/api/profile/${id}`, {
           method: "GET",
           headers: { "Accept-Type": "application/json", },
         });
@@ -88,7 +88,7 @@ export default {
      */
     async setTextComplete({ }, { token, id, data, }) {
       try {
-        const res = await fetch(`${host}/profile/text/${id}/complete`, {
+        const res = await fetch(`${host}/api/profile/text/${id}/complete`, {
           method: "POST",
           headers: {
             "Accept-Type": "application/json",
@@ -112,7 +112,7 @@ export default {
      */
     async getCompletedTexts({ }, { token, id, }) {
       try {
-        const res = await fetch(`${host}/profile/api/${id}/text/completed`, {
+        const res = await fetch(`${host}/api/profile/${id}/text/completed`, {
           method: "GET",
           headers: {
             "Accept-Type": "application/json",
@@ -134,7 +134,7 @@ export default {
      */
     async getFavoritesTexts({ }, { token, id, }) {
       try {
-        const res = await fetch(`${host}/profile/api/${id}/favorites`, {
+        const res = await fetch(`${host}/api/profile/${id}/favorites`, {
           method: "GET",
           headers: {
             "Accept-Type": "application/json",
@@ -157,7 +157,7 @@ export default {
      */
     async edit({ }, { token, fd, id, }) {
       try {
-        const res = await fetch(`${host}/profile/${id}/edit`, {
+        const res = await fetch(`${host}/api/profile/${id}/edit`, {
           method: "PUT",
           headers: {
             "Accept-Type": "application/json",
@@ -182,7 +182,7 @@ export default {
      */
     async levelUpdate({ }, { id, token, fd, }) {
       try {
-        const res = await fetch(`${host}/profile/${id}/level/update`, {
+        const res = await fetch(`${host}/api/profile/${id}/level/update`, {
           method: "PUT",
           headers: {
             "Accept-Type": "application/json",
@@ -207,7 +207,7 @@ export default {
      */
     async removeFavorites({ }, { token, id, fd, }) {
       try {
-        const res = await fetch(`${host}/profile/${id}/favorites/remove`, {
+        const res = await fetch(`${host}/api/profile/${id}/favorites/remove`, {
           method: "DELETE",
           headers: {
             "Accept-Type": "application/json",

@@ -47,7 +47,7 @@ export default {
      */
     async getRandom({ }, token) {
       try {
-        const res = await fetch(`${host}/text/api/random`, {
+        const res = await fetch(`${host}/api/text/random`, {
           method: "GET",
           headers: {
             "Accept-Type": "application/json",
@@ -69,7 +69,7 @@ export default {
      */
     async getOne({ }, { token, id, }) {
       try {
-        const res = await fetch(`${host}/text/api/${id}`, {
+        const res = await fetch(`${host}/api/text/${id}`, {
           method: "GET",
           headers: {
             "Accept-Type": "application/json",
@@ -91,7 +91,7 @@ export default {
      */
     async getNext({ }, { id, token, }) {
       try {
-        const res = await fetch(`${host}/text/api/next/${id}`, {
+        const res = await fetch(`${host}/api/text/next/${id}`, {
           method: "GET",
           headers: {
             "Accept-Type": "application/json",
@@ -113,7 +113,7 @@ export default {
      */
     async create({ }, { token, fd, }) {
       try {
-        const res = await fetch(`${host}/text/create`, {
+        const res = await fetch(`${host}/api/text/create`, {
           method: "POST",
           headers: {
             "Accept-Type": "application/json",
@@ -137,7 +137,7 @@ export default {
      */
     async setFavorite({ }, { token, id, }) {
       try {
-        const res = await fetch(`${host}/text/${id}/favorite`, {
+        const res = await fetch(`${host}/api/text/${id}/favorite`, {
           method: "POST",
           headers: {
             "Accept-Type": "application/json",
