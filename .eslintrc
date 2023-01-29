@@ -90,6 +90,7 @@
     "no-debugger": "off",
     "no-restricted-globals": "off",
     "func-names": "off",
-    "no-extend-native": "off"
+    "no-extend-native": "off",
+    "no-underscore-dangle": "off"
   }
 }

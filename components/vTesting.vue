@@ -9,7 +9,7 @@
       @startTyping="$emit('startTyping')"
     />
     <vTestingResult
-      :end="end"
+      v-if="end"
       :pending-set-favorite="pendingSetFavorite"
       :pending-next-text="pendingNextText"
       :accuracy="accuracy"

@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="end"
-    class="testing-result testing-window"
-  >
+  <div class="testing-result testing-window">
     <table class="testing-result__data">
       <tr class="testing-result__data-row">
         <td class="testing-result__data-column testing-result__data-title">
@@ -80,10 +77,6 @@
   export default {
     name: "TestingResultComponent",
     props: {
-      end: {
-        type: Boolean,
-        required: true,
-      },
       pendingSetFavorite: {
         type: Boolean,
         required: true,
